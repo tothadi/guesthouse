@@ -1,8 +1,8 @@
 import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { MessageDto } from 'src/dto/message.dto';
-import { Reservation } from 'src/interfaces/reservation.interface';
+import { MessageDto } from 'src/endpoints/messaging/message.dto';
+import { Reservation } from 'src/endpoints/reservations/reservation.interface';
 
 @Injectable()
 export class MailService {

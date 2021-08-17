@@ -19,6 +19,10 @@
 # Local env vars
 /backend/.env.local
 
+# Proxy conf for development
+/frontend/admin/proxy.conf.json
+/frontend/client/proxy.conf.json
+
 # Resources
 /resources
 

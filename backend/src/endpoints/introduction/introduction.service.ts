@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
-import { IntroductionDto } from '../../dto/introduction.dto';
-import { Introduction } from '../../interfaces/introduction.interface';
+import { IntroductionDto } from './introduction.dto';
+import { Introduction } from './introduction.interface';
 
 @Injectable()
 export class IntroductionService {

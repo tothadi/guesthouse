@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
-import { ActualitiesDto } from '../../dto/actualities.dto';
-import { Actualities } from '../../interfaces/actualities.interface';
+import { ActualitiesDto } from './actualities.dto';
+import { Actualities } from './actualities.interface';
 
 @Injectable()
 export class ActualitiesService {

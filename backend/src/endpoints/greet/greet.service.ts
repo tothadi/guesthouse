@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
-import { GreetDto } from '../../dto/greet.dto';
-import { Greet } from '../../interfaces/greet.interface';
+import { GreetDto } from './greet.dto';
+import { Greet } from './greet.interface';
 
 @Injectable()
 export class GreetService {

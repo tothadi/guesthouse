@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { ReservationDto } from 'src/dto/reservation.dto';
+import { ReservationDto } from 'src/endpoints/reservations/reservation.dto';
 
 export interface Beallitasok {
     szamlaagentkulcs: string; // this.configService.get<string>('INVOICE_KEY

@@ -1,7 +1,5 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { MongoExceptionFilter } from './database/exception.filter'
 
 import { ActualitiesModule } from './endpoints/actualities/actualities.module';
@@ -11,7 +9,7 @@ import { GalleriesModule } from './endpoints/galleries/galleries.module';
 import { GreetModule } from './endpoints/greet/greet.module';
 import { IntroductionModule } from './endpoints/introduction/introduction.module';
 import { ReservationModule } from './endpoints/reservations/reservation.module';
-import { MailModule } from './mail/mail.module';
+import { MailModule } from './endpoints/messaging/mail.module';
 
 @Module({
   imports: [
@@ -25,7 +23,7 @@ import { MailModule } from './mail/mail.module';
     ReservationModule,
     MailModule,
   ],
-  controllers: [AppController],
-  providers: [AppService, MongoExceptionFilter],
+  controllers: [],
+  providers: [MongoExceptionFilter],
 })
 export class AppModule { }

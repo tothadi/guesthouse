@@ -1,9 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
-import { IpnDto, OccupationDto, ReservationDto } from '../../dto/reservation.dto';
-import { IPN, Occupation, Reservation } from '../../interfaces/reservation.interface';
+import { IpnDto, OccupationDto, ReservationDto } from './reservation.dto';
+import { IPN, Occupation, Reservation } from './reservation.interface';
 import { InvoiceService } from './invoice.service';
-import { MailService } from '../../mail/mail.service';
+import { MailService } from '../messaging/mail.service';
 import { isError } from 'util';
 
 @Injectable()

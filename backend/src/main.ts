@@ -10,20 +10,20 @@ import { join } from 'path';
 import helmet from 'fastify-helmet';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 const swaggerDocument = new DocumentBuilder()
-  .setTitle('API')
-  .setDescription('API')
+  .setTitle('Client')
+  .setDescription('Client')
   .setVersion('1.0')
-  .addTag('API')
+  .addTag('Client')
   .build();
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestFastifyApplication>(
+  const appClient = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     new FastifyAdapter()
   );
-  app.setGlobalPrefix('/api');
-  await app.listen(3000);
-  app.register(helmet, {
+  appClient.setGlobalPrefix('/api');
+  await appClient.listen(3000);
+  appClient.register(helmet, {
     contentSecurityPolicy: {
       directives: {
         defaultSrc: [`'self'`],
@@ -33,13 +33,40 @@ async function bootstrap() {
       },
     },
   });
-  app.register(contentParser);
-  app.useStaticAssets({ root: join(__dirname, '../../guesthouse') });
+  appClient.register(contentParser);
 
   SwaggerModule.setup(
     'api',
-    app,
-    SwaggerModule.createDocument(app, swaggerDocument),
+    appClient,
+    SwaggerModule.createDocument(appClient, swaggerDocument),
   );
+
+  appClient.useStaticAssets({root: join(__dirname, '.', 'client')});
+
+  const appAdmin = await NestFactory.create<NestFastifyApplication>(
+    AppModule,
+    new FastifyAdapter()
+  );
+  appAdmin.setGlobalPrefix('/api');
+  await appAdmin.listen(3001);
+  appAdmin.register(helmet, {
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: [`'self'`],
+        styleSrc: [`'self'`, `'unsafe-inline'`],
+        imgSrc: [`'self'`, 'data:', 'validator.swagger.io'],
+        scriptSrc: [`'self'`, `https: 'unsafe-inline'`],
+      },
+    },
+  });
+  appAdmin.register(contentParser);
+
+  SwaggerModule.setup(
+    'api',
+    appAdmin,
+    SwaggerModule.createDocument(appAdmin, swaggerDocument),
+  );
+
+  appAdmin.useStaticAssets({root: join(__dirname, '.', 'admin')});
 }
 bootstrap();

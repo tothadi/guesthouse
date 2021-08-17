@@ -20,9 +20,9 @@ import { Request } from 'express';
 import { ConfigService } from '@nestjs/config';
 import { FastifyFilesInterceptor } from './interceptor/files.interceptor';
 import { MultipleFileDto } from './dto/files.dto';
-import { GalleriesDto, PicturesDto } from '../../dto/galleries.dto';
+import { GalleriesDto, PicturesDto } from './galleries.dto';
 import { GalleriesService } from './galleries.service';
-import { Galleries } from '../../interfaces/galleries.interface';
+import { Galleries } from './galleries.interface';
 import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 import { ObjectId } from 'mongoose';
 

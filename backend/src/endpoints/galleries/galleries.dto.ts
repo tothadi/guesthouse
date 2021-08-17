@@ -1,4 +1,4 @@
-import { Picture } from "../interfaces/galleries.interface";
+import { Picture } from "./galleries.interface";
 
 export class PicturesDto {
     readonly filename?: string;

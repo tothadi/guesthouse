@@ -3,8 +3,8 @@ import { Request } from 'express';
 import { resolve, extname } from 'path';
 import * as fs from 'fs';
 import { Model, ObjectId } from 'mongoose';
-import { GalleriesDto, PicturesDto } from '../../dto/galleries.dto';
-import { Galleries } from '../../interfaces/galleries.interface';
+import { GalleriesDto, PicturesDto } from './galleries.dto';
+import { Galleries } from './galleries.interface';
 import { FilesMapper } from './interface/filemapper.interface'
 import { ConfigService } from '@nestjs/config';
 

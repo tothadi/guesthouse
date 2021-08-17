@@ -3,7 +3,6 @@
   "sourceRoot": "src",
   "compilerOptions": {
     "assets": [
-      "mail/templates/*",
       "assets/gallery/*"
     ],
     "watchAssets": true

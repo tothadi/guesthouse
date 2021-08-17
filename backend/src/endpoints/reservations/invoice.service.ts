@@ -2,8 +2,8 @@ import { HttpService, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Builder, parseStringPromise } from 'xml2js';
 import * as FormData from 'form-data';
-import { ReservationDto } from 'src/dto/reservation.dto';
-import { ProformResponse } from 'src/interfaces/reservation.interface';
+import { ReservationDto } from 'src/endpoints/reservations/reservation.dto';
+import { ProformResponse } from 'src/endpoints/reservations/reservation.interface';
 import { XmlService } from './xml.service';
 
 @Injectable()

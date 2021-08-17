@@ -1,8 +1,8 @@
 import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards, Req } from '@nestjs/common';
 import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
-import { ActualitiesDto } from '../../dto/actualities.dto';
+import { ActualitiesDto } from './actualities.dto';
 import { ActualitiesService } from './actualities.service';
-import { Actualities } from '../../interfaces/actualities.interface';
+import { Actualities } from './actualities.interface';
 
 @Controller('actualities')
 export class ActualitiesController {
