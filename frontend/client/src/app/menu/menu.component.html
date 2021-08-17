@@ -1,0 +1,36 @@
+<div id="overlay"></div>
+
+<div id="menu-header">
+
+    <div id="logo-holder">
+        <img id="logo" src="assets/image/page/logo.svg" alt="logo">
+    </div>
+
+    <div id="menu" #menu>
+
+        <a class="menu-item" *ngFor="let menuItem of menuItems" routerLink="{{menuItem.link}}"
+            routerLinkActive="active">
+            
+            <div [style.width.px]="(iconSize * 1.5)" class="dummy"></div>
+            <div [style.right.px]="(iconSize * 1.5)" class="wrapper">
+                <div [style.fontSize.px]="iconSize * .6" class="bg">{{menuItem.title}}</div>
+            </div>
+            <fa-icon [style.fontSize.px]="iconSize" [style.width.px]="iconSize * 1.5" [icon]="menuItem.icon"></fa-icon>
+        </a>
+
+    </div>
+
+</div>
+
+
+<div *ngIf="rooms; then thenBlock else elseBlock">
+</div>
+<ng-template #thenBlock>
+    
+    <div id="rooms-menu"><a class="rooms" *ngFor="let roomsItem of roomsItems" routerLink="{{roomsItem.link}}"
+        routerLinkActive="active">{{roomsItem.title}}</a></div>
+</ng-template>
+
+<ng-template #elseBlock>
+    <h2 id="greeting">Egy hely, ahol az ősi falak megnyugvást adnak!</h2>
+</ng-template>

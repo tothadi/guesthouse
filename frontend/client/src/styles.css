@@ -1,0 +1,104 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 100%;
+}
+
+html {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    display: block;
+    position: absolute;
+    width: 95%;
+    height: 100%;
+    max-width: 1000px;
+    font-family: "Playfair Display", sans-serif;
+    text-shadow: 1px 1px 2px rgba(127, 118, 105, 1);
+}
+
+::-webkit-scrollbar {
+    height: 5px;
+    width: 5px;
+    margin: 0;
+    padding: 0;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(50, 50, 50, 0.2);
+    border-radius: 5px;
+}
+
+a {
+    text-decoration: none;
+}
+
+app-root {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+}
+
+app-menu {
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    height: 25%;
+    width: 100%;
+    background: url("/assets/image/page/menu.jpg") no-repeat center;
+    background-size: cover;
+    font-family: "Muli", sans-serif;
+    box-shadow: 5px 5px 10px rgba(50, 50, 50, 0.6);
+}
+
+app-footer {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 10%;
+    box-shadow: 5px 5px 10px rgba(50, 50, 50, 0.6);
+    margin-bottom: 1%;
+    font-family: 'Muli', sans-serif;
+}
+
+app-contact,
+app-home,
+app-reservation,
+app-page-not-found,
+app-double-bed,
+app-garden,
+app-living-room,
+app-single-bed,
+app-white-room {
+    position: relative;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    width: 100%;
+    height: 64%;
+    overflow: overlay;
+}
+
+app-reservation {
+    justify-content: flex-start;
+}
+
+app-page-not-found {
+    justify-content: space-evenly;
+}

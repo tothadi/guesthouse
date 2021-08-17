@@ -1,0 +1,84 @@
+div {
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#footer-logo {
+    margin-left: 1rem;
+}
+
+#logo {
+    max-height: 70%;
+}
+
+p {
+    text-align: center;
+}
+
+#footer-contact a, #footer-logo a {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
+    color: rgba(51, 98, 46, 1);
+    font-family: 'Muli', sans-serif;
+}
+
+#footer-contact a {
+    margin-bottom: .3rem;
+}
+
+#footer-contact fa-icon, #footer-logo fa-icon {
+    margin-right: .5rem;
+}
+
+#tothadi {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+}
+
+#tothadi a {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
+    color: rgba(51, 98, 46, 1);
+}
+
+@media only screen and (max-width: 600px) {
+    div {
+        font-size: .9rem;
+    }
+    #logo {
+        max-height: 60%;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    div {
+        font-size: .7rem;
+    }
+    #logo {
+        max-height: 50%;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    div {
+        font-size: .6rem;
+    }
+
+    #logo {
+        max-height: 40%;
+    }
+}

@@ -1,0 +1,29 @@
+div {
+    margin-bottom: 1.5rem;
+}
+
+p {
+    margin-bottom: .5rem;
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+}
+
+a {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
+    color: rgba(51, 98, 46, 1);
+    font-family: 'Muli', sans-serif;
+}
+
+fa-icon {
+    margin-right: .5rem;
+}
+
+#contact-logo {
+    width: 30%;
+}

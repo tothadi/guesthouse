@@ -1,0 +1,11 @@
+p {
+    text-align: center;
+    width: 80%;
+    max-width: 800px;
+    margin-bottom: 1rem;
+}
+
+a {
+    text-decoration: none;
+    color: rgba(51, 98, 46, 1);
+}
