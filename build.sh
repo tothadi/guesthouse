@@ -1,14 +1,15 @@
-cd backend/frontend/client
+cd frontend/client
 npm i
 npm run build:app
+cd ..
 
-#cd ..
 #cd admin
 #npm i
 #npm run build:app
+#cd ..
 
 cd ..
-cd ..
+mkdir dist
 npm i
 cp -r frontend/admin/src/index.html dist/admin/
 

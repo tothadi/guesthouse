@@ -4,13 +4,12 @@ ENV HOST '0.0.0.0'
 
 WORKDIR '/usr/src/app'
 
-COPY backend ./backend
-COPY frontend ./frontend/backend
+COPY backend ./
+COPY frontend ./frontend
 COPY ./build.sh ./
 RUN chmod +x ./build.sh
 RUN ./build.sh
-RUN ls run
-RUN ls run/client
-RUN ls run/admin
+RUN ls backend/dist
 
+WORKDIR '/usr/src/app/'
 CMD [ "npm", "start" ]
