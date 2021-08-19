@@ -48,7 +48,7 @@ async function bootstrap() {
     new FastifyAdapter()
   );
   appAdmin.setGlobalPrefix('/api');
-  await appAdmin.listen(3001);
+  await appAdmin.listen(5000);
   appAdmin.register(helmet, {
     contentSecurityPolicy: {
       directives: {
