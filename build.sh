@@ -1,4 +1,3 @@
-npm i -g @angular/cli
 mkdir dist
 mkdir dist/client
 mkdir dist/admin
