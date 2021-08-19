@@ -1,6 +1,6 @@
 import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+//import { ConfigService } from '@nestjs/config';
 import { MessageDto } from 'src/endpoints/messaging/message.dto';
 import { Reservation } from 'src/endpoints/reservations/reservation.interface';
 
@@ -8,12 +8,12 @@ import { Reservation } from 'src/endpoints/reservations/reservation.interface';
 export class MailService {
   constructor(
     private mailerService: MailerService,
-    private configService: ConfigService
+    //private configService: ConfigService
   ) { }
 
   async sendClientMail(messageDto: MessageDto): Promise<any> {
     return await this.mailerService.sendMail({
-      to: this.configService.get<string>('MAILER_EMAIL'),
+      to: process.env.MAILER_EMAIL,//this.configService.get<string>('MAILER_EMAIL'),
       from: { address: messageDto.email, name: messageDto.name },
       replyTo: messageDto.email,
       subject: `Vendégház - ${messageDto.subject} tárgyú, új üzenet érkezett`,
@@ -30,7 +30,7 @@ export class MailService {
 
   async sendNewResNotification(reservationData: Reservation, proformOK: boolean): Promise<any> {
     return await this.mailerService.sendMail({
-      to: this.configService.get<string>('MAILER_EMAIL'),
+      to: process.env.MAILER_EMAIL,//this.configService.get<string>('MAILER_EMAIL'),
       subject: `Vendégház - Új foglalás érkezett ${reservationData.arrivalAt.toLocaleDateString('hu-HU')} érkezéssel`,
       template: './newreservation',
       context: {
@@ -49,7 +49,7 @@ export class MailService {
 
   async sendPaymentNotification(reservationData: Reservation, invoiceOK: boolean): Promise<any> {
     return await this.mailerService.sendMail({
-      to: this.configService.get<string>('MAILER_EMAIL'),
+      to: process.env.MAILER_EMAIL,//this.configService.get<string>('MAILER_EMAIL'),
       subject: `Vendégház - A ${reservationData._id} számú foglalás kifizetésre került`,
       template: './payment',
       context: {

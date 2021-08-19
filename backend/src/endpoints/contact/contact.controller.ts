@@ -30,9 +30,9 @@ export class ContactController {
         return this.contactService.update(id, contactDto);
     }
 
-    // @UseGuards(JwtAuthGuard)
-    // @Delete(':id')
-    //     async delete(@Param('id') id: string, @Body() contactDto: ContactDto) {
-    //     return this.contactService.delete(id, contactDto);
-    // }
+    @UseGuards(JwtAuthGuard)
+    @Delete(':id')
+        async delete(@Param('id') id: string, @Body() contactDto: ContactDto) {
+        return this.contactService.delete(id, contactDto);
+    }
 }

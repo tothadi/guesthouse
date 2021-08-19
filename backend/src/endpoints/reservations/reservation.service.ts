@@ -4,7 +4,6 @@ import { IpnDto, OccupationDto, ReservationDto } from './reservation.dto';
 import { IPN, Occupation, Reservation } from './reservation.interface';
 import { InvoiceService } from './invoice.service';
 import { MailService } from '../messaging/mail.service';
-import { isError } from 'util';
 
 @Injectable()
 export class ReservationService {

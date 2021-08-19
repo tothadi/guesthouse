@@ -17,7 +17,7 @@ import {
 import * as fs from "fs";
 import { ApiConsumes } from '@nestjs/swagger';
 import { Request } from 'express';
-import { ConfigService } from '@nestjs/config';
+//import { ConfigService } from '@nestjs/config';
 import { FastifyFilesInterceptor } from './interceptor/files.interceptor';
 import { MultipleFileDto } from './dto/files.dto';
 import { GalleriesDto, PicturesDto } from './galleries.dto';

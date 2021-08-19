@@ -15,7 +15,7 @@ import { RoomsModule } from './endpoints/rooms/rooms.module';
   imports: [
     ActualitiesModule,
     AuthModule,
-    ConfigModule.forRoot({ envFilePath: `.env.local` }),
+    //ConfigModule.forRoot({ envFilePath: `.env.local` }),
     ContactModule,
     GalleriesModule,
     GreetModule,

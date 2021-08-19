@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Put, Delete, Body, Param, UseFilters, UseGuards, Inject, UseInterceptors, UploadedFiles } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+//import { ConfigService } from '@nestjs/config';
 import { IpnDto, OccupationDto, ReservationDto } from './reservation.dto';
 import { ReservationService } from './reservation.service';
 import { IPN, Occupation, Reservation } from './reservation.interface';
@@ -11,7 +11,7 @@ export class ReservationController {
 
     constructor(
         private readonly reservationService: ReservationService,
-        private readonly configService: ConfigService
+        //private readonly configService: ConfigService
     ) {
 
     }
@@ -29,7 +29,7 @@ export class ReservationController {
     @UseGuards(JwtAuthGuard)
     @Post(':ipnuri')
     async processPayment(@Param('ipnuri') ipnUri: string, @Body() ipnDto: IpnDto): Promise<IPN> {
-        if (ipnUri === this.configService.get<string>('IPN_URI')) {
+        if (ipnUri === process.env.IPN_URI/*this.configService.get<string>('IPN_URI')*/) {
             return await this.reservationService.updatePayment(ipnDto);
         }
     }

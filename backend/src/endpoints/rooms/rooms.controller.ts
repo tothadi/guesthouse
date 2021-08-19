@@ -30,9 +30,9 @@ export class RoomsController {
         return this.roomsService.update(id, roomsDto);
     }
 
-    // @UseGuards(JwtAuthGuard)
-    // @Delete(':id')
-    //     async delete(@Param('id') id: string, @Body() roomsDto: RoomsDto) {
-    //     return this.roomsService.delete(id, roomsDto);
-    // }
+    @UseGuards(JwtAuthGuard)
+    @Delete(':id')
+        async delete(@Param('id') id: string, @Body() roomsDto: RoomsDto) {
+        return this.roomsService.delete(id, roomsDto);
+    }
 }

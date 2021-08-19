@@ -6,7 +6,7 @@ import { Model, ObjectId } from 'mongoose';
 import { GalleriesDto, PicturesDto } from './galleries.dto';
 import { Galleries } from './galleries.interface';
 import { FilesMapper } from './interface/filemapper.interface'
-import { ConfigService } from '@nestjs/config';
+//import { ConfigService } from '@nestjs/config';
 
 export const imageFileFilter = (
   req: Request,
@@ -25,13 +25,13 @@ export class GalleriesService {
 
   constructor(
     @Inject('GALLERIES_MODEL') private readonly galleriesModel: Model<Galleries>,
-    private configService: ConfigService,
+    //private configService: ConfigService,
   ) { }
 
   async create(galleriesDto: GalleriesDto): Promise<Galleries> {
     const
       createdGallery = new this.galleriesModel(galleriesDto),
-      galleryPath = `${this.configService.get<string>('GALLERY_FOLDER')}/${createdGallery.folder}`;
+      galleryPath = `${process.env.GALLERY_FOLDER/*this.configService.get<string>('GALLERY_FOLDER')*/}/${createdGallery.folder}`;
     !fs.existsSync(resolve(galleryPath)) ? fs.mkdirSync(resolve(galleryPath)) : console.log('existing gallery');
     return await createdGallery.save();
   }
@@ -127,7 +127,7 @@ export class GalleriesService {
   ) {
     const
       folder = req.headers['gallery-name'],
-      galleryPath = resolve(`${this.configService.get<string>('GALLERY_FOLDER')}/${folder}`); //
+      galleryPath = resolve(`${process.env.GALLERY_FOLDER/*this.configService.get<string>('GALLERY_FOLDER')*/}/${folder}`); //
     cb(null, galleryPath)
   }
 

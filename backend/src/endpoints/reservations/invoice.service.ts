@@ -1,5 +1,5 @@
 import { HttpService, Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+//import { ConfigService } from '@nestjs/config';
 import { Builder, parseStringPromise } from 'xml2js';
 import * as FormData from 'form-data';
 import { ReservationDto } from 'src/endpoints/reservations/reservation.dto';
@@ -12,7 +12,7 @@ export class InvoiceService {
     constructor(
         private http: HttpService,
         private xml: XmlService,
-        private readonly configService: ConfigService
+        //private readonly configService: ConfigService
     ) { }
 
     createXML(reservationData: ReservationDto, isProform: boolean): string {
@@ -34,7 +34,7 @@ export class InvoiceService {
 
     async makeRequest(payload): Promise<any> {
         const
-            invoiceUri = this.configService.get<string>('INVOICE_URI'),
+            invoiceUri = process.env.INVOICE_URI,//this.configService.get<string>('INVOICE_URI'),
             response = await this.http.post(
                 invoiceUri,
                 payload,
