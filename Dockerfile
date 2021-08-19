@@ -10,4 +10,4 @@ RUN ls run
 RUN ls run/client
 RUN ls run/admin
 
-CMD [ "node", "run/index" ]
+CMD [ "node", "run/main" ]
