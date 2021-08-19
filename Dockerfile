@@ -1,4 +1,4 @@
-### STAGE 1: Build ###
+### STAGE 1: Build app ###
 FROM node:14.17.3
 WORKDIR '/usr/src/app'
 
