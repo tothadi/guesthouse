@@ -4,7 +4,7 @@ ENV HOST '0.0.0.0'
 
 WORKDIR '/usr/src/app'
 
-COPY ./backend/* ./
+COPY ./backend ./
 COPY ./frontend ./frontend
 COPY ./build.sh ./
 RUN ls
