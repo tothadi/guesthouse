@@ -21,3 +21,4 @@ mkdir run/admin
 cp -r backend/dist/* run/
 cp -r frontend/client/dist/* run/client/
 cp -r frontend/admin/src/index.html run/admin/
+
