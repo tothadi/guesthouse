@@ -18,11 +18,13 @@ export class ActualitiesController {
         return this.actualitiesService.create(actualitiesDto);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get()
         async findAll(): Promise<Actualities[]> {
         return this.actualitiesService.findAll();
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get(':id')
         async find(@Param('id') id: string) {
         return this.actualitiesService.find(id);

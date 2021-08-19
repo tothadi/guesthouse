@@ -16,7 +16,9 @@ export class ReservationController {
 
     }
 
+    
     // Reservation from clients
+    @UseGuards(JwtAuthGuard)
     @Post()
     @UseFilters(BadRequestFilter, MongoExceptionFilter)
     async create(@Body() reservationDto: ReservationDto): Promise<any> {
@@ -24,6 +26,7 @@ export class ReservationController {
     }
 
     // Payment notification from szamlazz.hu
+    @UseGuards(JwtAuthGuard)
     @Post(':ipnuri')
     async processPayment(@Param('ipnuri') ipnUri: string, @Body() ipnDto: IpnDto): Promise<IPN> {
         if (ipnUri === this.configService.get<string>('IPN_URI')) {
@@ -32,12 +35,14 @@ export class ReservationController {
     }
 
     // Occupied dates for clientside
+    @UseGuards(JwtAuthGuard)
     @Get()
     async findOccupations(): Promise<Occupation> {
         return this.reservationService.findOccupations();
     }
 
     // Client can check reservation status if knows order number
+    @UseGuards(JwtAuthGuard)
     @Get(':id')
     async find(@Param('id') id: string) {
         return this.reservationService.find(id);

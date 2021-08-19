@@ -54,7 +54,7 @@ export class GalleriesController {
     }
 */
 
-    //@UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard)
     @ApiConsumes('multipart/form-data')
     @Post('pic')
     @UseInterceptors(
@@ -69,17 +69,19 @@ export class GalleriesController {
         return { ...body, photo_url: this.galleriesService.filesMapper({ files, req }) };
     }
 
-    //@UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard)
     @Post('newgallery')
     async create(@Body() galleriesDto: GalleriesDto) {
         return this.galleriesService.create(galleriesDto);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get()
     async findAll(): Promise<Galleries[]> {
         return this.galleriesService.findAll();
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get(':id')
     async find(@Param('id') id: string) {
         return this.galleriesService.find(id);
@@ -91,7 +93,7 @@ export class GalleriesController {
         return this.galleriesService.update(id, galleriesDto);
     }
 
-    //@UseGuards(JwtAuthGuard) // update caption of a picture
+    @UseGuards(JwtAuthGuard) // update caption of a picture
     @Put('caption/:id/:picid')
     async updatePic(
         @Param('id') id: ObjectId, //galleryID
@@ -107,6 +109,7 @@ export class GalleriesController {
         return this.galleriesService.delete(id, galleriesDto);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Delete(':id/:picid')
     async deletePic(
         @Param('id') id: ObjectId, //galleryID
@@ -115,6 +118,7 @@ export class GalleriesController {
         return this.galleriesService.deletePic(id, picId);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Delete('picid/:id/:picid')
     async deletePicCaption(
         @Param('id') id: ObjectId, //galleryID

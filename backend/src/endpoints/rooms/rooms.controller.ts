@@ -8,7 +8,7 @@ import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 export class RoomsController {
     constructor(private readonly roomsService: RoomsService) {}
 
-    //@UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard)
     @Put()
         async create(@Body() roomsDto: RoomsDto) {
         return this.roomsService.create(roomsDto);
