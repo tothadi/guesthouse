@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { GreetController } from './greet.controller';
 import { GreetService } from './greet.service';
-import { greetProviders } from '../../database/providers/greet.provider';
+import { greetProviders } from './greet.provider';
 import { DatabaseModule } from '../../database/database.module';
 
 @Module({

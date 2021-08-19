@@ -1,5 +1,5 @@
 import { Connection } from 'mongoose';
-import { ContactSchema } from '../schemas/contact.schemas';
+import { ContactSchema } from './contact.schemas';
 
 export const contactProviders = [
    {

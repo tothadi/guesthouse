@@ -4,6 +4,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from './app-routing.module';
 import { RoomsModule } from './rooms/rooms.module';
 
+import { BackendService } from './backend.service';
+
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -11,6 +13,7 @@ import { MenuComponent } from './menu/menu.component';
 import { FooterComponent } from './footer/footer.component';
 import { ContactComponent } from './contact/contact.component';
 import { ReservationComponent } from './reservation/reservation.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -25,11 +28,13 @@ import { ReservationComponent } from './reservation/reservation.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     FontAwesomeModule,
     RoomsModule
   ],
   providers: [
+    BackendService,
     Title,
   ],
   schemas: [

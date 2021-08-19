@@ -1,208 +1,282 @@
 #overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-image: linear-gradient(
-        to left,
-        rgba(255, 255, 255, 1),
-        rgba(255, 255, 255, 0.3),
-        rgba(255, 255, 255, 1)
-    );
-    height: 100%;
-    width: 100%;
-    z-index: 11;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: linear-gradient(
+    to left,
+    rgba(255, 255, 255, 1),
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 1)
+  );
+  height: 100%;
+  width: 100%;
+  z-index: 11;
 }
 
 #menu-header {
-    width: 100%;
-    height: 20vh;
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    justify-content: space-between;
-    z-index: 12;
+  position: relative;
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 12;
 }
 
 #logo-holder {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 50%;
 }
 
 #logo {
-    max-height: 95%;
-    max-width: 95%;
+  max-height: 95%;
+  max-width: 95%;
 }
 
 #menu {
-    height: 100%;
-    width: 50%;
-    display: flex;
-    flex-flow: column;
-    align-items: flex-end;
-    justify-content: space-evenly;
-    overflow: hidden;
+  height: 100%;
+  width: 50%;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-end;
+  justify-content: space-evenly;
+  overflow: hidden;
 }
 
 .menu-item {
-    position: relative;
-    width: 100%;
-    flex: 1;
-    text-decoration: none;
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    justify-content: flex-end;
-    color: #33622e;
-    transition: all 500ms ease-in-out;
-    z-index: 22;
+  position: relative;
+  width: 100%;
+  flex: 1;
+  text-decoration: none;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  color: #33622e;
+  transition: all 500ms ease-in-out;
+  z-index: 22;
 }
 
 .menu-item:hover {
-    color: whitesmoke;
+  color: whitesmoke;
 }
 
 .active {
-    /* background: linear-gradient(
-        to left,
-        rgba(51, 98, 46, 1),
-        rgba(255, 255, 255, 0.5),
-        rgba(255, 255, 255, 0)
-    ); */
-    color: whitesmoke;
+  color: whitesmoke;
 }
 
 .dummy {
-    position: absolute;
-    right: 0;
-    top: 0;
-    display: block;
-    height: 100%;
-    margin-right: -100%;
-    background: rgba(51, 98, 46, 1);
-    transition: all 500ms ease-in-out;
-    z-index: 22;
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: block;
+  height: 100%;
+  margin-right: -100%;
+  background: rgba(51, 98, 46, 1);
+  transition: all 500ms ease-in-out;
+  z-index: 22;
 }
 
 .wrapper {
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: block;
-    width: 100%;
-    height: 100%;
-    margin-right: -120%;
-    background: linear-gradient(
-        to left,
-        rgba(51, 98, 46, 1),
-        rgba(51, 98, 46, 0.8),
-        rgba(51, 98, 46, 0.6),
-        rgba(51, 98, 46, 0.4),
-        rgba(255, 255, 255, 0)
-    );
-    transition: all 500ms ease-in-out;
-    z-index: 21;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin-right: -120%;
+  background: linear-gradient(
+    to left,
+    rgba(51, 98, 46, 1),
+    rgba(51, 98, 46, 0.8),
+    rgba(51, 98, 46, 0.6),
+    rgba(51, 98, 46, 0.4),
+    rgba(255, 255, 255, 0)
+  );
+  transition: all 500ms ease-in-out;
+  z-index: 21;
 }
 
 .menu-item:hover .dummy,
 .menu-item:hover .wrapper,
 .menu-item.active .dummy,
 .menu-item.active .wrapper {
-    margin-right: 0;
+  margin-right: 0;
 }
 
 fa-icon {
-    filter: drop-shadow(2px 2px 2px rgba(50, 50, 50, 0.9));
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    align-items: center;
-    padding-left: 10px;
-    padding-right: 10px;
-    z-index: 23;
+  filter: drop-shadow(2px 2px 2px rgba(50, 50, 50, 0.9));
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  margin-left: 10px;
+  margin-right: 10px;
+  z-index: 23;
 }
 
 .bg {
-    height: 100%;
-    display: flex;
-    flex-flow: column;
-    align-items: flex-end;
-    justify-content: center;
-    padding-left: 10px;
-    padding-right: 10px;
-    color: whitesmoke;
-    z-index: 24;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-end;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-left: 10px;
+  margin-right: 20px;
+  color: whitesmoke;
+  z-index: 24;
 }
 
 #rooms-menu {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    justify-content: space-evenly;
-    height: 5vh;
-    width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 20%;
+  width: 100%;
 }
 
 .rooms {
-    position: relative;
-    height: 100%;
-    font-size: 1rem;
-    flex: 1;
-    text-decoration: none;
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    justify-content: center;
-    color: black;
-    font-weight: bold;
-    transition: all 500ms ease-in-out;
-    z-index: 23;
+  position: relative;
+  height: 100%;
+  font-size: 1rem;
+  flex: 1;
+  text-decoration: none;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  font-weight: bold;
+  transition: all 500ms ease-in-out;
+  z-index: 23;
 }
 
 .rooms:hover,
 .rooms.active {
-    color: rgba(90, 51, 23, 1);
-    background-color: rgba(255, 255, 255, 0.5);
+  color: rgba(90, 51, 23, 1);
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
-#greeting {
-    height: 5vh;
-    width: 100%;
-    font-size: 1.3rem;
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: #5a3317;
-    overflow: hidden;
-    z-index: 12;
+#motto {
+  height: 20%;
+  width: 100%;
+  font-size: 1.3rem;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #5a3317;
+  overflow: hidden;
+  z-index: 12;
 }
 
 @media only screen and (max-width: 800px) {
-    #greeting {
-        font-size: 1.1rem;
-    }
+  #motto {
+    font-size: 1.1rem;
+  }
+  .bg {
+    font-size: 1.3rem;
+  }
 }
 
 @media only screen and (max-width: 600px) {
-    .rooms {
-        font-size: 0.8rem;
-    }
+  .rooms {
+    font-size: 0.8rem;
+  }
 
-    #greeting {
-        font-size: 1rem;
-    }
+  #motto {
+    font-size: 1rem;
+  }
 }
 
 @media only screen and (max-width: 500px) {
-    .rooms {
-        font-size: 0.6rem;
-    }
+  .menu-item .bg {
+    font-size: 1rem;
+  }
+  .menu-item fa-icon {
+    font-size: 1.2rem;
+  }
+  .rooms {
+    font-size: 0.7rem;
+  }
 
-    #greeting {
-        font-size: .8rem;
-    }
+  #motto {
+    font-size: 0.8rem;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .rooms {
+    font-size: 0.65rem;
+  }
+}
+
+@media only screen and (max-height: 500px) {
+  #menu-header {
+    height: 70%;
+  }
+  #rooms-menu {
+    height: 30%;
+  }
+  #motto {
+    height: 30%;
+  }
+  .rooms,
+  #motto {
+    font-size: 0.7rem;
+  }
+  #menu {
+    width: 80%;
+    flex-direction: row;
+    align-items: center;
+  }
+  .menu-item {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    margin-right: 0;
+    margin-left: 0;
+    z-index: 23;
+  }
+  .bg {
+    align-items: center;
+    text-align: center;
+    margin-right: 0;
+    margin-left: 0;
+    margin-bottom: 0.4rem;
+    font-size: 0.8rem;
+    color: rgba(51, 98, 46, 1);
+  }
+  #menu .active {
+    padding: 5px;
+    background: linear-gradient(
+      to right,
+      rgba(51, 98, 46, 0),
+      rgba(51, 98, 46, 0.8),
+      rgba(51, 98, 46, 0)
+    );
+  }
+  .active .bg {
+    color: white;
+  }
+  .dummy {
+    display: none;
+  }
+  .menu-item fa-icon {
+    font-size: 1.5rem;
+  }
 }

@@ -82,3 +82,12 @@ p {
         max-height: 40%;
     }
 }
+
+@media only screen and (max-height: 450px) {
+    p, img {
+        display: none;
+    }
+    div {
+        flex-direction: row;
+    }
+}

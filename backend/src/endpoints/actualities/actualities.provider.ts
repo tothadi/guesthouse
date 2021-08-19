@@ -1,5 +1,5 @@
 import { Connection } from 'mongoose';
-import { ActualitiesSchema } from '../schemas/actualities.schemas';
+import { ActualitiesSchema } from './actualities.schemas';
 
 export const actualitiesProviders = [
     {

@@ -1,5 +1,5 @@
 import { Connection } from 'mongoose';
-import { OccupationSchema, ReservationSchema } from '../schemas/reservation.schemas';
+import { OccupationSchema, ReservationSchema } from './reservation.schemas';
 
 export const reservationProviders = [
     {

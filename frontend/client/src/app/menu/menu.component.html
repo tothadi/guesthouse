@@ -6,16 +6,16 @@
         <img id="logo" src="assets/image/page/logo.svg" alt="logo">
     </div>
 
-    <div id="menu" #menu>
+    <div id="menu">
 
         <a class="menu-item" *ngFor="let menuItem of menuItems" routerLink="{{menuItem.link}}"
             routerLinkActive="active">
             
             <div [style.width.px]="(iconSize * 1.5)" class="dummy"></div>
-            <div [style.right.px]="(iconSize * 1.5)" class="wrapper">
-                <div [style.fontSize.px]="iconSize * .6" class="bg">{{menuItem.title}}</div>
+            <div [style.right.px]="(rowOffset)" class="wrapper">
+                <div class="bg">{{menuItem.title}}</div>
             </div>
-            <fa-icon [style.fontSize.px]="iconSize" [style.width.px]="iconSize * 1.5" [icon]="menuItem.icon"></fa-icon>
+            <fa-icon  [style.width.px]="iconSize * 1.5" [icon]="menuItem.icon"></fa-icon>
         </a>
 
     </div>
@@ -23,14 +23,14 @@
 </div>
 
 
-<div *ngIf="rooms; then thenBlock else elseBlock">
+<div *ngIf="showRooms; then thenBlock else elseBlock">
 </div>
 <ng-template #thenBlock>
     
-    <div id="rooms-menu"><a class="rooms" *ngFor="let roomsItem of roomsItems" routerLink="{{roomsItem.link}}"
-        routerLinkActive="active">{{roomsItem.title}}</a></div>
+    <div id="rooms-menu"><a class="rooms" *ngFor="let room of rooms" routerLink="{{room.link}}"
+        routerLinkActive="active">{{room.menu}}</a></div>
 </ng-template>
 
 <ng-template #elseBlock>
-    <h2 id="greeting">Egy hely, ahol az ősi falak megnyugvást adnak!</h2>
+    <h2 id="motto">{{motto}}</h2>
 </ng-template>

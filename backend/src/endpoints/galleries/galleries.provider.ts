@@ -1,5 +1,5 @@
 import { Connection } from 'mongoose';
-import { GalleriesSchema } from '../schemas/galleries.schemas';
+import { GalleriesSchema } from './galleries.schemas';
 
 export const galleriesProviders = [
     {

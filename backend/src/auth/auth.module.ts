@@ -7,7 +7,7 @@ import { DatabaseModule } from '../database/database.module';
 
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
-import { authProviders } from '../database/providers/auth.provider';
+import { authProviders } from './auth.provider';
 
 
 import { JwtStrategy } from './strategies/jwt-auth.strategy';

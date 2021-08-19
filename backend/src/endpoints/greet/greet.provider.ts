@@ -1,5 +1,5 @@
 import { Connection } from 'mongoose';
-import { GreetSchema } from '../schemas/greet.schemas';
+import { GreetSchema } from './greet.schemas';
 
 export const greetProviders = [
    {

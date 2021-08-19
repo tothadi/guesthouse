@@ -14,7 +14,7 @@ export class ContactService {
   }
 
   async findAll(): Promise<Contact[]> {
-    return await this.contactModel.find().exec();
+    return await this.contactModel.find().sort({order: 1}).exec();
   }
 
   async find(id: string): Promise<Contact> {

@@ -1,25 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { WhiteRoomComponent } from './white-room/white-room.component';
-import { DoubleBedComponent } from './double-bed/double-bed.component';
-import { SingleBedComponent } from './single-bed/single-bed.component';
-import { LivingRoomComponent } from './living-room/living-room.component';
-import { GardenComponent } from './garden/garden.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 import { RoomsRoutingModule } from './rooms.routing';
+
+import { RoomsComponent } from './rooms.component';
 
 @NgModule({
   declarations: [
-    WhiteRoomComponent,
-    DoubleBedComponent,
-    SingleBedComponent,
-    LivingRoomComponent,
-    GardenComponent,
+    RoomsComponent
   ],
   imports: [
     CommonModule,
+    FontAwesomeModule,
     RoomsRoutingModule
   ],
+  providers: [
+  
+    ],
   exports: [
   ]
 })
-export class RoomsModule { }
+export class RoomsModule {
+
+}

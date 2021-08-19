@@ -1,9 +1,9 @@
-import { Document } from 'mongoose';
+import { Document } from "mongoose";
 
 export interface Contact extends Document {
-    readonly name: string;
-    readonly phone: string;
-    readonly email: string;
-    readonly text: string;
-    readonly address: string;
+  readonly order: number;
+  readonly label: string;
+  readonly data: string;
+  readonly link: string;
+  readonly icon: string;
 }

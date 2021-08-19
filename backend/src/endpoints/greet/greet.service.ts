@@ -13,8 +13,8 @@ export class GreetService {
     return await createdGreet.save();
   }
 
-  async findAll(): Promise<Greet[]> {
-    return await this.greetModel.find().exec();
+  async findAll(): Promise<Greet> {
+    return (await this.greetModel.find().exec())[0];
   }
 
   async find(id: string): Promise<Greet> {

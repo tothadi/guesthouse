@@ -10,6 +10,7 @@ import { GreetModule } from './endpoints/greet/greet.module';
 import { IntroductionModule } from './endpoints/introduction/introduction.module';
 import { ReservationModule } from './endpoints/reservations/reservation.module';
 import { MailModule } from './endpoints/messaging/mail.module';
+import { RoomsModule } from './endpoints/rooms/rooms.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { MailModule } from './endpoints/messaging/mail.module';
     GreetModule,
     IntroductionModule,
     ReservationModule,
+    RoomsModule,
     MailModule,
   ],
   controllers: [],

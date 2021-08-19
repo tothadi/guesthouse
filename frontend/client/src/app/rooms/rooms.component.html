@@ -1,0 +1,22 @@
+<h2>{{ room?.title }}</h2>
+
+<div class="picsCont" [ngClass]="{'fullScreen': fullScreen}">
+    <a *ngIf="loaded" [style.top.px]="currentPicPos.top" [style.right.px]="currentPicPos.right" class="toggle"
+        (click)="toggleFullScreen()">
+        <fa-icon [icon]="expandClose"></fa-icon>
+    </a>
+    <a [ngClass]="{'fullScreenControl': fullScreen}" *ngIf="multiplePics" class="picControl" (click)="prevPic()">
+        <fa-icon [icon]="left"></fa-icon>
+    </a>
+    <div *ngIf="loaded" id="roomPics" #pics>
+        <div *ngFor="let pic of room?.pics; index as i" id="picwrap">
+            <img [src]="'assets/image/page/rooms/' + pic" alt="{{room?.title}} - {{i+1}}" (load)="setToggle()"/>
+        </div>
+    </div>
+    <a [ngClass]="{'fullScreenControl': fullScreen}" *ngIf="multiplePics" class="picControl" (click)="nextPic()">
+        <fa-icon [icon]="right"></fa-icon>
+    </a>
+</div>
+
+
+<p *ngFor="let p of room?.paragraphs">{{p}}</p>

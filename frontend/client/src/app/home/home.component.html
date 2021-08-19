@@ -5,10 +5,5 @@
 </div>
 
 <div id="intro">
-    <p>Vendégházunk az Őrség szívében, Nagyrákoson várja a pihenni vágyókat.
-    </p>
-
-    <p>Három szobában, összesen (maximum) hat férőhellyel, szobánként külön fürdővel, tágas konyha/nappalival, hatalmas kerti kiülővel várjuk kedves vendégeinket.</p>
-
-    <p>A ház csak egyben kivehető, az árat nem befolyásolja a vendégek száma.</p>
+    <p *ngFor="let p of paragraphs">{{p}}</p>
 </div>

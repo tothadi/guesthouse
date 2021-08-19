@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { icon, library } from '@fortawesome/fontawesome-svg-core';
+import { icon, IconName, library } from '@fortawesome/fontawesome-svg-core';
 import {
     faEnvelope,
     faGlobeEurope,
@@ -8,6 +8,8 @@ import {
     faPhone,
     IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
+import { Contact } from '../backend.interfaces';
+import { BackendService } from '../backend.service';
 
 @Component({
     selector: 'app-footer',
@@ -15,20 +17,30 @@ import {
     styleUrls: ['./footer.component.css'],
 })
 export class FooterComponent implements OnInit {
-    envelope: IconDefinition;
     globe: IconDefinition;
-    phone: IconDefinition;
     pencil: IconDefinition;
     home: IconDefinition;
 
-    constructor() {
+    contacts?: Contact[];
+
+    constructor(private backend: BackendService) {
         library.add(faEnvelope, faPhone, faGlobeEurope, faPencilAlt, faHome);
-        this.phone = icon({ prefix: 'fas', iconName: 'phone' });
         this.globe = icon({ prefix: 'fas', iconName: 'globe-europe' });
-        this.envelope = icon({ prefix: 'fas', iconName: 'envelope' });
         this.pencil = icon({prefix: 'fas', iconName: 'pencil-alt'})
         this.home = icon({prefix: 'fas', iconName: 'home'})
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.backend.getContacts().subscribe(
+            (contacts) => {
+                this.contacts = contacts.map(c => {
+                  c.iconDef = icon({ prefix: "fas", iconName: c.icon as IconName });
+                  return c;
+                })
+              },
+            (err) => {
+              console.error(err.message);
+            }
+          );
+    }
 }
