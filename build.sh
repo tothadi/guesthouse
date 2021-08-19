@@ -1,18 +1,21 @@
-mkdir dist
-mkdir dist/client
-mkdir dist/admin
-
 cd frontend/client
 npm i
-ls node_modules/@angular/cli/bin
-ng build --prod
+npm run build:app
 cd ..
 
 cd admin
 npm i
-ng build --prod
-cd ..
+npm run build:app
 cd ..
 
-cp -r frontend/client/dist/* dist/client
-cp -r frontend/admin/dist/* dist/admin
+cd ..
+cd backend
+npm i
+npm run build
+mkdir dist
+mkdir dist/client
+mkdir dist/admin
+
+cd ..
+cp -r frontend/client/dist/* backend/dist/client/
+cp -r frontend/admin/dist/* backend/dist/admin/
