@@ -1,19 +1,19 @@
-import { NestFactory } from '@nestjs/core';
+import { NestFactory } from "@nestjs/core";
 import {
   FastifyAdapter,
-  NestFastifyApplication
-} from '@nestjs/platform-fastify';
-import { AppModule } from './app.module';
-import { contentParser } from 'fastify-multer';
-import 'reflect-metadata';
-import { join } from 'path';
-import helmet from 'fastify-helmet';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+  NestFastifyApplication,
+} from "@nestjs/platform-fastify";
+import { AppModule } from "./app.module";
+import { contentParser } from "fastify-multer";
+import "reflect-metadata";
+import { join } from "path";
+import helmet from "fastify-helmet";
+import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 const swaggerDocument = new DocumentBuilder()
-  .setTitle('Client')
-  .setDescription('Client')
-  .setVersion('1.0')
-  .addTag('Client')
+  .setTitle("Client")
+  .setDescription("Client")
+  .setVersion("1.0")
+  .addTag("Client")
   .build();
 
 async function bootstrap() {
@@ -21,17 +21,24 @@ async function bootstrap() {
     AppModule,
     new FastifyAdapter()
   );
-  appClient.setGlobalPrefix('/api');
-  await appClient.listen(3000, '0.0.0.0', (err, addr) => {
-    if (err) {console.log(err)}
-    console.log(`address: ${addr}`)
+
+  appClient.useStaticAssets({
+    root: join(__dirname, ".", "client"),
+    prefix: '/*',
+  });
+  appClient.setGlobalPrefix("/api");
+  await appClient.listen(3000, "0.0.0.0", (err, addr) => {
+    if (err) {
+      console.log(err);
+    }
+    console.log(`address: ${addr}`);
   });
   appClient.register(helmet, {
     contentSecurityPolicy: {
       directives: {
         defaultSrc: [`'self'`],
         styleSrc: [`'self'`, `'unsafe-inline'`],
-        imgSrc: [`'self'`, 'data:', 'validator.swagger.io'],
+        imgSrc: [`'self'`, "data:", "validator.swagger.io"],
         scriptSrc: [`'self'`, `https: 'unsafe-inline'`],
       },
     },
@@ -39,28 +46,32 @@ async function bootstrap() {
   appClient.register(contentParser);
 
   SwaggerModule.setup(
-    'api',
+    "api",
     appClient,
-    SwaggerModule.createDocument(appClient, swaggerDocument),
+    SwaggerModule.createDocument(appClient, swaggerDocument)
   );
-
-  appClient.useStaticAssets({root: join(__dirname, '.', 'client')});
 
   const appAdmin = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     new FastifyAdapter()
   );
-  appAdmin.setGlobalPrefix('/api');
-  await appAdmin.listen(5000, '0.0.0.0', (err, addr) => {
-    if (err) {console.log(err)}
-    console.log(`address: ${addr}`)
+  appAdmin.useStaticAssets({
+    root: join(__dirname, ".", "admin"),
+    prefix: '/*',
+  });
+  appAdmin.setGlobalPrefix("/api");
+  await appAdmin.listen(5000, "0.0.0.0", (err, addr) => {
+    if (err) {
+      console.log(err);
+    }
+    console.log(`address: ${addr}`);
   });
   appAdmin.register(helmet, {
     contentSecurityPolicy: {
       directives: {
         defaultSrc: [`'self'`],
         styleSrc: [`'self'`, `'unsafe-inline'`],
-        imgSrc: [`'self'`, 'data:', 'validator.swagger.io'],
+        imgSrc: [`'self'`, "data:", "validator.swagger.io"],
         scriptSrc: [`'self'`, `https: 'unsafe-inline'`],
       },
     },
@@ -68,11 +79,9 @@ async function bootstrap() {
   appAdmin.register(contentParser);
 
   SwaggerModule.setup(
-    'api',
+    "api",
     appAdmin,
-    SwaggerModule.createDocument(appAdmin, swaggerDocument),
+    SwaggerModule.createDocument(appAdmin, swaggerDocument)
   );
-
-  appAdmin.useStaticAssets({root: join(__dirname, '.', 'admin')});
 }
 bootstrap();
