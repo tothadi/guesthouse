@@ -7,6 +7,9 @@ WORKDIR '/usr/src/app'
 COPY backend ./
 COPY frontend ./frontend
 COPY ./build.sh ./
+RUN ls backend
+RUN ls frontend
+RUN ls frontend/client
 RUN chmod +x ./build.sh
 RUN ./build.sh
 RUN ls backend/dist
