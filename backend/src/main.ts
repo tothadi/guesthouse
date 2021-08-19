@@ -22,7 +22,10 @@ async function bootstrap() {
     new FastifyAdapter()
   );
   appClient.setGlobalPrefix('/api');
-  await appClient.listen(3000);
+  await appClient.listen(3000, '0.0.0.0', (err, addr) => {
+    if (err) {console.log(err)}
+    console.log(`address: ${addr}`)
+  });
   appClient.register(helmet, {
     contentSecurityPolicy: {
       directives: {
@@ -48,7 +51,10 @@ async function bootstrap() {
     new FastifyAdapter()
   );
   appAdmin.setGlobalPrefix('/api');
-  await appAdmin.listen(5000);
+  await appAdmin.listen(5000, '0.0.0.0', (err, addr) => {
+    if (err) {console.log(err)}
+    console.log(`address: ${addr}`)
+  });
   appAdmin.register(helmet, {
     contentSecurityPolicy: {
       directives: {
