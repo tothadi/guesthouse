@@ -5,6 +5,7 @@ mkdir dist/admin
 
 cd frontend/client
 npm i
+ls node_modules/@angular/cli/bin
 npm run build:app
 cd ..
 
