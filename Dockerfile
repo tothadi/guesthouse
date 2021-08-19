@@ -1,6 +1,4 @@
 FROM node:14.17.3
-ENV NODE_ENV=production
-ENV HOST '0.0.0.0'
 WORKDIR '/usr/src/app'
 
 COPY backend ./backend
@@ -16,4 +14,6 @@ RUN ls dist
 RUN ls dist/client
 RUN ls dist/admin
 
+ENV NODE_ENV=production
+ENV HOST '0.0.0.0'
 CMD [ "npm", "start" ]
