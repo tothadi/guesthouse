@@ -23,10 +23,10 @@ async function bootstrap() {
   );
 
   appClient.useStaticAssets({
-    root: join(__dirname, ".", "client"),
-    prefix: '/*',
+    root: join(__dirname, ".", "client")
   });
-  appClient.setGlobalPrefix("/api");
+  
+  appClient.setGlobalPrefix("/");
   await appClient.listen(3000, "0.0.0.0", (err, addr) => {
     if (err) {
       console.log(err);
@@ -57,9 +57,8 @@ async function bootstrap() {
   );
   appAdmin.useStaticAssets({
     root: join(__dirname, ".", "admin"),
-    prefix: '/*',
   });
-  appAdmin.setGlobalPrefix("/api");
+  appAdmin.setGlobalPrefix("/");
   await appAdmin.listen(5000, "0.0.0.0", (err, addr) => {
     if (err) {
       console.log(err);
