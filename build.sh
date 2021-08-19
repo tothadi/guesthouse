@@ -1,4 +1,3 @@
-npm i
 mkdir dist
 mkdir dist/client
 mkdir dist/admin
@@ -15,5 +14,6 @@ npm run build:app
 cd ..
 cd ..
 
+npm i
 cp -r frontend/client/dist/* dist/client
 cp -r frontend/admin/dist/* dist/admin
