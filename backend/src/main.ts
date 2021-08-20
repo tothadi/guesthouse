@@ -9,6 +9,8 @@ import 'reflect-metadata';
 import { join } from 'path';
 import helmet from 'fastify-helmet';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { ClientModule } from './client/client.module';
+import { AdminModule } from './admin/admin.module';
 const swaggerDocument = new DocumentBuilder()
   .setTitle('Client')
   .setDescription('Client')
@@ -19,35 +21,31 @@ const swaggerDocument = new DocumentBuilder()
 async function bootstrap() {
 
   const appClient = await NestFactory.create<NestFastifyApplication>(
-    AppModule,
+    ClientModule,
     new FastifyAdapter()
   );
-  appClient.setGlobalPrefix('/*');
+  appClient.useStaticAssets({root: join(__dirname, '.', 'client')});
+  appClient.setViewEngine('html');
   await appClient.listen(3000, '0.0.0.0', (err, addr) => {
     if (err) {
       console.log(err);
     }
     console.log(`address: ${addr}`);
   });
-  appClient.useStaticAssets({
-    root: join(__dirname, '.', 'client')
-  });
 
-  
+
 
   const appAdmin = await NestFactory.create<NestFastifyApplication>(
-    AppModule,
+    AdminModule,
     new FastifyAdapter()
   );
-  appAdmin.setGlobalPrefix('/*');
+  appAdmin.useStaticAssets({root: join(__dirname, '.', 'admin')});
+  appAdmin.setViewEngine('html');
   await appAdmin.listen(3001, '0.0.0.0', (err, addr) => {
     if (err) {
       console.log(err);
     }
     console.log(`address: ${addr}`);
-  });
-  appAdmin.useStaticAssets({
-    root: join(__dirname, '.', 'admin'),
   });
 
 

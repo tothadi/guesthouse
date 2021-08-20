@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+//import { ConfigModule } from '@nestjs/config';
 import { MongoExceptionFilter } from './database/exception.filter'
 
 import { ActualitiesModule } from './endpoints/actualities/actualities.module';
@@ -10,6 +10,8 @@ import { GreetModule } from './endpoints/greet/greet.module';
 import { ReservationModule } from './endpoints/reservations/reservation.module';
 import { MailModule } from './endpoints/messaging/mail.module';
 import { RoomsModule } from './endpoints/rooms/rooms.module';
+import { ClientModule } from './client/client.module';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
@@ -22,6 +24,8 @@ import { RoomsModule } from './endpoints/rooms/rooms.module';
     ReservationModule,
     RoomsModule,
     MailModule,
+    ClientModule,
+    AdminModule,
   ],
   controllers: [],
   providers: [MongoExceptionFilter],

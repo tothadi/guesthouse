@@ -8,8 +8,8 @@ RUN chmod +x ./build.sh
 RUN ./build.sh
 
 WORKDIR '/usr/src/app/backend'
-RUN cp -r src/assets/admin/* dist/admin/assets
-RUN cp -r src/assets/client/* dist/client/assets
+RUN cp -r src/admin/assets/* dist/admin/assets
+RUN cp -r src/client/assets/* dist/client/assets
 RUN ls dist
 RUN ls dist/client
 RUN ls dist/admin

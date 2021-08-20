@@ -30,6 +30,7 @@
     "@nestjs/passport": "^7.1.5",
     "@nestjs/platform-express": "^7.6.15",
     "@nestjs/platform-fastify": "^7.6.17",
+    "@nestjs/serve-static": "^2.2.2",
     "@nestjs/swagger": "^4.8.0",
     "@types/bcrypt": "^5.0.0",
     "@types/form-data": "^2.5.0",
