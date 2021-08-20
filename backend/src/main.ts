@@ -24,8 +24,7 @@ async function bootstrap() {
     ClientModule,
     new FastifyAdapter()
   );
-  appClient.useStaticAssets({root: join(__dirname, '.', 'client')});
-  appClient.setViewEngine('html');
+  appClient.useStaticAssets({root: join(__dirname, '.', 'client/dist')});
   await appClient.listen(3000, '0.0.0.0', (err, addr) => {
     if (err) {
       console.log(err);
@@ -39,8 +38,7 @@ async function bootstrap() {
     AdminModule,
     new FastifyAdapter()
   );
-  appAdmin.useStaticAssets({root: join(__dirname, '.', 'admin')});
-  appAdmin.setViewEngine('html');
+  appAdmin.useStaticAssets({root: join(__dirname, '.', 'admin/dist')});
   await appAdmin.listen(3001, '0.0.0.0', (err, addr) => {
     if (err) {
       console.log(err);

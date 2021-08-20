@@ -6,8 +6,7 @@ import { AdminController } from './admin.controller';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
-      
-      rootPath: join(__dirname, '.', 'client'),
+      rootPath: join(__dirname, '.', 'admin/dist'),
       exclude: ['/api*'],
     }),
   ],
