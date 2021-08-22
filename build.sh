@@ -12,7 +12,8 @@ cd ..
 cd backend
 npm i
 npm run build
-mkdir dist
+mkdir dist/client
+mkdir dist/admin
 mkdir dist/client/dist
 mkdir dist/admin/dist
 
