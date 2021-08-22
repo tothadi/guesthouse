@@ -10,8 +10,6 @@ import { GreetModule } from './endpoints/greet/greet.module';
 import { ReservationModule } from './endpoints/reservations/reservation.module';
 import { MailModule } from './endpoints/messaging/mail.module';
 import { RoomsModule } from './endpoints/rooms/rooms.module';
-import { ClientModule } from './client/client.module';
-import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
@@ -24,8 +22,6 @@ import { AdminModule } from './admin/admin.module';
     ReservationModule,
     RoomsModule,
     MailModule,
-    ClientModule,
-    AdminModule,
   ],
   controllers: [],
   providers: [MongoExceptionFilter],

@@ -9,21 +9,20 @@ import 'reflect-metadata';
 import { join } from 'path';
 import helmet from 'fastify-helmet';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { ClientModule } from './client/client.module';
-import { AdminModule } from './admin/admin.module';
 const swaggerDocument = new DocumentBuilder()
-  .setTitle('Client')
-  .setDescription('Client')
+  .setTitle('API')
+  .setDescription('API')
   .setVersion('1.0')
-  .addTag('Client')
+  .addTag('API')
   .build();
 
 async function bootstrap() {
 
   const appClient = await NestFactory.create<NestFastifyApplication>(
-    ClientModule,
+    AppModule,
     new FastifyAdapter()
   );
+  appClient.setGlobalPrefix('/api');
   appClient.useStaticAssets({root: join(__dirname, '.', 'client/dist')});
   await appClient.listen(3000, '0.0.0.0', (err, addr) => {
     if (err) {
@@ -32,34 +31,19 @@ async function bootstrap() {
     console.log(`address: ${addr}`);
   });
 
-
-
   const appAdmin = await NestFactory.create<NestFastifyApplication>(
-    AdminModule,
-    new FastifyAdapter()
-  );
-  appAdmin.useStaticAssets({root: join(__dirname, '.', 'admin/dist')});
-  await appAdmin.listen(3001, '0.0.0.0', (err, addr) => {
-    if (err) {
-      console.log(err);
-    }
-    console.log(`address: ${addr}`);
-  });
-
-
-
-  const appAPI = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     new FastifyAdapter()
   );
-  appAPI.setGlobalPrefix('/api');
-  await appAPI.listen(5000, '0.0.0.0', (err, addr) => {
+  appAdmin.setGlobalPrefix('/api');
+  appAdmin.useStaticAssets({root: join(__dirname, '.', 'admin/dist')});
+  await appAdmin.listen(5000, '0.0.0.0', (err, addr) => {
     if (err) {
       console.log(err);
     }
     console.log(`address: ${addr}`);
   });
-  appAPI.register(helmet, {
+  appAdmin.register(helmet, {
     contentSecurityPolicy: {
       directives: {
         defaultSrc: [`'self'`],
@@ -69,12 +53,12 @@ async function bootstrap() {
       },
     },
   });
-  appAPI.register(contentParser);
+  appAdmin.register(contentParser);
 
   SwaggerModule.setup(
     'api',
-    appAPI,
-    SwaggerModule.createDocument(appAPI, swaggerDocument)
+    appAdmin,
+    SwaggerModule.createDocument(appAdmin, swaggerDocument)
   );
 }
 bootstrap();
