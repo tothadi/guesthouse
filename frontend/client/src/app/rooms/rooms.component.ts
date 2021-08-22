@@ -75,7 +75,7 @@ export class RoomsComponent implements OnInit {
   setToggle() {
     this.cd.detectChanges();
     this.currentPicPos.top =
-      this.pics?.nativeElement.firstChild.firstChild.offsetTop + 10;
+      this.pics?.nativeElement.firstChild.firstChild.offsetTop;
     this.currentPicPos.right =
       this.pics?.nativeElement.firstChild.firstChild.offsetLeft + 10;
   }

@@ -3,7 +3,7 @@ import { Controller, Get, Post, Put, Delete, Body, Param, UseFilters, UseGuards,
 import { IpnDto, OccupationDto, ReservationDto } from './reservation.dto';
 import { ReservationService } from './reservation.service';
 import { IPN, Occupation, Reservation } from './reservation.interface';
-import { BadRequestFilter, MongoExceptionFilter } from '../../database/exception.filter'
+import { BadRequestFilter, MongoExceptionFilter } from '../../exception.filter'
 import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 
 @Controller('reservation')

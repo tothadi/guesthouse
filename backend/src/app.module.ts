@@ -1,15 +1,15 @@
-import { Module } from '@nestjs/common';
+import { Module, } from "@nestjs/common";
 //import { ConfigModule } from '@nestjs/config';
-import { MongoExceptionFilter } from './database/exception.filter'
+import { MongoExceptionFilter, NotFoundExceptionFilter } from "./exception.filter";
 
-import { ActualitiesModule } from './endpoints/actualities/actualities.module';
-import { AuthModule } from './auth/auth.module';
-import { ContactModule } from './endpoints/contact/contact.module';
-import { GalleriesModule } from './endpoints/galleries/galleries.module';
-import { GreetModule } from './endpoints/greet/greet.module';
-import { ReservationModule } from './endpoints/reservations/reservation.module';
-import { MailModule } from './endpoints/messaging/mail.module';
-import { RoomsModule } from './endpoints/rooms/rooms.module';
+import { ActualitiesModule } from "./endpoints/actualities/actualities.module";
+import { AuthModule } from "./auth/auth.module";
+import { ContactModule } from "./endpoints/contact/contact.module";
+import { GalleriesModule } from "./endpoints/galleries/galleries.module";
+import { GreetModule } from "./endpoints/greet/greet.module";
+import { ReservationModule } from "./endpoints/reservations/reservation.module";
+import { MailModule } from "./endpoints/messaging/mail.module";
+import { RoomsModule } from "./endpoints/rooms/rooms.module";
 
 @Module({
   imports: [
@@ -24,6 +24,10 @@ import { RoomsModule } from './endpoints/rooms/rooms.module';
     MailModule,
   ],
   controllers: [],
-  providers: [MongoExceptionFilter],
+  providers: [
+    MongoExceptionFilter,
+    NotFoundExceptionFilter
+  ],
 })
-export class AppModule { }
+export class AppModule {
+}
