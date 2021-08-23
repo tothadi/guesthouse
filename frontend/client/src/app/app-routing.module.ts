@@ -24,7 +24,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'kezdolap',
+    redirectTo: '/kezdolap',
     pathMatch: 'full'
   },
   { 

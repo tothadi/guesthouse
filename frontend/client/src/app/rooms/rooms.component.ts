@@ -6,26 +6,32 @@ import {
   HostListener,
   OnInit,
   ViewChild,
-} from "@angular/core";
-import { icon, library } from "@fortawesome/fontawesome-svg-core";
+} from '@angular/core';
+import { icon, library } from '@fortawesome/fontawesome-svg-core';
 import {
   faArrowCircleLeft,
   faArrowCircleRight,
   faExpand,
   faWindowClose,
   IconDefinition,
-} from "@fortawesome/free-solid-svg-icons";
-import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
-import { Room } from "../backend.interfaces";
-import { BackendService } from "../backend.service";
+} from '@fortawesome/free-solid-svg-icons';
+import {
+  ActivatedRoute,
+  NavigationStart,
+  Router,
+  RouterLinkActive,
+  UrlSegment,
+} from '@angular/router';
+import { Room } from '../backend.interfaces';
+import { BackendService } from '../backend.service';
 
 @Component({
-  selector: "app-rooms",
-  templateUrl: "rooms.component.html",
-  styleUrls: ["./rooms.component.css"],
+  selector: 'app-rooms',
+  templateUrl: 'rooms.component.html',
+  styleUrls: ['./rooms.component.css'],
 })
 export class RoomsComponent implements OnInit {
-  @ViewChild("pics")
+  @ViewChild('pics')
   pics?: ElementRef;
 
   currentPicPos = {
@@ -50,24 +56,24 @@ export class RoomsComponent implements OnInit {
     private Backend: BackendService
   ) {
     library.add(faArrowCircleLeft, faArrowCircleRight, faExpand, faWindowClose);
-    this.left = icon({ prefix: "fas", iconName: "arrow-circle-left" });
-    this.right = icon({ prefix: "fas", iconName: "arrow-circle-right" });
-    this.expandClose = icon({ prefix: "fas", iconName: "expand" });
+    this.left = icon({ prefix: 'fas', iconName: 'arrow-circle-left' });
+    this.right = icon({ prefix: 'fas', iconName: 'arrow-circle-right' });
+    this.expandClose = icon({ prefix: 'fas', iconName: 'expand' });
   }
 
-  @HostListener("window:resize", ["$event"])
+  @HostListener('window:resize', ['$event'])
   onresize(event: Event) {
     this.setToggle();
   }
 
   prevPic() {
-    const last = this.room?.pics.pop() || "pic";
+    const last = this.room?.pics.pop() || 'pic';
     this.room?.pics.unshift(last);
     this.setToggle();
   }
 
   nextPic() {
-    const first = this.room?.pics.shift() || "pic";
+    const first = this.room?.pics.shift() || 'pic';
     this.room?.pics.push(first);
     this.setToggle();
   }
@@ -83,18 +89,26 @@ export class RoomsComponent implements OnInit {
   toggleFullScreen() {
     this.fullScreen = !this.fullScreen;
     this.expandClose = this.fullScreen
-      ? icon({ prefix: "fas", iconName: "window-close" })
-      : icon({ prefix: "fas", iconName: "expand" });
+      ? icon({ prefix: 'fas', iconName: 'window-close' })
+      : icon({ prefix: 'fas', iconName: 'expand' });
     this.setToggle();
+  }
+
+  filterRoom(roomName: string) {
+    this.room = this.rooms?.filter((r) => r.link === roomName)[0];
+    this.multiplePics = this.room!.pics.length > 1;
   }
 
   ngOnInit(): void {
     this.Backend.getRooms().subscribe(
       (rooms) => {
         this.rooms = rooms;
-        this.room = rooms[0];
-        this.multiplePics = this.room!.pics.length > 1;
-        this.router.navigateByUrl(`/szobak/${this.room.link}`);
+        this.route.url.subscribe((url: UrlSegment[]) => {
+          this.filterRoom(url[0].path);
+        },
+        (err) => {
+          console.error(err.message);
+        })
         this.loaded = true;
       },
       (err) => {
@@ -103,17 +117,11 @@ export class RoomsComponent implements OnInit {
     );
 
     this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd && event.urlAfterRedirects) {
-        this.route.url.subscribe(
-          (url) => {
-            this.room = this.rooms?.filter((r) => r.link === url[0].path)[0];
-            this.multiplePics = this.room!.pics.length > 1;
-          },
-          (err) => {
-            console.error(err.message);
-          }
-        );
+      if (event instanceof NavigationStart && event.url) {
+        this.filterRoom(event.url.split('/')[2]);
       }
     });
+
+
   }
 }
