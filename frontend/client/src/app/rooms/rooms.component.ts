@@ -106,6 +106,7 @@ export class RoomsComponent implements OnInit {
         this.rooms = rooms;
         this.filterRoom(roomName);
         this.loaded = true;
+        this.setToggle()
       },
       (err) => {
         console.error(err.message);
