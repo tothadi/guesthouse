@@ -105,7 +105,6 @@ export class RoomsComponent implements OnInit {
         const roomName = this.location.path().split('/')[2] || 'nappali'
         this.rooms = rooms;
         this.filterRoom(roomName);
-        console.log(this.room)
         this.loaded = true;
       },
       (err) => {

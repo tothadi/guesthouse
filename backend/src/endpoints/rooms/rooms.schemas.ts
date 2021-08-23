@@ -1,6 +1,6 @@
 import * as mongoose from "mongoose";
 
-const PicturesSchema = new mongoose.Schema({
+export const PicturesSchema = new mongoose.Schema({
   base64: { type: String, required: true },
   caption: { type: String, required: false },
 });

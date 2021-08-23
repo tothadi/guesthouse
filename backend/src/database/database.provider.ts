@@ -3,7 +3,7 @@ import { Connection } from 'mongoose';
 import { ActualitiesSchema } from '../endpoints/actualities/actualities.schemas';
 import { ContactSchema } from '../endpoints/contact/contact.schemas';
 import { GreetSchema } from '../endpoints/greet/greet.schemas';
-import { PicturesSchema } from '../endpoints/pictures/pictures.schemas';
+import { PicturesSchema } from '../endpoints/rooms/rooms.schemas';
 import { OccupationSchema, ReservationSchema } from '../endpoints/reservations/reservation.schemas';
 import { RoomsSchema } from '../endpoints/rooms/rooms.schemas';
 

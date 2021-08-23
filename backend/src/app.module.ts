@@ -5,12 +5,10 @@ import { MongoExceptionFilter, NotFoundExceptionFilter } from "./exception.filte
 import { ActualitiesModule } from "./endpoints/actualities/actualities.module";
 import { AuthModule } from "./auth/auth.module";
 import { ContactModule } from "./endpoints/contact/contact.module";
-import { PicturesModule } from "./endpoints/pictures/pictures.module";
 import { GreetModule } from "./endpoints/greet/greet.module";
 import { ReservationModule } from "./endpoints/reservations/reservation.module";
 import { MailModule } from "./endpoints/messaging/mail.module";
 import { RoomsModule } from "./endpoints/rooms/rooms.module";
-import { appProviders } from "./app.provider";
 
 @Module({
   imports: [
@@ -18,7 +16,6 @@ import { appProviders } from "./app.provider";
     AuthModule,
     //ConfigModule.forRoot({ envFilePath: `.env.local` }),
     ContactModule,
-    PicturesModule,
     GreetModule,
     ReservationModule,
     RoomsModule,
