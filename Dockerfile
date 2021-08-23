@@ -1,8 +1,6 @@
 FROM node:14.17.3
 WORKDIR '/usr/src/app'
 
-RUN apt install nano
-
 COPY backend ./backend
 COPY frontend ./frontend
 COPY ./build.sh ./
