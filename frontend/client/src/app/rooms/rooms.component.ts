@@ -17,9 +17,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import {
   ActivatedRoute,
-  NavigationStart,
+  NavigationEnd,
   Router,
-  RouterLinkActive,
   UrlSegment,
 } from '@angular/router';
 import { Room } from '../backend.interfaces';
@@ -104,6 +103,7 @@ export class RoomsComponent implements OnInit {
       (rooms) => {
         this.rooms = rooms;
         this.route.url.subscribe((url: UrlSegment[]) => {
+          console.log(url);
           this.filterRoom(url[0].path);
         },
         (err) => {
@@ -117,7 +117,7 @@ export class RoomsComponent implements OnInit {
     );
 
     this.router.events.subscribe((event) => {
-      if (event instanceof NavigationStart && event.url) {
+      if (event instanceof NavigationEnd && event.url) {
         this.filterRoom(event.url.split('/')[2]);
       }
     });
