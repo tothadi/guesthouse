@@ -22,7 +22,7 @@ async function bootstrap() {
     AppModule,
     new FastifyAdapter()
   );
-  //appClient.useGlobalFilters(new NotFoundExceptionFilter());
+  appClient.useGlobalFilters(new NotFoundExceptionFilter());
   appClient.setGlobalPrefix("/api");
   appClient.useStaticAssets({ root: join(__dirname, ".", "client/dist") });
   await appClient.listen(3000, "0.0.0.0", (err, addr) => {
@@ -36,7 +36,7 @@ async function bootstrap() {
     AppModule,
     new FastifyAdapter()
   );
-  //appAdmin.useGlobalFilters(new NotFoundExceptionFilter());
+  appAdmin.useGlobalFilters(new NotFoundExceptionFilter());
   appAdmin.setGlobalPrefix("/api");
   appAdmin.useStaticAssets({ root: join(__dirname, ".", "admin/dist") });
   await appAdmin.listen(5000, "0.0.0.0", (err, addr) => {
