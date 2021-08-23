@@ -14,11 +14,16 @@ export interface Contact {
   iconDef?: IconDefinition;
 }
 
+interface Pictures {
+  caption?: string;
+  base64: Buffer;
+}
+
 export interface Room {
   order: number;
   menu: string;
   title: string;
   paragraphs: string[];
   link: string;
-  pics: string[];
+  pics?: Pictures[];
 }

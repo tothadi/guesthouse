@@ -47,6 +47,15 @@ img {
     box-shadow: 5px 5px 10px rgba(0,0,0,.5);
 }
 
+figcaption {
+    position: absolute;
+    bottom: calc(1rem + 15px);
+    left: auto;
+    padding: .3rem;
+    color: whitesmoke;
+    background-color: rgba(51, 98, 46, .7);
+}
+
 .picControl, .toggle {
     text-decoration: none;
     cursor: pointer;

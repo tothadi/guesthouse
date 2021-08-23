@@ -1,18 +1,12 @@
-import * as mongoose from 'mongoose';
 import { Connection } from 'mongoose';
-import { ActualitiesSchema } from '../endpoints/actualities/actualities.schemas';
-import { ContactSchema } from '../endpoints/contact/contact.schemas';
-import { GreetSchema } from '../endpoints/greet/greet.schemas';
-import { PicturesSchema } from '../endpoints/pictures/pictures.schemas';
-import { OccupationSchema, ReservationSchema } from '../endpoints/reservations/reservation.schemas';
-import { RoomsSchema } from '../endpoints/rooms/rooms.schemas';
+import { ActualitiesSchema } from './endpoints/actualities/actualities.schemas';
+import { ContactSchema } from './endpoints/contact/contact.schemas';
+import { GreetSchema } from './endpoints/greet/greet.schemas';
+import { PicturesSchema } from './endpoints/pictures/pictures.schemas';
+import { OccupationSchema, ReservationSchema } from './endpoints/reservations/reservation.schemas';
+import { RoomsSchema } from './endpoints/rooms/rooms.schemas';
 
-export const databaseProviders = [
-    {
-        provide: 'DATABASE_CONNECTION',
-        useFactory: async (): Promise<typeof mongoose> =>
-        await mongoose.connect(process.env.DB_HOST, { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true, }),
-    },
+export const appProviders = [
     {
         provide: 'ACTUALITIES_MODEL',
         useFactory: (connection: Connection) => connection.model('Actualities', ActualitiesSchema),

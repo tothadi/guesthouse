@@ -20,7 +20,7 @@ const swaggerDocument = new DocumentBuilder()
 async function bootstrap() {
   const appClient = await NestFactory.create<NestFastifyApplication>(
     AppModule,
-    new FastifyAdapter()
+    new FastifyAdapter(),
   );
   appClient.useGlobalFilters(new NotFoundExceptionFilter());
   appClient.setGlobalPrefix("/api");
@@ -34,7 +34,9 @@ async function bootstrap() {
 
   const appAdmin = await NestFactory.create<NestFastifyApplication>(
     AppModule,
-    new FastifyAdapter()
+    new FastifyAdapter({
+      bodyLimit: 16777216
+    })
   );
   appAdmin.useGlobalFilters(new NotFoundExceptionFilter());
   appAdmin.setGlobalPrefix("/api");

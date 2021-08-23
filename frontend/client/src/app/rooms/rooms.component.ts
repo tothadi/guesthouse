@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   ChangeDetectorRef,
   Component,
   ElementRef,
@@ -7,6 +6,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { Location } from '@angular/common';
 import { icon, library } from '@fortawesome/fontawesome-svg-core';
 import {
   faArrowCircleLeft,
@@ -49,6 +49,7 @@ export class RoomsComponent implements OnInit {
   fullScreen = false;
 
   constructor(
+    private location: Location,
     private cd: ChangeDetectorRef,
     private router: Router,
     private route: ActivatedRoute,
@@ -66,14 +67,14 @@ export class RoomsComponent implements OnInit {
   }
 
   prevPic() {
-    const last = this.room?.pics.pop() || 'pic';
-    this.room?.pics.unshift(last);
+    const last = this.room?.pics!.pop();
+    this.room?.pics!.unshift(last!);
     this.setToggle();
   }
 
   nextPic() {
-    const first = this.room?.pics.shift() || 'pic';
-    this.room?.pics.push(first);
+    const first = this.room?.pics!.shift();
+    this.room?.pics!.push(first!);
     this.setToggle();
   }
 
@@ -95,20 +96,16 @@ export class RoomsComponent implements OnInit {
 
   filterRoom(roomName: string) {
     this.room = this.rooms?.filter((r) => r.link === roomName)[0];
-    this.multiplePics = this.room!.pics.length > 1;
+    this.multiplePics = this.room!.pics!.length > 1;
   }
 
   ngOnInit(): void {
     this.Backend.getRooms().subscribe(
       (rooms) => {
+        const roomName = this.location.path().split('/')[2] || 'nappali'
         this.rooms = rooms;
-        this.route.url.subscribe((url: UrlSegment[]) => {
-          console.log(url);
-          this.filterRoom(url[0].path);
-        },
-        (err) => {
-          console.error(err.message);
-        })
+        this.filterRoom(roomName);
+        console.log(this.room)
         this.loaded = true;
       },
       (err) => {

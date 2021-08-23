@@ -105,7 +105,6 @@ export class MenuComponent implements AfterViewInit, OnInit {
 
   @HostListener("window:resize", ["$event"])
   onResize(event: Event) {
-    console.log(event.target);
     this.setSize();
   }
 
