@@ -4,11 +4,11 @@ import {
   ExceptionFilter,
   HttpException,
   NotFoundException,
-} from "@nestjs/common";
-import { FastifyReply } from "fastify";
-import { MongoError } from "mongodb";
-import { join } from "path";
-import { createReadStream } from "fs";
+} from '@nestjs/common';
+import { FastifyReply } from 'fastify';
+import { MongoError } from 'mongodb';
+import { join } from 'path';
+import { createReadStream } from 'fs';
 
 @Catch()
 export class BadRequestFilter implements ExceptionFilter {
@@ -25,7 +25,7 @@ export class MongoExceptionFilter implements ExceptionFilter {
     if (exception.code === 11000) {
       response.status(400).send({ message: exception.message });
     } else {
-      response.status(500).send({ message: "Internal error." });
+      response.status(500).send({ message: 'Internal error.' });
     }
   }
 }
@@ -36,9 +36,9 @@ export class NotFoundExceptionFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const request = ctx.getRequest();
     const response = ctx.getResponse<FastifyReply>();
-    const port = request.headers.host.split(":")[1];
-    const dir = port === "3000" ? "client" : "admin";
-    const path = join(__dirname, ".", dir, "dist/index.html");
+    const port = request.headers.host.split(':')[1];
+    const dir = parseInt(port, 10) < 5000 ? 'client' : 'admin';
+    const path = join(__dirname, '.', dir, 'dist/index.html');
     const stream = createReadStream(path);
     response.type('text-html').send(stream);
   }
