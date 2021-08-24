@@ -10,6 +10,11 @@ cd ..
 
 cd ..
 cd backend
+ls
+
+mkdir frontend/client
+mkdir frontend/admin
+
 npm i
 
 cd ..
