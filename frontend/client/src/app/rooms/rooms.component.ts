@@ -93,33 +93,38 @@ export class RoomsComponent implements OnInit {
     this.setToggle();
   }
 
+  getRooms() {
+    this.Backend.getRooms().subscribe(
+      (rooms) => {
+        this.rooms = rooms;
+        const roomName =
+          this.location.path().split('/')[2] || this.rooms[0].link;
+        this.router.navigateByUrl(`szobak/${roomName}`);
+        this.filterRoom(roomName);
+        this.loaded = true;
+        this.setToggle();
+      },
+      (err) => {
+        console.error(err.message);
+      }
+    );
+  }
+
   filterRoom(roomName: string) {
     this.room = this.rooms?.filter((r) => r.link === roomName)[0];
     this.multiplePics = this.room!.pics!.length > 1;
   }
 
   ngOnInit(): void {
-    this.Backend.getRooms().subscribe(
-      (rooms) => {
-        this.rooms = rooms;
-        const roomName = this.location.path().split('/')[2] || this.rooms[0].link;
-        this.router.navigateByUrl(`szobak/${roomName}`);
-        console.log(roomName)
-        this.filterRoom(roomName);
-        this.loaded = true;
-        this.setToggle()
-      },
-      (err) => {
-        console.error(err.message);
-      }
-    );
+    this.getRooms();
 
     this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd && event.url) {
-        this.filterRoom(event.url.split('/')[2]);
+      if (event instanceof NavigationEnd && event.urlAfterRedirects) {
+        const url = event.urlAfterRedirects.split('/');
+        if (url[1] == 'szobak' && url[2]) {
+          this.filterRoom(url[2]);
+        }
       }
     });
-
-
   }
 }
