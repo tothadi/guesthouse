@@ -1,20 +1,21 @@
 <app-loader *ngIf="!loaded">
-    
+
 </app-loader>
 
 <h2>{{ room?.title }}</h2>
 
 <div class="picsCont" [ngClass]="{'fullScreen': fullScreen}">
-    <a *ngIf="loaded" [style.top.px]="currentPicPos.top" [style.right.px]="currentPicPos.right" class="toggle"
-        (click)="toggleFullScreen()">
-        <fa-icon [icon]="expandClose"></fa-icon>
-    </a>
+
     <a [ngClass]="{'fullScreenControl': fullScreen}" *ngIf="multiplePics" class="picControl" (click)="prevPic()">
         <fa-icon [icon]="left"></fa-icon>
     </a>
-    <div *ngIf="loaded" id="roomPics" #pics>
+    <div *ngIf="loaded" id="roomPics" >
         <figure *ngFor="let pic of room?.pics; index as i" id="picwrap">
-            <img [src]="'data:image/png;base64,' + pic.base64" alt="{{room?.title}} - {{i+1}}" (load)="setToggle()"/>
+            <img [src]="'data:image/png;base64,' + pic.base64" alt="{{room?.title}} - {{i+1}}" (load)="setToggle()" />
+            <a #pics *ngIf="loaded" [style.top.px]="currentPicPos.top" [style.right.px]="currentPicPos.right" class="toggle"
+                (click)="toggleFullScreen()">
+                <fa-icon [icon]="expandClose"></fa-icon>
+            </a>
             <figcaption *ngIf="pic.caption">{{pic.caption}}</figcaption>
         </figure>
     </div>

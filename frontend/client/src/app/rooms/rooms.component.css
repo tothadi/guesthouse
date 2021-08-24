@@ -27,6 +27,7 @@ h2 {
 }
 
 #roomPics {
+  position: relative;
   width: 86%;
   height: 100%;
   overflow: hidden;
@@ -43,6 +44,7 @@ h2 {
 }
 
 img {
+  position: relative;
   max-width: calc(100% - 10px);
   max-height: calc(100% - 30px);
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
@@ -85,7 +87,7 @@ p {
   text-align: justify;
   width: 80%;
   max-width: 800px;
-  margin-bottom: .3rem;
+  margin-bottom: 0.3rem;
 }
 
 @media only screen and (max-width: 600px) {

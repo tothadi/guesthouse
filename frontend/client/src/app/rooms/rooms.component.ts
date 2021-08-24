@@ -80,9 +80,9 @@ export class RoomsComponent implements OnInit {
   setToggle() {
     this.cd.detectChanges();
     this.currentPicPos.top =
-      this.pics?.nativeElement.firstChild.firstChild.offsetTop;
+      this.pics?.nativeElement.previousSibling.offsetTop;
     this.currentPicPos.right =
-      this.pics?.nativeElement.firstChild.firstChild.offsetLeft + 10;
+      this.pics?.nativeElement.previousSibling.offsetLeft + 10;
   }
 
   toggleFullScreen() {
