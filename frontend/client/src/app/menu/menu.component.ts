@@ -121,7 +121,7 @@ export class MenuComponent implements AfterViewInit, OnInit {
   ngOnInit(): void {
     this.backend.getWelcome().subscribe(
       (greet) => {
-        this.motto = greet.motto;
+        this.motto = greet[0].motto;
       },
       (err) => {
         console.error(err.message);

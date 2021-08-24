@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.backend.getWelcome().subscribe(
       (greet) => {
-        this.paragraphs = greet.paragraphs;
+        this.paragraphs = greet[0].paragraphs;
       },
       (err) => {
         console.error(err.message);

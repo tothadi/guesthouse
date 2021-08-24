@@ -9,18 +9,9 @@ npm run build:app
 cd ..
 
 cd ..
-
-npm i -g @nestjs/cli
-
 cd backend
-
-npm i --production
-npm run build
-mkdir dist/client
-mkdir dist/admin
-mkdir dist/client/dist
-mkdir dist/admin/dist
+npm i
 
 cd ..
-cp -r frontend/client/dist/* backend/dist/client/dist/
-cp -r frontend/admin/dist/* backend/dist/admin/dist/
+cp -r frontend/client/dist/* backend/frontend/client/
+cp -r frontend/admin/dist/* backend/frontend/admin/

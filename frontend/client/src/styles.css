@@ -68,7 +68,7 @@ app-menu {
   align-items: center;
   height: 25%;
   width: 100%;
-  background: url("/assets/image/page/menu.jpg") no-repeat center;
+  background: url("/assets/image/menu.jpg") no-repeat center;
   background-size: cover;
   font-family: "Muli", sans-serif;
   box-shadow: 5px 5px 10px rgba(50, 50, 50, 0.6);

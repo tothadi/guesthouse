@@ -11,8 +11,8 @@ export class BackendService {
 
   constructor(private http: HttpClient) { }
 
-  public getWelcome(): Observable<Greet> {
-    return this.http.get<Greet>('/api/greet');
+  public getWelcome(): Observable<Greet[]> {
+    return this.http.get<Greet[]>('/api/greet');
   }
 
   public getContacts(): Observable<Contact[]> {

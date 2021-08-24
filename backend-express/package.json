@@ -1,0 +1,23 @@
+{
+  "name": "guesthouse-backend",
+  "version": "0.0.2",
+  "description": "express backend for guesthouse",
+  "main": "bin/www.js",
+  "scripts": {
+    "start": "node bin/www",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "tothadi",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-jwt": "^6.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.8",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "serve-favicon": "^2.5.0"
+  }
+}
