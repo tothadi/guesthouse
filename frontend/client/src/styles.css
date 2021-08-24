@@ -109,3 +109,16 @@ app-reservation {
 app-page-not-found {
   justify-content: space-evenly;
 }
+
+app-loader {
+  position: relative;
+  margin: 0px auto;
+  width: 200px;
+  height: 200px;
+}
+
+app-loader::before {
+  content: '';
+  display: block;
+  padding-top: 100%;
+}

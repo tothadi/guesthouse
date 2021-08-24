@@ -1,3 +1,7 @@
+<app-loader *ngIf="!loaded">
+    
+</app-loader>
+
 <h2>{{ room?.title }}</h2>
 
 <div class="picsCont" [ngClass]="{'fullScreen': fullScreen}">

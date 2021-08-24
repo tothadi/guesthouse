@@ -24,7 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
     MenuComponent,
     FooterComponent,
     ContactComponent,
-    ReservationComponent,
+    ReservationComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +32,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     FontAwesomeModule,
     RoomsModule
+  ],
+  exports: [
   ],
   providers: [
     BackendService,

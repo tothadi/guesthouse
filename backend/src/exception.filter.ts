@@ -40,6 +40,6 @@ export class NotFoundExceptionFilter implements ExceptionFilter {
     const dir = port === "3000" ? "client" : "admin";
     const path = join(__dirname, ".", dir, "dist/index.html");
     const stream = createReadStream(path);
-    response.type('text/html').send(stream);
+    response.type('text-html').send(stream);
   }
 }

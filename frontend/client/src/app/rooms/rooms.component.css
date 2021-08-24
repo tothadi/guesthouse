@@ -1,107 +1,109 @@
 h2 {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 2rem;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 .picsCont {
-    position: relative;
-    width: 100%;
-    height: 70%;
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    justify-content: space-evenly;
-    margin-bottom: 2rem;
+  position: relative;
+  width: 100%;
+  height: 70%;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-bottom: 2rem;
 }
 
 .fullScreen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    min-height: -webkit-fill-available;
-    margin: 0;
-    background-color: rgba(0,0,0,.9);
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  min-height: -webkit-fill-available;
+  margin: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
 }
 
 #roomPics {
-    width: 86%;
-    height: 100%;
-    overflow: hidden;
-    margin: 0;
+  width: 86%;
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
 }
 
 #picwrap {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 img {
-    max-width: calc(100% - 10px);
-    max-height: calc(100% - 30px);
-    box-shadow: 5px 5px 10px rgba(0,0,0,.5);
+  max-width: calc(100% - 10px);
+  max-height: calc(100% - 30px);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
 
 figcaption {
-    position: absolute;
-    bottom: calc(1rem + 15px);
-    left: auto;
-    padding: .3rem;
-    color: whitesmoke;
-    z-index: 10;
-    background-color: rgba(51, 98, 46, .7);
+  position: absolute;
+  bottom: calc(1rem + 15px);
+  left: auto;
+  padding: 0.3rem;
+  color: whitesmoke;
+  z-index: 10;
+  background-color: rgba(51, 98, 46, 0.7);
 }
 
-.picControl, .toggle {
-    text-decoration: none;
-    cursor: pointer;
-    color: black;
-    font-size: 2rem;
+.picControl,
+.toggle {
+  text-decoration: none;
+  cursor: pointer;
+  color: black;
+  font-size: 2rem;
 }
 
-.picControl:hover, .toggle:hover {
-    color: rgba(51, 98, 46, 1);
+.picControl:hover,
+.toggle:hover {
+  color: rgba(51, 98, 46, 1);
 }
 
 .toggle {
-    color: whitesmoke;
-    position: absolute;
-    z-index:3;
+  color: whitesmoke;
+  position: absolute;
+  z-index: 3;
 }
 
 .fullScreenControl {
-    color: whitesmoke;
+  color: whitesmoke;
 }
 
 p {
-    text-align: justify;
-    width: 80%;
-    max-width: 800px;
+  text-align: justify;
+  width: 80%;
+  max-width: 800px;
+  margin-bottom: .3rem;
 }
 
 @media only screen and (max-width: 600px) {
-    .picControl, .toggle {
-        font-size: 1rem;
-    }
-    figcaption {
-        font-size: .8rem;
-    }
+  .picControl,
+  .toggle {
+    font-size: 1rem;
+  }
+  figcaption {
+    font-size: 0.8rem;
+  }
 }
 
 @media only screen and (max-height: 500px) {
+  .toggle {
+    font-size: 1rem;
+  }
 
-    .toggle {
-        font-size: 1rem;
-    }
-
-    
-    figcaption {
-        font-size: .6rem;
-    }
+  figcaption {
+    font-size: 0.6rem;
+  }
 }

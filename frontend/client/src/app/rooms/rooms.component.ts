@@ -52,7 +52,6 @@ export class RoomsComponent implements OnInit {
     private location: Location,
     private cd: ChangeDetectorRef,
     private router: Router,
-    private route: ActivatedRoute,
     private Backend: BackendService
   ) {
     library.add(faArrowCircleLeft, faArrowCircleRight, faExpand, faWindowClose);
@@ -102,8 +101,10 @@ export class RoomsComponent implements OnInit {
   ngOnInit(): void {
     this.Backend.getRooms().subscribe(
       (rooms) => {
-        const roomName = this.location.path().split('/')[2] || 'nappali'
         this.rooms = rooms;
+        const roomName = this.location.path().split('/')[2] || this.rooms[0].link;
+        this.router.navigateByUrl(`szobak/${roomName}`);
+        console.log(roomName)
         this.filterRoom(roomName);
         this.loaded = true;
         this.setToggle()

@@ -5,10 +5,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RoomsRoutingModule } from './rooms.routing';
 
 import { RoomsComponent } from './rooms.component';
+import { LoaderComponent } from '../loader/loader.component';
 
 @NgModule({
   declarations: [
-    RoomsComponent
+    RoomsComponent,
+    LoaderComponent,
   ],
   imports: [
     CommonModule,
@@ -19,6 +21,7 @@ import { RoomsComponent } from './rooms.component';
   
     ],
   exports: [
+    LoaderComponent
   ]
 })
 export class RoomsModule {
