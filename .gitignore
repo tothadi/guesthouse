@@ -22,11 +22,6 @@
 /frontend/admin/proxy.conf.json
 /frontend/client/proxy.conf.json
 
-#dev frontend builds
-
-/backend-express/frontend/admin/*
-/backend-express/frontend/client/*
-
 # Resources
 /resources
 

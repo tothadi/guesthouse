@@ -2,7 +2,6 @@ if (process.env.NODE_ENV === 'development') {
     require('../config/config');
 }
 
-console.log(process.env.ADMIN_PORT);
 const { client, admin } = require('../app');
 const clientPort = normalizePort(process.env.CLIENT_PORT || '3000');
 const adminPort = normalizePort(process.env.ADMIN_PORT || '5000');

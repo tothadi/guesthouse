@@ -24,16 +24,16 @@ const objRep = {
     },
 }
 
-const getAllMW = require('./controllers/getAll')(objRep);
-const getOneMW = require('./controllers/getOne')(objRep);
-const createMW = require('./controllers/create')(objRep);
-const updateMW = require('./controllers/update')(objRep);
-const deleteMW = require('./controllers/delete')(objRep);
+const getAllMW = require('./controllers/getAll');
+const getOneMW = require('./controllers/getOne');
+const createMW = require('./controllers/create');
+const updateMW = require('./controllers/update');
+const deleteMW = require('./controllers/delete');
 
-router.get('/:model', getAllMW);
-router.get('/:model/:id', getOneMW);
-router.post('/:model', auth, createMW);
-router.post('/:model/:id', auth, getOneMW, updateMW);
-router.post('/:model/:id', auth, getOneMW, deleteMW);
+router.get('/all-:model', getAllMW(objRep));
+router.get('/one-:model/:id', getOneMW(objRep), (req, res, next) => res.json(res.locals.document));
+router.put('/new-:model', auth, createMW(objRep));
+router.patch('/update-:model/:id', auth, getOneMW(objRep), updateMW(objRep));
+router.delete('/delete-:model/:id', auth, getOneMW(objRep), deleteMW(objRep));
 
 module.exports = router

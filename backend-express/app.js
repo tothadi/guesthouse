@@ -11,21 +11,27 @@ const API = require('./api/index');
 const client = express();
 const admin = express();
 
-client.use(express.urlencoded({ extended: true }));
 client.use(cookieParser());
 client.use(cors());
-client.use(favicon(__dirname + '/assets/favicon.ico'));
+client.use(express.json());
+client.use(express.urlencoded({
+    extended: true
+}));
 client.use('/api', API);
+client.use(favicon(__dirname + '/assets/favicon.ico'));
 client.use(express.static(path.join(__dirname, 'frontend/client')));
 client.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, 'frontend/client/index.html'));
 });
 
-admin.use(express.urlencoded({ extended: true }));
 admin.use(cookieParser());
 admin.use(cors());
-admin.use(favicon(__dirname + '/assets/favicon.ico'));
+admin.use(express.json());
+admin.use(express.urlencoded({
+    extended: true
+}));
 admin.use('/api', API);
+admin.use(favicon(__dirname + '/assets/favicon.ico'));
 admin.use(express.static(path.join(__dirname, 'frontend/admin')));
 admin.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, 'frontend/admin/index.html'));
