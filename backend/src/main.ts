@@ -23,14 +23,25 @@ async function bootstrap() {
     new FastifyAdapter(),
   );
   appClient.useGlobalFilters(new NotFoundExceptionFilter());
-  appClient.setGlobalPrefix("/api");
   appClient.useStaticAssets({ root: join(__dirname, ".", "client/dist") });
+  appClient.setGlobalPrefix("/api");
   await appClient.listen(3000, "0.0.0.0", (err, addr) => {
     if (err) {
       console.log(err);
     }
     console.log(`address: ${addr}`);
   });
+  // appClient.register(helmet, {
+  //   contentSecurityPolicy: {
+  //     directives: {
+  //       defaultSrc: [`'self'`],
+  //       styleSrc: [`'self'`, `'unsafe-inline'`],
+  //       imgSrc: [`'self'`, "data:", "validator.swagger.io"],
+  //       scriptSrc: [`'self'`, `https: 'unsafe-inline'`],
+  //     },
+  //   },
+  // });
+  appClient.register(contentParser);
 
   const appAdmin = await NestFactory.create<NestFastifyApplication>(
     AppModule,
@@ -39,24 +50,24 @@ async function bootstrap() {
     })
   );
   appAdmin.useGlobalFilters(new NotFoundExceptionFilter());
-  appAdmin.setGlobalPrefix("/api");
   appAdmin.useStaticAssets({ root: join(__dirname, ".", "admin/dist") });
+  appAdmin.setGlobalPrefix("/api");
   await appAdmin.listen(5000, "0.0.0.0", (err, addr) => {
     if (err) {
       console.log(err);
     }
     console.log(`address: ${addr}`);
   });
-  appAdmin.register(helmet, {
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: [`'self'`],
-        styleSrc: [`'self'`, `'unsafe-inline'`],
-        imgSrc: [`'self'`, "data:", "validator.swagger.io"],
-        scriptSrc: [`'self'`, `https: 'unsafe-inline'`],
-      },
-    },
-  });
+  // appAdmin.register(helmet, {
+  //   contentSecurityPolicy: {
+  //     directives: {
+  //       defaultSrc: [`'self'`],
+  //       styleSrc: [`'self'`, `'unsafe-inline'`],
+  //       imgSrc: [`'self'`, "data:", "validator.swagger.io"],
+  //       scriptSrc: [`'self'`, `https: 'unsafe-inline'`],
+  //     },
+  //   },
+  // });
   appAdmin.register(contentParser);
 
   SwaggerModule.setup(

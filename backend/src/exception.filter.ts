@@ -36,8 +36,8 @@ export class NotFoundExceptionFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const request = ctx.getRequest();
     const response = ctx.getResponse<FastifyReply>();
-    const port = request.headers.host.split(':')[1];
-    const dir = parseInt(port, 10) < 5000 ? 'client' : 'admin';
+    const port = parseInt(request.headers.host.split(':')[1], 10);
+    const dir = port === 3000 ? 'client' : 'admin';
     const path = join(__dirname, '.', dir, 'dist/index.html');
     const stream = createReadStream(path);
     response.type('text-html').send(stream);
