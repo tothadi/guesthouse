@@ -12,6 +12,7 @@ cd ..
 cd backend
 ls
 
+mkdir frontend
 mkdir frontend/client
 mkdir frontend/admin
 
