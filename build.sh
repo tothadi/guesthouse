@@ -9,7 +9,11 @@ npm run build:app
 cd ..
 
 cd ..
+
+npm i -g @nestjs/cli
+
 cd backend
+
 npm i --production
 npm run build
 mkdir dist/client
