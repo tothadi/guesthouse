@@ -10,7 +10,7 @@ cd ..
 
 cd ..
 cd backend
-npm i
+npm i --production
 npm run build
 mkdir dist/client
 mkdir dist/admin
