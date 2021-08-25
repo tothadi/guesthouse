@@ -52,7 +52,7 @@ router.patch('/:model/pics-update/:id/:picid', auth, getOneMW(objRep), updatePic
 router.delete('/:model/rm-pics/:id/:picid', auth, getOneMW(objRep), rmPicMW(objRep)); // Deletes a picture from the pics array of a document - /api/rooms/rm-pics/idOfRoom/idOfPic
 router.delete('/delete-:model/:id', auth, getOneMW(objRep), deleteOneMW(objRep)); // Deletes a document - /api/delete-rooms/idOfRoom
 
-router.post('/signup', authMW.register);
+router.post('/signup', auth, authMW.register);
 router.post('/signin', authMW.login);
 
 module.exports = router;
