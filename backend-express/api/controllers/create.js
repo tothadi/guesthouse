@@ -10,7 +10,7 @@ module.exports = (objRep) => {
         const Model = Models[req.params.model];
         const newModel = new Model(req.body);
 
-        newModel.save(function (err,) {
+        newModel.save((err) => {
             if (err) {
                 res.status(500).json({ saved: false, error: err.message });
                 return;

@@ -7,7 +7,7 @@ module.exports = (objRep) => {
 
         const Model = res.locals.Model;
 
-        Model.updateOne({ _id: res.locals.document._id, 'pics._id': req.params.picid }, { $set: { 'pics.$.caption': req.body.caption } }).exec(function (err, result) {
+        Model.updateOne({ _id: res.locals.document._id, 'pics._id': req.params.picid }, { $set: { 'pics.$.caption': req.body.caption } }).exec((err, result) => {
             if (err) {
                 res.status(500).json({ error: err.message });
                 return;

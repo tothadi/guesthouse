@@ -2,7 +2,7 @@ module.exports = (objRep) => {
     const { Models } = objRep;
     return (req, res, next) => {
         const Model = Models[req.params.model];
-        Model.findOne({ _id: req.params.id }).exec(function (err, result) {
+        Model.findOne({ _id: req.params.id }).exec((err, result) => {
             if (err) {
                 res.status(500).json({ error: err.message });
                 return;

@@ -17,6 +17,14 @@ const userSchema = new mongoose.Schema({
     unique: true,
     required: true
   },
+  role: {
+    type: String,
+    required: true,
+    enum: [
+      'admin',
+      'godmode'
+    ]
+  },
   hash: String,
   salt: String
 });

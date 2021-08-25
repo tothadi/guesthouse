@@ -9,7 +9,7 @@ module.exports = (objRep) => {
             newPic.base64 = file.buffer.toString('base64');
             return newPic;
         })
-        Model.updateOne({ _id: res.locals.document._id }, { $addToSet: { pics: { $each: newPics } } }).exec(function (err, result) {
+        Model.updateOne({ _id: res.locals.document._id }, { $addToSet: { pics: { $each: newPics } } }).exec((err, result) => {
             if (err) {
                 res.status(500).json({ error: err.message });
                 return;

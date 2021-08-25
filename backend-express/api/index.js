@@ -37,6 +37,8 @@ const deleteOneMW = require('./controllers/delete-one');
 const addPicMW = require('./controllers/add-pics');
 const updatePicMW = require('./controllers/update-pics.js');
 const rmPicMW = require('./controllers/rm-pics');
+const authMW = require('./controllers/auth');
+
 
 router.get('/all-:model', getAllMW(objRep)); // Sends all documents from model - /api/all-rooms
 router.get('/one-:model/:id', getOneMW(objRep), (req, res, next) => res.json(res.locals.document)); // Sends one document of model - /api/one-rooms/idOfRoom
@@ -49,5 +51,8 @@ router.patch('/:model/pics-update/:id/:picid', auth, getOneMW(objRep), updatePic
 
 router.delete('/:model/rm-pics/:id/:picid', auth, getOneMW(objRep), rmPicMW(objRep)); // Deletes a picture from the pics array of a document - /api/rooms/rm-pics/idOfRoom/idOfPic
 router.delete('/delete-:model/:id', auth, getOneMW(objRep), deleteOneMW(objRep)); // Deletes a document - /api/delete-rooms/idOfRoom
+
+router.post('/signup', authMW.register);
+router.post('/signin', authMW.login);
 
 module.exports = router;
