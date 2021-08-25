@@ -12,15 +12,15 @@ export class BackendService {
   constructor(private http: HttpClient) { }
 
   public getWelcome(): Observable<Greet[]> {
-    return this.http.get<Greet[]>('/api/greet');
+    return this.http.get<Greet[]>('/api/all-greet');
   }
 
   public getContacts(): Observable<Contact[]> {
-    return this.http.get<Contact[]>('/api/contact');
+    return this.http.get<Contact[]>('/api/all-contact');
   }
 
   public getRooms(): Observable<Room[]> {
-    return this.http.get<Room[]>('/api/rooms');
+    return this.http.get<Room[]>('/api/all-rooms');
   }
 
 }
