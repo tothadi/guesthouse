@@ -4,9 +4,9 @@ const favicon = require('serve-favicon');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
-require('./api/db/db')
+require('../api/db/db')
 
-const API = require('./api/index');
+const API = require('../api/index');
 
 const client = express();
 const admin = express();
