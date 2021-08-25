@@ -4,8 +4,7 @@ module.exports = (objRep) => {
         const Model = Models[req.params.model];
         Model.findOne({ _id: req.params.id }).exec((err, result) => {
             if (err) {
-                res.status(500).json({ error: err.message });
-                return;
+               return res.status(500).json({ error: err.message });
             }
             res.locals.document = result;
             res.locals.Model = Model;

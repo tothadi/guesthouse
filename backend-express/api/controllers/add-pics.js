@@ -11,8 +11,7 @@ module.exports = (objRep) => {
         })
         Model.updateOne({ _id: res.locals.document._id }, { $addToSet: { pics: { $each: newPics } } }).exec((err, result) => {
             if (err) {
-                res.status(500).json({ error: err.message });
-                return;
+                return res.status(500).json({ error: err.message });
             }
             res.status(200).json({ updated: res.locals.document, result });
         })

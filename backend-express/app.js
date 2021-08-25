@@ -1,5 +1,5 @@
 const express = require('express');
-const path = require('path');
+const { join } = require('path');
 const favicon = require('serve-favicon');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
@@ -19,9 +19,9 @@ client.use(express.urlencoded({
 }));
 client.use('/api', API);
 client.use(favicon(__dirname + '/assets/favicon.ico'));
-client.use(express.static(path.join(__dirname, 'frontend/client')));
-client.get('*', function (req, res) {
-    res.sendFile(path.join(__dirname, 'frontend/client/index.html'));
+client.use(express.static(join(__dirname, 'frontend/client')));
+client.get('*', (req, res) => {
+    res.sendFile(join(__dirname, 'frontend/client/index.html'));
 });
 
 admin.use(cookieParser());
@@ -32,9 +32,9 @@ admin.use(express.urlencoded({
 }));
 admin.use('/api', API);
 admin.use(favicon(__dirname + '/assets/favicon.ico'));
-admin.use(express.static(path.join(__dirname, 'frontend/admin')));
-admin.get('*', function (req, res) {
-    res.sendFile(path.join(__dirname, 'frontend/admin/index.html'));
+admin.use(express.static(join(__dirname, 'frontend/admin')));
+admin.get('*', (req, res) => {
+    res.sendFile(join(__dirname, 'frontend/admin/index.html'));
 });
 
 // catch 404 and forward to error handler

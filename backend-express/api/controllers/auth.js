@@ -10,8 +10,7 @@ const sendJSONresponse = (res, status, content) => {
 module.exports.register = (req, res) => {
 
     if (typeof req.body == 'undefined') {
-        res.status(400).json({ saved: false, error: 'Request data missing.' });
-        return;
+        return res.status(400).json({ saved: false, error: 'Request data missing.' });
     }
 
     const newUserName = req.body.username;
@@ -19,16 +18,10 @@ module.exports.register = (req, res) => {
 
     User.findOne({ $or: [{ username: newUserName }, { email: newUserEmail },] }, ((err, user) => {
         if (err) {
-            sendJSONresponse(res, 500, {
-                'error': err.message
-            });
-            return;
+            return sendJSONresponse(res, 500, { 'error': err.message });
         }
         if (user) {
-            sendJSONresponse(res, 400, {
-                'message': 'User already exists!'
-            });
-            return;
+            return sendJSONresponse(res, 400, { 'message': 'User already exists!' });
         }
 
         const newUser = new User();
@@ -41,10 +34,7 @@ module.exports.register = (req, res) => {
 
         newUser.save((err) => {
             if (err) {
-                sendJSONresponse(res, 500, {
-                    'error': err.message
-                });
-                return;
+                return sendJSONresponse(res, 500, { 'error': err.message });
             }
             let token;
             token = newUser.generateJwt();
@@ -57,23 +47,18 @@ module.exports.register = (req, res) => {
 module.exports.login = (req, res) => {
 
     if (!req.body.username || !req.body.password) {
-        sendJSONresponse(res, 400, {
-            'message': 'All fields required'
-        });
-        return;
+        return sendJSONresponse(res, 400, { 'message': 'All fields required' });
     }
 
     passport.authenticate('local', (err, user, info) => {
         // If Passport throws/catches an error
         if (err) {
-            res.status(404).json({ error: err.message });
-            return;
+            return res.status(404).json({ error: err.message });
         }
 
         // If user is not found
         if (!user) {
-            res.status(401).json({ info });
-            return;
+            return res.status(401).json({ info });
         }
 
         const token = user.generateJwt();

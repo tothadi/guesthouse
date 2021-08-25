@@ -7,7 +7,7 @@ const clientPort = normalizePort(process.env.CLIENT_PORT || '3000');
 const adminPort = normalizePort(process.env.ADMIN_PORT || '5000');
 
 function normalizePort(val) {
-    var port = parseInt(val, 10);
+    const port = parseInt(val, 10);
 
     if (isNaN(port)) {
         // named pipe
@@ -41,7 +41,7 @@ function server(app, port) {
             throw error;
         }
 
-        var bind = typeof port === 'string'
+        const bind = typeof port === 'string'
             ? 'Pipe ' + port
             : 'Port ' + port
 
@@ -60,8 +60,8 @@ function server(app, port) {
     }
 
     function onListening() {
-        var addr = server.address();
-        var bind = typeof addr === 'string'
+        const addr = server.address();
+        const bind = typeof addr === 'string'
             ? 'pipe ' + addr
             : 'port ' + addr.port;
         debug('Listening on ' + bind);
