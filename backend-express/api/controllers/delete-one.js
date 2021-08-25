@@ -6,7 +6,7 @@ module.exports = (objRep) => {
                 res.status(500).json({ error: err.message });
                 return;
             }
-            res.status(200).json({deleted: res.locals.document});
+            res.status(200).json({deleted: res.locals.document, result});
         })
     }
 }
