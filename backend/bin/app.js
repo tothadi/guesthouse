@@ -1,10 +1,11 @@
 const express = require('express');
 const { join } = require('path');
-const favicon = require('serve-favicon');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const passport = require('passport');
 
-require('../api/db/db')
+require('../api/db/db');
+require('../config/passport');
 
 const API = require('../api/index');
 
@@ -18,7 +19,6 @@ client.use(express.urlencoded({
     extended: true
 }));
 client.use('/api', API);
-client.use(favicon(__dirname + '/assets/favicon.ico'));
 client.use(express.static(join(__dirname, 'frontend/client')));
 client.get('*', (req, res) => {
     res.sendFile(join(__dirname, 'frontend/client/index.html'));
@@ -30,8 +30,8 @@ admin.use(express.json());
 admin.use(express.urlencoded({
     extended: true
 }));
+admin.use(passport.initialize());
 admin.use('/api', API);
-admin.use(favicon(__dirname + '/assets/favicon.ico'));
 admin.use(express.static(join(__dirname, 'frontend/admin')));
 admin.get('*', (req, res) => {
     res.sendFile(join(__dirname, 'frontend/admin/index.html'));

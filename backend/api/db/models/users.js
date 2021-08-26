@@ -18,38 +18,44 @@ const userSchema = new mongoose.Schema({
     required: true
   },
   role: {
-    type: String,
+    type: [String],
     required: true,
     enum: [
       'admin',
-      'godmode'
+      'godmode',
+      'site'
     ]
   },
   hash: String,
   salt: String
 });
 
-userSchema.methods.setPassword = function (password) {
-  this.salt = crypto.randomBytes(16).toString('hex');
-  this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
+userSchema.methods.setPassword = (password) => {
+  const salt = crypto.randomBytes(16).toString('hex');
+  const hash = crypto.pbkdf2Sync(password, salt, 1000, 64, 'sha512').toString('hex');
+  return { salt, hash };
 };
 
-userSchema.methods.validPassword = function (password) {
-  const hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
-  return this.hash === hash;
+userSchema.methods.validPassword = (password, salt, userhash) => {
+  const hash = crypto.pbkdf2Sync(password, salt, 1000, 64, 'sha512').toString('hex');
+  return userhash === hash;
 };
 
-userSchema.methods.generateJwt = function () {
+userSchema.methods.generateJwt = (user) => {
   const expiry = new Date();
   expiry.setDate(expiry.getDate() + 7);
 
   return jwt.sign({
-    _id: this._id,
-    fullname: this.fullname,
-    email: this.email,
-    username: this.username,
+    _id: user._id,
+    fullname: user.fullname,
+    email: user.email,
+    username: user.username,
+    role: user.role,
     exp: parseInt(expiry.getTime() / 1000),
-  }, process.env.JWT_SECRET);
+  },
+    process.env.JWT_SECRET,
+    //{ algorithm: 'RS256' }
+  );
 };
 
 mongoose.model('User', userSchema);

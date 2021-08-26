@@ -1,0 +1,14 @@
+#top-menu {
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    max-width: 1366px;
+    height: 5%;
+    display: flex;
+
+    
+    background-color: white;
+    font-family: "Muli", sans-serif;
+    box-shadow: 5px 5px 10px rgba(50, 50, 50, 0.6);
+    z-index: 100;
+}
