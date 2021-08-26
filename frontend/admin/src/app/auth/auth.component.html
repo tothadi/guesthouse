@@ -1,20 +1,21 @@
 <ng-template #dialog>
     <form class="form-group" (submit)="submit()">
 
-        <mat-form-field appearance="fill" [floatLabel]="floatLabelControl.value">
+        <mat-form-field appearance="outline" [floatLabel]="floatLabelControl.value">
             <mat-label>Felhasználónév</mat-label>
-            <input matInput name="username" class="form-control" required placeholder="Add meg a felhasználóneved!"
-                minlength="1" [(ngModel)]="credentials.username" #usernameInput="ngModel" [ngClass]="{'red': loginError}">
-            <mat-error>Kötelező megadni.</mat-error>
+            <input matInput name="username" class="form-control" required [placeholder]="userPlaceHolder"
+                minlength="1" [(ngModel)]="credentials.username" #usernameInput="ngModel">
         </mat-form-field>
 
-        <mat-form-field appearance="fill" hintLabel="Minimum 8 karakter." [floatLabel]="floatLabelControl.value">
+        <mat-form-field appearance="outline" hintLabel="Minimum 8 karakter." [floatLabel]="floatLabelControl.value">
             <mat-label>Jelszó</mat-label>
             <input matInput type="password" name="password" class="form-control" required minlength="8"
-                placeholder="Add meg a jelszavadd!" [(ngModel)]="credentials.password" #passwordInput="ngModel" [ngClass]="{'red': loginError}">
+                [placeholder]="pwPlaceHolder" [(ngModel)]="credentials.password" #passwordInput="ngModel">
             <mat-hint *ngIf="(passwordInput.invalid && passwordInput.dirty)" align="end">{{passwordInput.value?.length
                 || 0}}/8</mat-hint>
         </mat-form-field>
+        
+        <mat-error *ngIf="errorMessage">{{errorMessage}}</mat-error>
 
         <button type="submit" mat-raised-button
             [disabled]="usernameInput.invalid || passwordInput.invalid">Bejelentkezés</button>

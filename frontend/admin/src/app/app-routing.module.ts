@@ -6,9 +6,8 @@ import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'sign-in', component: AuthComponent },
-  
+  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: '**', component: NotFoundComponent },
 ];
 

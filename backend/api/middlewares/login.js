@@ -5,16 +5,14 @@ module.exports = (passport) => {
             return res.status(400).json({ message: "All fields required" });
         }
 
-        console.log(req.body.username)
-
         return passport.authenticate('local', (err, user, info) => {
 
             if (err) {
-                return res.status(404).json({ error: err.message });
+                return res.status(404).json({ message: err.message });
             }
 
             if (!user) {
-                return res.status(401).json(info);
+                return res.json({ info });
             }
 
             let token;

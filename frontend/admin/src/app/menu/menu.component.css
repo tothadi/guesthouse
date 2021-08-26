@@ -5,10 +5,25 @@
     max-width: 1366px;
     height: 5%;
     display: flex;
-
-    
+    flex-flow: row nowrap;
     background-color: white;
     font-family: "Muli", sans-serif;
     box-shadow: 5px 5px 10px rgba(50, 50, 50, 0.6);
     z-index: 100;
 }
+
+#top-left {
+    width: 20%;
+    height: 100%;
+    box-shadow: none;
+}
+
+#top-right {
+    width: 80%;
+    height: 100%;
+    box-shadow: 5px 5px 10px rgba(50, 50, 50, 0.6);
+}
+
+require('../config/passport');
+
+admin.use(passport.initialize());

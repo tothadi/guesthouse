@@ -18,10 +18,10 @@ client.use(express.json());
 client.use(express.urlencoded({
     extended: true
 }));
+client.use(express.static(join(__dirname, '../frontend/client')));
 client.use('/api', API);
-client.use(express.static(join(__dirname, 'frontend/client')));
 client.get('*', (req, res) => {
-    res.sendFile(join(__dirname, 'frontend/client/index.html'));
+    res.sendFile(join(__dirname, '../frontend/client/index.html'));
 });
 
 admin.use(cookieParser());
@@ -31,10 +31,10 @@ admin.use(express.urlencoded({
     extended: true
 }));
 admin.use(passport.initialize());
+admin.use(express.static(join(__dirname, '../frontend/admin')));
 admin.use('/api', API);
-admin.use(express.static(join(__dirname, 'frontend/admin')));
 admin.get('*', (req, res) => {
-    res.sendFile(join(__dirname, 'frontend/admin/index.html'));
+    res.sendFile(join(__dirname, '../frontend/admin/index.html'));
 });
 
 // catch 404 and forward to error handler

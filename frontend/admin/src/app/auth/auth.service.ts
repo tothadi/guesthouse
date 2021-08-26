@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
-  login(credentials: User): Observable<TokenResponse> {
+  login(credentials: User) {
     return this.http.post<TokenResponse>('/api/signin', credentials).pipe(
       tap((res) => this.setToken(res)),
       shareReplay()
@@ -36,8 +36,10 @@ export class AuthService {
   }
 
   private setToken(authResult: TokenResponse) {
+    if (authResult.access_token) {
     localStorage.setItem('id_token', authResult.access_token);
     this.getExpiration();
+    }
   }
 
   private getToken(): string {

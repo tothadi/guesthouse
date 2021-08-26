@@ -10,6 +10,11 @@ export interface TokenPayload {
     exp: number;
 }
 
+interface Info {
+    message?: string;
+}
+
 export interface TokenResponse {
-    access_token: string;
+    access_token?: string;
+    info?: Info;
 }
