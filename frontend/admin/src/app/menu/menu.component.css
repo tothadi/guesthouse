@@ -23,7 +23,3 @@
     height: 100%;
     box-shadow: 5px 5px 10px rgba(50, 50, 50, 0.6);
 }
-
-require('../config/passport');
-
-admin.use(passport.initialize());
