@@ -1,40 +1,15 @@
-export interface iFaceContact {
-  _id: string;
+export class MockContact {
   order: number;
-  label: string;
-  data: string;
-  link: string;
-  icon: string;
-}
+  label: string = '';
+  data: string = '';
+  link: string = '';
+  icon: string = '';
+  _id: string = '';
 
-export type icons =
-  | 'phone'
-  | 'phone-alt'
-  | 'phone-volume'
-  | 'phone-square-alt'
-  | 'phone-square'
-  | 'mobile'
-  | 'mobile-alt'
-  | 'map'
-  | 'map-alt'
-  | 'map-signs'
-  | 'map-marked'
-  | 'map-marked-alt'
-  | 'directions'
-  | 'route'
-  | 'shoe-prints'
-  | 'globe'
-  | 'globe-asia'
-  | 'globe-americas'
-  | 'globe-africa'
-  | 'globe-europe'
-  | 'info'
-  | 'envelope'
-  | 'envelope-square'
-  | 'envelope-open'
-  | 'envelope-open-text'
-  | 'at'
-  | 'home';
+  constructor(order: number) {
+    this.order = order;
+  }
+}
 
 export class Contact {
   'Sorszám': number;

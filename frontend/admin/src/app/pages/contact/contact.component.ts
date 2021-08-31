@@ -1,18 +1,17 @@
 import {
   Component,
-  HostBinding,
   OnInit,
-  TemplateRef,
-  ViewChild,
 } from '@angular/core';
-import { FormControl, NgModel } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { icon, library } from '@fortawesome/fontawesome-svg-core';
+import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { icon, IconName, library } from '@fortawesome/fontawesome-svg-core';
 import { fas, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { AppComponent } from 'src/app/app.component';
+import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 
 import { PageService } from '../pages.service';
-import { Contact, ModContact } from './contact.class';
+import { RemoveDialogComponent } from '../remove-dialog/remove-dialog.component';
+import { Contact, MockContact, ModContact } from './contact.class';
 
 @Component({
   selector: 'app-contact',
@@ -20,15 +19,12 @@ import { Contact, ModContact } from './contact.class';
   styleUrls: ['../pages.component.css'],
 })
 export class ContactComponent implements OnInit {
-  @ViewChild('dialog') template!: TemplateRef<any>;
-  editDialog!: MatDialogRef<any>;
-
   objectKeys = Object.keys;
 
   title: string = 'Kapcsolat';
   link: string = 'kapcsolat';
   api: string = 'contact';
-  contacts: Contact[] = [];
+  docs: Contact[] = [];
   original!: ModContact;
   newContact!: Contact;
   mockContact!: ModContact;
@@ -38,14 +34,6 @@ export class ContactComponent implements OnInit {
   floatLabelControl = new FormControl('always');
 
   width: number = 0;
-  edit: IconDefinition;
-  remove: IconDefinition;
-  save: IconDefinition;
-  add: IconDefinition;
-  expandClose: IconDefinition;
-  close: IconDefinition;
-  left: IconDefinition;
-  right: IconDefinition;
 
   constructor(
     private pageService: PageService,
@@ -53,46 +41,92 @@ export class ContactComponent implements OnInit {
     private app: AppComponent
   ) {
     library.add(fas);
-    this.edit = icon({ prefix: 'fas', iconName: 'edit' });
-    this.remove = icon({ prefix: 'fas', iconName: 'trash-alt' });
-    this.save = icon({ prefix: 'fas', iconName: 'save' });
-    this.add = icon({ prefix: 'fas', iconName: 'plus-square' });
-    this.expandClose = icon({ prefix: 'fas', iconName: 'expand' });
-    this.close = icon({ prefix: 'fas', iconName: 'window-close' });
-    this.left = icon({ prefix: 'fas', iconName: 'arrow-circle-left' });
-    this.right = icon({ prefix: 'fas', iconName: 'arrow-circle-right' });
 
-    this.pageService.getAll(this.api).then((contacts) => {
-      this.contacts = contacts.map((c) => new Contact(c));
-      this.mockContact = {
-        order: this.contacts.length + 1,
-        label: '',
-        data: '',
-        link: '',
-        icon: 'home',
-        _id: '',
-      };
+    this.pageService.getAll(this.api).then((docs) => {
+      this.docs = docs.map((c) => new Contact(c));
+      this.mockContact = new MockContact(this.docs.length + 1);
       this.width =
         (document.body.offsetWidth * 0.85 * 0.9 * 0.95) /
-          (Object.keys(this.contacts[0]).length - 2) -
+          (Object.keys(this.docs[0]).length - 1) -
         20;
       this.loaded = true;
     });
   }
 
-  editItem(contact: Contact) {
-    this.app.blur = 'blur';
+  setIcon(name: string): IconDefinition {
+    return icon({ prefix: 'fas', iconName: name as IconName })
+  }
 
-    // Create an instance of original item for possibility of cancelling
-    this.original = new ModContact(contact);
-    this.editDialog = this.dialog.open(this.template, {
+  backendResponse(result: any) {
+    this.pageService.getAll(this.api).then((docs) => {
+      this.docs = docs.map((c) => new Contact(c));
+      this.docs.sort((a, b) => a['Sorszám'] - b['Sorszám']);
+      this.loaded = true;
+    });
+    console.log(result);
+  }
+
+  openDialog(doc: any) {
+    const editDialog = this.dialog.open(EditDialogComponent, {
       width: '350px',
       disableClose: true,
       autoFocus: true,
       closeOnNavigation: true,
       panelClass: 'overlay',
-      data: contact,
+      data: {
+        doc,
+        icons: this.pageService.icons,
+      },
     });
+
+    editDialog.afterClosed().subscribe(
+      (data) => {
+        this.app.blur = '';
+
+        if (typeof data === 'string' && data.length === 0) {
+          return;
+        }
+
+        if (typeof data === 'string') {
+          this.docs = this.docs.filter((c) => c._id != data);
+          this.docs.push(new Contact(this.original));
+          this.docs.sort((a, b) => a['Sorszám'] - b['Sorszám']);
+          return;
+        }
+
+        this.loaded = false;
+        
+        if (data._id) {
+          return this.pageService.update(this.api, new ModContact(data)).then(
+            (result) => {
+              this.backendResponse(result);
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
+        }
+
+        return this.pageService.create(this.api, new ModContact(data)).then(
+          (result) => {
+            this.backendResponse(result);
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+      },
+      (err) => {
+        console.log(err.message);
+      }
+    );
+  }
+
+  editItem(doc: Contact) {
+    this.app.blur = 'blur';
+    // Create an instance of original item for possibility of cancelling
+    this.original = new ModContact(doc);
+    this.openDialog(doc);
   }
 
   /**
@@ -100,64 +134,45 @@ export class ContactComponent implements OnInit {
    */
   addItem() {
     this.app.blur = 'blur';
+    // Create a new empty document
     this.newContact = new Contact(this.mockContact);
-    this.editDialog = this.dialog.open(this.template, {
+    this.openDialog(this.newContact);
+  }
+
+  removeItem(doc: Contact) {
+    this.app.blur = 'blur';
+    const removeDialog = this.dialog.open(RemoveDialogComponent, {
       width: '350px',
       disableClose: true,
       autoFocus: true,
       closeOnNavigation: true,
       panelClass: 'overlay',
-      data: this.newContact,
+      data: {
+        doc
+      },
     });
-  }
 
-  submit(data: Contact) {
-    this.app.blur = '';
-    this.contacts.sort((a, b) => a['Sorszám'] - b['Sorszám']);
-    this.editDialog.close();
-    this.loaded = false;
-
-    if (data._id) {
-      return this.pageService.update(this.api, new ModContact(data)).then(
-        (result) => {
-          this.pageService.getAll(this.api).then((contacts) => {
-            this.contacts = contacts.map((c) => new Contact(c));
-            this.contacts.sort((a, b) => a['Sorszám'] - b['Sorszám']);
-            this.loaded = true;
-          });
-          console.log(result);
-        },
-        (err) => {
-          console.log(err);
+    removeDialog.afterClosed().subscribe(
+      (data) => {
+        this.app.blur = '';
+        if (data === 'close') {
+          return;
         }
-      );
-    }
-    return this.pageService.create(this.api, new ModContact(data)).then(
-      (result) => {
-        this.pageService.getAll(this.api).then((contacts) => {
-          this.contacts = contacts.map((c) => new Contact(c));
-          this.contacts.sort((a, b) => a['Sorszám'] - b['Sorszám']);
-          this.loaded = true;
-        });
-        console.log(result);
+        this.loaded = false;
+        return this.pageService.delete(this.api, data._id).then(
+          (result) => {
+            this.backendResponse(result);
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
       },
       (err) => {
-        console.log(err);
+        console.log(err.message);
       }
     );
   }
-
-  closeDialog(id?: string) {
-    this.app.blur = '';
-    if (id?.length) {
-      this.contacts = this.contacts.filter((c) => c._id != id);
-      this.contacts.push(new Contact(this.original));
-      this.contacts.sort((a, b) => a['Sorszám'] - b['Sorszám']);
-    }
-    this.editDialog.close();
-  }
-
-  removeItem(contact: Contact) {}
 
   descOrder = (a: any, b: any) => {
     if (a.key < b.key) return b.key;

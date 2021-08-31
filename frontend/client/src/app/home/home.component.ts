@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Section } from "../backend.interfaces";
 import { BackendService } from "../backend.service";
 
 @Component({
@@ -7,14 +8,14 @@ import { BackendService } from "../backend.service";
   styleUrls: ["./home.component.css"],
 })
 export class HomeComponent implements OnInit {
-  paragraphs?: string[];
+  sections?: Section[];
 
   constructor(private backend: BackendService) {}
 
   ngOnInit(): void {
     this.backend.getWelcome().subscribe(
       (greet) => {
-        this.paragraphs = greet[0].paragraphs;
+        this.sections = greet[0].sections;
       },
       (err) => {
         console.error(err.message);

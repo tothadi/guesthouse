@@ -75,7 +75,7 @@ router.get(
  */
 router.put('/new-:model',
   isValidRouteMW(objRep),
-  auth,
+  //auth,
   createMW(objRep),
   saveMW()
 );
@@ -98,7 +98,7 @@ router.put(
 router.patch(
   '/update-:model/:id',
   isValidRouteMW(objRep),
-  auth,
+  //auth,
   getOneMW(objRep),
   updateOneMW(objRep)
 );

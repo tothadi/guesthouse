@@ -24,5 +24,7 @@
     </a>
 </div>
 
-
-<p *ngFor="let p of room?.paragraphs">{{p}}</p>
+<section *ngFor="let section of room?.sections">
+    <h4>{{section.title}}</h4>
+    <p *ngFor="let p of section.paragraphs">{{p}}</p>
+</section>

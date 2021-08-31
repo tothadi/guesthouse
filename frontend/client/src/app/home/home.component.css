@@ -44,12 +44,15 @@ h1 {
 }
 
 #intro {
-    margin: auto;
-    text-align: justify;
     width: 80%;
     max-width: 800px;
 }
 
-p {
+h4 {
+    text-align: center;
     margin-bottom: 1rem;
+}
+p {
+    margin-bottom: .5rem;
+    text-align: justify;
 }

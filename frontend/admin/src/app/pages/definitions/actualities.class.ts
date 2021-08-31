@@ -1,5 +1,5 @@
 import { PagesService } from '../pages.service';
-import { Section } from './common.interfaces';
+import { Section } from '../pages.interfaces';
 
 export interface Actuality {
   _id: string;

@@ -9,29 +9,34 @@
     <section>
 
         <div id="tableHead">
-            <div class="item" *ngFor="let item of objectKeys(contacts[0])" [style.width.px]="width"
-                [ngClass]="{hide: item == 'Ikon' || item == '_id'}">
+            <div class="item" *ngFor="let item of objectKeys(docs[0])" [style.width.px]="width"
+                [ngClass]="{hide: item == '_id'}">
                 <h3>{{item}}</h3>
             </div>
         </div>
-        <article *ngFor="let contact of contacts; even as even" [ngClass]="{even: even}">
-            <div class="item" *ngFor="let item of contact | keyvalue:descOrder" [style.width.px]="width"
-                [ngClass]="{hide: item.key === 'Ikon' || item.key === '_id'}">
-                <p>{{item.value}}</p>
+        <article *ngFor="let doc of docs; even as even" [ngClass]="{even: even}">
+            <div class="item" *ngFor="let item of doc | keyvalue:descOrder" [style.width.px]="width"
+                [ngClass]="{hide: item.key === '_id'}">
+                <fa-icon *ngIf="item.key === 'Ikon'; else thenBlock" [icon]="setIcon(item.value.toString())"></fa-icon>
+                <ng-template #thenBlock>
+                    <p>{{item.value}}</p>
+                </ng-template>
             </div>
             <div class="actions">
-                <a (click)="editItem(contact)">
-                    <fa-icon [icon]="edit"></fa-icon>
+                <a (click)="editItem(doc)">
+                    <fa-icon [icon]="setIcon('edit')"></fa-icon>
                 </a>
-                <a (click)="removeItem(contact)">
-                    <fa-icon [icon]="remove"></fa-icon>
+                <a (click)="removeItem(doc)">
+                    <fa-icon [icon]="setIcon('trash-alt')"></fa-icon>
                 </a>
             </div>
         </article>
 
         <div id="add">
             <button (click)="addItem()" mat-raised-button>
-                <p><fa-icon [icon]="add"></fa-icon>Elérhetőség hozzáadása</p>
+                <p>
+                    <fa-icon [icon]="setIcon('plus-square')"></fa-icon>Elérhetőség hozzáadása
+                </p>
             </button>
         </div>
 
@@ -40,22 +45,3 @@
 
 
 </main>
-
-<ng-template #dialog let-data>
-    <form class="form-group" (submit)="submit(data)">
-
-        <mat-form-field *ngFor="let item of objectKeys(data)" [ngClass]="{hide: item === 'Ikon' || item === '_id'}"
-            appearance="outline" [floatLabel]="floatLabelControl.value">
-            <mat-label>{{item}}</mat-label>
-            <input matInput type="text" class="form-control" [(ngModel)]="data[item]" [value]="data[item]" [placeholder]="item"
-                [ngModelOptions]="{standalone: true}">
-        </mat-form-field>
-
-        <button class="dialog-button" type="submit" mat-raised-button color="primary">
-            <fa-icon [icon]="save"></fa-icon>
-        </button>
-    </form>
-    <button class="dialog-button" (click)="closeDialog(data._id)" mat-raised-button color="warn">
-        <fa-icon [icon]="close"></fa-icon>
-    </button>
-</ng-template>

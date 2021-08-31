@@ -1,0 +1,32 @@
+form {
+}
+
+mat-form-field,
+.dialog-button {
+  width: 100%;
+}
+
+.dialog-button {
+  height: 40px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.hide {
+  display: none;
+}
+
+mat-option {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+mat-option fa-icon {
+    margin-right: .5rem;
+}

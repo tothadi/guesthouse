@@ -1,0 +1,27 @@
+<form class="form-group">
+
+    <mat-form-field *ngFor="let item of objectKeys(data.doc)" [ngClass]="{hide: item === 'Ikon' || item === '_id'}"
+        appearance="outline" [floatLabel]="floatLabelControl.value">
+        <mat-label>{{item}}</mat-label>
+        <input matInput type="text" class="form-control" [(ngModel)]="data.doc[item]" [value]="data.doc[item]"
+            [placeholder]="item" [ngModelOptions]="{standalone: true}">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" [floatLabel]="floatLabelControl.value">
+        <mat-label>Ikon</mat-label>
+        <mat-select name="icon" [(ngModel)]="selectedIcon" required>
+            <mat-option *ngFor="let icon of data.icons" [value]="icon">
+                <fa-icon [icon]="setIcon(icon)">
+                </fa-icon>
+                {{icon}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <button class="dialog-button" [mat-dialog-close]="data.doc" type="submit" mat-raised-button color="primary">
+        <fa-icon [icon]="setIcon('save')"></fa-icon>
+    </button>
+</form>
+<button class="dialog-button" [mat-dialog-close]="data.doc._id" mat-raised-button color="warn">
+    <fa-icon [icon]="setIcon('window-close')"></fa-icon>
+</button>

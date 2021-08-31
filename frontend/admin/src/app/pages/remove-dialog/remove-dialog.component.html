@@ -1,0 +1,9 @@
+<h3>Biztosan törölni szeretnéd? Nem vonható vissza.</h3>
+
+<button class="dialog-button" [mat-dialog-close]="data.doc" type="submit" mat-raised-button color="primary">
+    <fa-icon [icon]="setIcon('trash-alt')"></fa-icon>
+</button>
+
+<button class="dialog-button" [mat-dialog-close]="'close'" mat-raised-button color="warn">
+<fa-icon [icon]="setIcon('window-close')"></fa-icon>
+</button>

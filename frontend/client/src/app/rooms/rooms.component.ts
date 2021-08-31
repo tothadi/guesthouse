@@ -16,10 +16,8 @@ import {
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
 import {
-  ActivatedRoute,
   NavigationEnd,
   Router,
-  UrlSegment,
 } from '@angular/router';
 import { Room } from '../backend.interfaces';
 import { BackendService } from '../backend.service';

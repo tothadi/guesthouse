@@ -16,6 +16,10 @@ img {
   cursor: not-allowed;
 }
 
+fa-icon {
+  pointer-events: none;
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -134,6 +138,12 @@ app-rooms {
 
 .blur {
   filter: blur(4px);
+}
+
+app-edit-dialog, app-remove-dialog {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
 }
 
 app-not-found {

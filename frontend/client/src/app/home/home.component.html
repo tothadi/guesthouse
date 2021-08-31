@@ -4,6 +4,7 @@
     <h1 id="welcome2">honlapján!</h1>
 </div>
 
-<div id="intro">
-    <p *ngFor="let p of paragraphs">{{p}}</p>
-</div>
+<section *ngFor="let section of sections" id="intro">
+    <h4>{{section.title}}</h4>
+    <p *ngFor="let p of section.paragraphs">{{p}}</p>
+</section>

@@ -5,6 +5,34 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class PageService {
+  icons: string[] = [
+    'phone',
+    'phone-alt',
+    'phone-volume',
+    'phone-square-alt',
+    'phone-square',
+    'mobile',
+    'mobile-alt',
+    'map',
+    'map-signs',
+    'map-marked',
+    'map-marked-alt',
+    'directions',
+    'route',
+    'shoe-prints',
+    'globe',
+    'globe-asia',
+    'globe-americas',
+    'globe-africa',
+    'globe-europe',
+    'info',
+    'envelope',
+    'envelope-square',
+    'envelope-open',
+    'envelope-open-text',
+    'at',
+    'home',
+  ];
   pages: any[] = [
     {
       name: 'Aktualitások',
@@ -83,4 +111,19 @@ export class PageService {
     });
   }
 
+  public delete(api: string, id: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http
+        .delete<any>(`/api/delete-${api}/${id}`)
+        .toPromise()
+        .then(
+          (item) => {
+            resolve(item);
+          },
+          (err) => {
+            reject(err);
+          }
+        );
+    });
+  }
 }

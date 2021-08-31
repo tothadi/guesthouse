@@ -1,4 +1,4 @@
-import { Picture, Section } from "./common.interfaces";
+import { Picture, Section } from "../pages.interfaces";
 
 
 export interface Room {

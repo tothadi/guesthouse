@@ -1,8 +1,13 @@
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
+export interface Section {
+  title: string;
+  paragraphs: string[];
+}
+
 export interface Greet {
   motto: string;
-  paragraphs: string[];
+  sections: Section[];
 }
 
 export interface Contact {
@@ -23,7 +28,7 @@ export interface Room {
   order: number;
   menu: string;
   title: string;
-  paragraphs: string[];
+  sections: Section[];
   link: string;
   pics?: Pictures[];
 }
