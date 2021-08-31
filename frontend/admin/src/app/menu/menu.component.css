@@ -1,25 +1,47 @@
-#top-menu {
-    position: fixed;
-    top: 0;
-    width: 100vw;
-    max-width: 1366px;
-    height: 5%;
-    display: flex;
-    flex-flow: row nowrap;
-    background-color: white;
-    font-family: "Muli", sans-serif;
-    box-shadow: 5px 5px 10px rgba(50, 50, 50, 0.6);
-    z-index: 100;
+#title {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  max-width: 50%;
 }
 
-#top-left {
-    width: 20%;
-    height: 100%;
-    box-shadow: none;
+#logo,
+h3 {
+  margin-left: 2rem;
 }
 
-#top-right {
-    width: 80%;
-    height: 100%;
-    box-shadow: 5px 5px 10px rgba(50, 50, 50, 0.6);
+#logo {
+  object-fit: cover;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 25%;
+}
+
+#control {
+  height: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+a {
+  text-decoration: none;
+  color: whitesmoke;
+  cursor: pointer;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  transition: all 500ms ease-in-out;
+}
+
+a:hover {
+  color: rgb(2, 172, 172);
+  transform: scale(1.1);
+}
+
+fa-icon {
+  margin-right: 2rem;
 }

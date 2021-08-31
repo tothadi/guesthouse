@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
 @Component({
@@ -6,12 +6,17 @@ import { Title } from '@angular/platform-browser';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements AfterViewInit {
-    title = 'Könczevölgyi Vendégház - Nagyrákos';
+export class AppComponent {
+    title = 'Könczevölgyi Vendégház - Nagyrákos - ';
 
     constructor(private titleService: Title) {
         this.titleService.setTitle(this.title);
+        setInterval(() => {
+            const firstLetter = this.title.charAt(0);
+            const restOfTitle = this.title.substring(1);
+            this.title = restOfTitle + firstLetter;
+            this.titleService.setTitle(this.title);
+          }, 300);
     }
 
-    ngAfterViewInit(): void {}
 }

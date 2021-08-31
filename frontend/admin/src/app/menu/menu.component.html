@@ -1,5 +1,11 @@
-<div id="top-menu">
-    <div id="top-left">
-        AdminPage</div>
-    <div id="top-right">itt is lesz valami</div>
+<div id="title">
+    <a routerLink=""><img id="logo" src="assets/image/logo.svg" alt="logo" [style.width.px]="logoSize" [style.height.px]="logoSize"></a>
+    <h3>Könczevölgyi Vendégház - adminisztrációs felület</h3>
+</div>
+
+<div id="control" [style.fontSize.px]="logoSize *.5">
+    <a routerLink="/felhasznalo"><fa-icon [icon]="user"></fa-icon></a>
+    <a routerLink="/beallitasok"><fa-icon [icon]="settings"></fa-icon></a>
+    <a routerLink="/"><fa-icon [icon]="home"></fa-icon></a>
+    <a (click)="signOut()"><fa-icon [icon]="signout"></fa-icon></a>
 </div>

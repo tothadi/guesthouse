@@ -34,10 +34,6 @@ const objRep = {
   }
 }
 
-//block get data
-//grid fs
-//billingo
-
 const isValidRouteMW = require('./middlewares/validate-route');
 const rolesMW = require('./middlewares/roles.js');
 const registerMW = require('./middlewares/register');

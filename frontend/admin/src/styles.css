@@ -30,6 +30,7 @@ html {
   justify-content: center;
   width: 100%;
   height: 100%;
+  background-color: darkgrey;
 }
 
 body {
@@ -39,7 +40,7 @@ body {
   position: relative;
   width: 100%;
   height: 100%;
-  max-width: 1366px;
+  max-width: 1920px;
   font-family: 'Playfair Display', sans-serif;
   text-shadow: 1px 1px 2px rgba(127, 118, 105, 1);
 }
@@ -63,43 +64,76 @@ a {
 app-root {
   position: relative;
   display: flex;
-  align-items: center;
   flex-flow: row nowrap;
   justify-content: center;
   background-color: whitesmoke;
   width: 100%;
   height: 100%;
-}
-
-app-menu {
-  position: relative;
-  height: 100%;
-  width: 20%;
-  background-color: white;
-  font-family: 'Muli', sans-serif;
-  box-shadow: 5px 5px 10px rgba(50, 50, 50, 0.6);
+  overflow: hidden;
 }
 
 app-auth {
   position: fixed;
   height: 100%;
   width: 100%;
-  background-color: rgb(100, 100, 255);
+  background-color: teal;
   z-index: 1000;
 }
 
-app-not-found,
-app-home {
+app-menu {
+  position: absolute;
+  top: 0;
+  height: 5%;
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  color: whitesmoke;
+  background-color: rgb(15, 80, 80);
+  box-shadow: 5px 5px 10px rgba(10, 50, 60, 0.8);
+  font-family: 'Muli', sans-serif;
+  z-index: 100;
+}
+
+app-sidebar {
   position: relative;
+  top: 5%;
+  width: 15%;
+  height: 95%;
+  padding-top: 2rem;
+  display: flex;
+  flex-flow: column;
+  color: whitesmoke;
+  background-color: rgb(5, 110, 110);
+  font-family: 'Muli', sans-serif;
+  overflow: overlay;
+}
+
+app-not-found,
+app-home,
+app-settings,
+app-user,
+app-actualities,
+app-contact,
+app-greet,
+app-reservations,
+app-rooms {
+  position: relative;
+  top: 5%;
+  width: 85%;
+  height: 95%;
   padding-top: 2rem;
   padding-bottom: 1rem;
   display: flex;
   flex-flow: column;
   align-items: center;
-  background-color: rgb(100, 100, 255);
-  width: 80%;
-  height: 100%;
+  background-color: whitesmoke;
   overflow: overlay;
+}
+
+.blur {
+  filter: blur(4px);
 }
 
 app-not-found {

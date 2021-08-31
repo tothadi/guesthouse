@@ -49,7 +49,7 @@ export class AuthService {
 
   public logout() {
     localStorage.removeItem('id_token');
-    this.router.navigate(['']);
+    this.router.navigateByUrl('/bejelentkezes');
   }
 
   public isLoggedIn() {

@@ -1,9 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { icon, IconName, library } from "@fortawesome/fontawesome-svg-core";
 import {
-  faEnvelope,
-  faHome,
-  faPhone,
+  fas,
   IconDefinition,
 } from "@fortawesome/free-solid-svg-icons";
 import { Contact } from "../backend.interfaces";
@@ -20,7 +18,7 @@ export class ContactComponent implements OnInit {
   contacts?: Contact[];
 
   constructor(private backend: BackendService) {
-    library.add(faEnvelope, faPhone, faHome);
+    library.add(fas);
     this.home = icon({ prefix: "fas", iconName: "home" });
   }
 
@@ -28,10 +26,12 @@ export class ContactComponent implements OnInit {
   ngOnInit(): void {
     this.backend.getContacts().subscribe(
       (contacts) => {
-        this.contacts = contacts.map(c => {
+        this.contacts = contacts
+        .map(c => {
           c.iconDef = icon({ prefix: "fas", iconName: c.icon as IconName });
           return c;
         })
+        .sort((a, b) => a.order - b.order);
       },
       (err) => {
         console.error(err.message);

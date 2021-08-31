@@ -1,0 +1,5 @@
+<h3>
+    <fa-icon [icon]="menu" [style.fontSize.px]="menuHeight"></fa-icon>
+</h3>
+
+<a *ngFor="let menuItem of menuItems" [routerLink]="menuItem.link" routerLinkActive="active" class="menuItem">{{menuItem.title}}</a>

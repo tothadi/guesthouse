@@ -1,0 +1,176 @@
+main {
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+h2 {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+section {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: 90%;
+}
+
+article, #tableHead {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  height: 3rem;
+  width: 100%;
+}
+
+article {
+  background-color: white;
+}
+
+.even {
+  background-color: teal;
+}
+
+.item {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  overflow: hidden;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.item h3, #tableHead h3 {
+  display: flex;
+  width: 95%;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.item p {
+  font-size: .9rem;
+}
+
+.hide {
+  display: none;
+}
+
+.actions {
+  width: 5%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.actions a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#add {
+  font-size: 1rem;
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+#add button {
+  margin-top: .5rem;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+#add p {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+#add fa-icon {
+  margin-right: .5rem;
+}
+
+.overlay {
+  overflow: overlay;
+  display: flex;
+  flex-flow: column;
+}
+
+form {
+}
+
+mat-form-field,
+.dialog-button  {
+    width: 100%;
+}
+
+.dialog-button {
+  height: 40px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+/*
+* For popup pictures
+*/
+.fullScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  min-height: -webkit-fill-available;
+  margin: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+}
+.toggle {
+  text-decoration: none;
+  cursor: pointer;
+  color: black;
+  font-size: 2rem;
+}
+
+.toggle:hover {
+  color: rgba(51, 98, 46, 1);
+}
+
+.toggle {
+  color: whitesmoke;
+  position: absolute;
+  z-index: 3;
+}
+
+.fullScreenControl {
+  color: whitesmoke;
+}
+
+@media only screen and (max-width: 600px) {
+    .toggle {
+    font-size: 1rem;
+  }
+  
+}
+
+@media only screen and (max-height: 500px) {
+  .toggle {
+    font-size: 1rem;
+  }
+
+}

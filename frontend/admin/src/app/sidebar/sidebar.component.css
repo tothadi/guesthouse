@@ -1,0 +1,27 @@
+h3 {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+a {
+  margin-bottom: 0.75rem;
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: whitesmoke;
+  cursor: pointer;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  transition: all 500ms ease-in-out;
+}
+
+a:hover {
+  color: rgb(2, 172, 172);
+  transform: scale(1.1);
+}
+
+a.active {
+    color: rgb(2, 172, 172);
+  }
