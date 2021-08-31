@@ -57,7 +57,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(50, 50, 50, 0.2);
+  background: rgba(50, 50, 50, 0.1);
   border-radius: 5px;
 }
 
@@ -144,6 +144,8 @@ app-edit-dialog, app-remove-dialog {
   display: flex;
   flex-flow: column;
   align-items: center;
+  max-height: 80vh;
+  overflow: scroll;
 }
 
 app-not-found {

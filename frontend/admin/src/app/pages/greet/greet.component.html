@@ -14,21 +14,21 @@
                 <h3>{{item}}</h3>
             </div>
         </div>
-        <article *ngFor="let doc of docs; even as even" [ngClass]="{even: even}">
+        <article *ngFor="let doc of docs; even as even; index as i" [ngClass]="{even: even}">
             <div class="item" *ngFor="let item of doc | keyvalue:descOrder" [style.width.px]="width"
                 [ngClass]="{hide: item.key === '_id'}">
                 <div *ngIf="item.key === 'Leírás'; else thenBlock">
-                    <p *ngFor="let section of doc['Leírás']">{{section.title || 'a fejezetnek nincs címe'}}</p>
+                    <p *ngFor="let section of doc['Leírás']">{{doc['Leírás'].length}} szekció, {{section.paragraphs.length}} bekezdéssel</p>
                 </div>
                 <ng-template #thenBlock>
                     <p>{{item.value}}</p>
                 </ng-template>
             </div>
             <div class="actions">
-                <a (click)="editItem(doc)">
+                <a (click)="editItem(docs[i])">
                     <fa-icon [icon]="setIcon('edit')"></fa-icon>
                 </a>
-                <a (click)="removeItem(doc)">
+                <a (click)="removeItem(docs[i])">
                     <fa-icon [icon]="setIcon('trash-alt')"></fa-icon>
                 </a>
             </div>

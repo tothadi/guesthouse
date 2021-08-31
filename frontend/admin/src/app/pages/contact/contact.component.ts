@@ -29,10 +29,12 @@ export class ContactComponent implements OnInit {
   newContact!: Contact;
   mockContact!: ModContact;
 
+
   loaded = false;
 
   floatLabelControl = new FormControl('always');
 
+  pageWidth: number = document.body.offsetWidth;
   width: number = 0;
 
   constructor(
@@ -43,10 +45,10 @@ export class ContactComponent implements OnInit {
     library.add(fas);
 
     this.pageService.getAll(this.api).then((docs) => {
-      this.docs = docs.map((c) => new Contact(c));
+      this.docs = docs.map((d) => new Contact(d));
       this.mockContact = new MockContact(this.docs.length + 1);
       this.width =
-        (document.body.offsetWidth * 0.85 * 0.9 * 0.95) /
+        (this.pageWidth * 0.85 * 0.9 * 0.95) /
           (Object.keys(this.docs[0]).length - 1) -
         20;
       this.loaded = true;
@@ -57,18 +59,20 @@ export class ContactComponent implements OnInit {
     return icon({ prefix: 'fas', iconName: name as IconName })
   }
 
-  backendResponse(result: any) {
+  backendResponse(result?: any) {
     this.pageService.getAll(this.api).then((docs) => {
-      this.docs = docs.map((c) => new Contact(c));
+      this.docs = docs.map((d) => new Contact(d));
       this.docs.sort((a, b) => a['Sorszám'] - b['Sorszám']);
       this.loaded = true;
     });
-    console.log(result);
+    if (typeof result != 'undefined') {
+      console.log(result);
+    }
   }
 
   openDialog(doc: any) {
     const editDialog = this.dialog.open(EditDialogComponent, {
-      width: '350px',
+      width: this.pageWidth < 450 ? '350px' : '600px',
       disableClose: true,
       autoFocus: true,
       closeOnNavigation: true,
@@ -88,10 +92,7 @@ export class ContactComponent implements OnInit {
         }
 
         if (typeof data === 'string') {
-          this.docs = this.docs.filter((c) => c._id != data);
-          this.docs.push(new Contact(this.original));
-          this.docs.sort((a, b) => a['Sorszám'] - b['Sorszám']);
-          return;
+          return this.backendResponse();
         }
 
         this.loaded = false;

@@ -1,9 +1,25 @@
 form {
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
 }
 
 mat-form-field,
 .dialog-button {
   width: 100%;
+  max-width: 300px;
+  position: relative;
+  overflow: visible;
+}
+
+.remove {
+  font-size: 15px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10000;
+  color: red;
 }
 
 .dialog-button {
@@ -13,8 +29,48 @@ mat-form-field,
   align-items: center;
   justify-content: center;
   color: black;
-  font-size: 30px;
   margin-bottom: 10px;
+  max-width: 250px;
+}
+
+.dialog-button fa-icon {
+  font-size: 25px;
+  margin-right: 10px;
+}
+
+form button {
+  background-color: rgb(15, 80, 80);
+  color: white;
+}
+
+.section {
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.section button {
+  background-color: teal;
+  color: white;
+}
+
+.first::before {
+  content: '';
+  border: .5px solid lightgray;
+  width: 80%;
+  max-width: 200px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.section::after {
+  content: '';
+  border: .5px solid lightgray;
+  width: 80%;
+  max-width: 200px;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .hide {
@@ -22,11 +78,11 @@ mat-form-field,
 }
 
 mat-option {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
 }
 
 mat-option fa-icon {
-    margin-right: .5rem;
+  margin-right: 0.5rem;
 }

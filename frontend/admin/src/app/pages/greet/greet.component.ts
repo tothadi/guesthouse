@@ -1,7 +1,4 @@
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { icon, IconName, library } from '@fortawesome/fontawesome-svg-core';
@@ -20,7 +17,6 @@ import { Greet, MockGreet, ModGreet } from './greet.class';
   styleUrls: ['../pages.component.css'],
 })
 export class GreetComponent implements OnInit {
-
   objectKeys = Object.keys;
 
   title: string = 'Kezdőlap';
@@ -35,6 +31,7 @@ export class GreetComponent implements OnInit {
 
   floatLabelControl = new FormControl('always');
 
+  pageWidth: number = document.body.offsetWidth;
   width: number = 0;
 
   constructor(
@@ -48,30 +45,31 @@ export class GreetComponent implements OnInit {
       this.docs = docs.map((c) => new Greet(c));
       this.mockGreet = new MockGreet(this.docs.length + 1);
       this.width =
-        (document.body.offsetWidth * 0.85 * 0.9 * 0.95) /
+        (this.pageWidth * 0.85 * 0.9 * 0.90) /
           (Object.keys(this.docs[0]).length - 1) -
         20;
       this.loaded = true;
-      console.log(this.docs)
     });
   }
 
   setIcon(name: string): IconDefinition {
-    return icon({ prefix: 'fas', iconName: name as IconName })
+    return icon({ prefix: 'fas', iconName: name as IconName });
   }
 
-  backendResponse(result: any) {
+  backendResponse(result?: any) {
     this.pageService.getAll(this.api).then((docs) => {
       this.docs = docs.map((c) => new Greet(c));
       this.docs.sort((a, b) => a['Sorszám'] - b['Sorszám']);
       this.loaded = true;
     });
-    console.log(result);
+    if (typeof result != 'undefined') {
+      console.log(result);
+    }
   }
 
   openDialog(doc: any) {
     const editDialog = this.dialog.open(EditDialogComponent, {
-      width: '350px',
+      width: this.pageWidth < 450 ? '350px' : '600px',
       disableClose: true,
       autoFocus: true,
       closeOnNavigation: true,
@@ -82,6 +80,8 @@ export class GreetComponent implements OnInit {
       },
     });
 
+    console.log(this.original)
+
     editDialog.afterClosed().subscribe(
       (data) => {
         this.app.blur = '';
@@ -91,14 +91,11 @@ export class GreetComponent implements OnInit {
         }
 
         if (typeof data === 'string') {
-          this.docs = this.docs.filter((c) => c._id != data);
-          this.docs.push(new Greet(this.original));
-          this.docs.sort((a, b) => a['Sorszám'] - b['Sorszám']);
-          return;
+          return this.backendResponse();
         }
 
         this.loaded = false;
-        
+
         if (data._id) {
           return this.pageService.update(this.api, new ModGreet(data)).then(
             (result) => {
@@ -151,7 +148,7 @@ export class GreetComponent implements OnInit {
       closeOnNavigation: true,
       panelClass: 'overlay',
       data: {
-        doc
+        doc,
       },
     });
 
