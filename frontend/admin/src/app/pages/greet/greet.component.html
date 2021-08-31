@@ -17,7 +17,12 @@
         <article *ngFor="let doc of docs; even as even" [ngClass]="{even: even}">
             <div class="item" *ngFor="let item of doc | keyvalue:descOrder" [style.width.px]="width"
                 [ngClass]="{hide: item.key === '_id'}">
-                
+                <div *ngIf="item.key === 'Leírás'; else thenBlock">
+                    <p *ngFor="let section of doc['Leírás']">{{section.title || 'a fejezetnek nincs címe'}}</p>
+                </div>
+                <ng-template #thenBlock>
+                    <p>{{item.value}}</p>
+                </ng-template>
             </div>
             <div class="actions">
                 <a (click)="editItem(doc)">
