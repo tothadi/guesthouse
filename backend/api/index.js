@@ -86,7 +86,7 @@ router.put('/new-:model',
 router.put(
   '/:model/add-pics/:id',
   isValidRouteMW(objRep),
-  //auth,
+  auth,
   getOneMW,
   upload.array('pics'),
   addPicMW
@@ -98,7 +98,7 @@ router.put(
 router.patch(
   '/update-:model/:id',
   isValidRouteMW(objRep),
-  //auth,
+  auth,
   getOneMW,
   updateOneMW
 );
