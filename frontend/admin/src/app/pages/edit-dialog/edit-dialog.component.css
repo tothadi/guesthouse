@@ -3,6 +3,7 @@ form {
   display: flex;
   flex-flow: column;
   align-items: center;
+  color: black;
 }
 
 mat-form-field,
