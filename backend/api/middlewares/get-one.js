@@ -1,17 +1,15 @@
 module.exports = (objRep) => {
-    const { Models } = objRep;
-    return (req, res, next) => {
-        const Model = Models[req.params.model];
-        return Model.findOne({ _id: req.params.id }).exec((err, result) => {
-            if (err) {
-                return res.status(500).json({ error: err.message });
-            }
-            if (!result) {
-                return res.status(404).json({ message: `No document with the id: ${req.params.id} can be found.` });
-            }
-            res.locals.document = result;
-            res.locals.Model = Model;
-            return next();
-        })
+  const { Models } = objRep;
+  return async (req, res, next) => {
+    const Model = Models[req.params.model];
+    try {
+      const doc = await Model.findOne({ _id: req.params.id });
+      res.locals.document = doc;
+      res.locals.Model = Model;
+      return next();
+    } catch (err) {
+      const status = err.message.includes('validation') ? 400 : 500;
+      return res.status(status).json({ error: err.message });
     }
-}
+  };
+};

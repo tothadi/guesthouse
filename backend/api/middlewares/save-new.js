@@ -1,11 +1,11 @@
 module.exports = () => {
-    return (req, res, next) => {
-        return res.locals.newModel.save((err, document) => {
-            if (err) {
-                const status = err.message.includes('validation') ? 400 : 500;
-                return res.status(status).json({ error: err.message });
-            }
-            return res.json(document);
-        });
+  return async (req, res, next) => {
+    try {
+      const doc = await res.locals.newModel.save();
+      return res.json(doc);
+    } catch (err) {
+      const status = err.message.includes('validation') ? 400 : 500;
+      return res.status(status).json({ error: err.message });
     }
-}
+  };
+};

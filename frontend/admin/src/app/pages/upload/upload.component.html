@@ -1,0 +1,24 @@
+<div class="upload">
+  <input type="file" multiple class="file-input" (change)="onFilesSelected($event)" #fileUpload>
+
+  <div class="file-upload">
+    <button mat-raised-button class="upload-btn dialog-button" (click)="fileUpload.click()">
+      <fa-icon [icon]="setIcon('paperclip')"></fa-icon>
+      Kép(ek) hozzáadása
+    </button>
+<button class="dialog-button cancel" [mat-dialog-close]="result" mat-raised-button color="warn"
+    [disabled]="!canBeClosed || uploading">
+    <fa-icon [icon]="setIcon('window-close')"></fa-icon> {{uploadSuccessful ? 'bezárás' : 'mégse'}}
+  </button>
+    
+  </div>
+  <mat-dialog-content fxFlex>
+      <mat-list>
+        <mat-list-item *ngFor="let file of files">
+          <h4 mat-line>{{file.name}}</h4>
+          <mat-progress-bar *ngIf="progress" mode="determinate" [value]="progress[file.name].progress | async">
+          </mat-progress-bar>
+        </mat-list-item>
+      </mat-list>
+    </mat-dialog-content>
+</div>

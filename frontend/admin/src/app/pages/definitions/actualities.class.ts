@@ -1,38 +1,44 @@
-import { PagesService } from '../pages.service';
-import { Section } from '../pages.interfaces';
+import { Picture, Section } from './common.interfaces';
 
-export interface Actuality {
-  _id: string;
-  title: string;
-  sections: Section[];
-  pics: string[];
+export class MockActuality {
+  title: string = '';
+  sections: Section[] = [];
+  pics: Picture[] = [];
+  updatedAt: Date = new Date();
+  _id: string = '';
+
+  constructor() {}
 }
 
 export class Actuality {
   'Cím': string;
   'Leírás': Section[];
-  'Képek': string[];
+  'Képek': Picture[];
+  'Módosítva': Date;
+  _id: string;
 
-  constructor(actuality: Actuality) {
+  constructor(actuality: ModActuality) {
     this['Cím'] = actuality.title;
     this['Leírás'] = actuality.sections;
     this['Képek'] = actuality.pics;
+    this['Módosítva'] = actuality.updatedAt;
+    this._id = actuality._id;
   }
 }
 
-export class Actualities {
-  name: string = 'Aktualitások';
-  link: string = 'aktualitasok';
-  api: string = 'actualities';
-  items: Promise<Actuality[]>;
+export class ModActuality {
+  title: string;
+  sections: Section[];
+  pics: Picture[];
+  updatedAt: Date;
+  _id: string;
 
-  constructor(private pageService: PagesService) {
-    this.items = this.getItems(this.api);
-  }
-
-  async getItems(api: string): Promise<Actuality[]> {
-    return (await this.pageService.apiCall(api)).map((item: Actuality) => {
-      return new Actuality(item);
-    });
+  constructor(actuality: Actuality) {
+    this.title = actuality['Cím'];
+    this.sections = actuality['Leírás'];
+    this.pics = actuality['Képek'];
+    this.updatedAt = actuality['Módosítva'];
+    this._id = actuality._id;
   }
 }
+

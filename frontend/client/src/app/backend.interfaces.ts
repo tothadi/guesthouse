@@ -21,7 +21,9 @@ export interface Contact {
 
 interface Pictures {
   caption?: string;
-  base64: Buffer;
+  data: Buffer;
+  contentType: string;
+  imgSrc: string;
 }
 
 export interface Room {

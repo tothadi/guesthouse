@@ -1,26 +1,42 @@
-const mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
-let gracefulShutdown;
+const Mongoose = require('mongoose');
 const dbURI = process.env.DB_HOST;
+const options = {
+  useCreateIndex: true,
+  useNewUrlParser: true,
+  useFindAndModify: false,
+  useUnifiedTopology: true,
+  keepAlive: true,
+};
 
-mongoose.set('useCreateIndex', true);
+async function main() {
+  try {
+    const db = await Mongoose.connect(dbURI, options);
+    console.log('DB server connect');
+  } catch (err) {
+    console.error(err.message);
+  }
+}
+main().catch(console.dir);
 
+/*
 function connectMongoose() {
   mongoose.connect(dbURI, { useUnifiedTopology: true, useNewUrlParser: true })
-    .then(() => console.log("DB server connect"))
-    .catch(e => console.log("DB error", e));
+    .then(() => console.log('DB server connect'))
+    .catch(e => console.log('DB error', e));
 };
 
 connectMongoose();
 
 const db = mongoose.connection;
+const bucket = new mongoose
+
 
 // Added check for DB connection
 
 if (!db)
-  console.log("Error connecting db")
+  console.log('Error connecting db')
 else
-  console.log("Db connected successfully")
+  console.log('Db connected successfully')
 
 // CONNECTION EVENTS
 mongoose.connection.on('connected', () => {
@@ -62,7 +78,7 @@ process.on('SIGTERM', () => {
     process.exit(0);
   });
 });
-
+*/
 // BRING IN YOUR SCHEMAS & MODELS
 require('./models/actualities');
 require('./models/contact');
@@ -71,3 +87,30 @@ require('./models/pictures');
 require('./models/reservations');
 require('./models/rooms');
 require('./models/users');
+
+/*const {readFileSync} = require('fs')
+
+const valami = readFileSync('./api/db/base64', {encoding: 'base64'})
+const buffer = Buffer.from(valami, 'base64')
+
+const pic = new Mongoose.model('Actualities')
+pic.data = buffer;
+pic.contentType = 'image/jpg';
+
+async function change() {
+  try {
+    return await Mongoose.model('Actualities').findByIdAndUpdate(
+      { _id: '6130ce6e5278dd34ac457adc' },
+      {
+        $addToSet: { pics: { pic } },
+      },
+      { new: true }
+    );
+  } catch (err) {
+    return err.message
+  }
+}
+
+change().then(result => {
+  console.log(result)
+})*/

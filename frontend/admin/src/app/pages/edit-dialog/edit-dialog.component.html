@@ -1,8 +1,8 @@
 <form class="form-group">
 
     <mat-form-field *ngFor="let item of objectKeys(data.doc)"
-        [ngClass]="{hide: item === 'Ikon' || item === '_id' || item === 'Leírás'}" appearance="outline"
-        [floatLabel]="floatLabelControl.value">
+        [ngClass]="{hide: item === 'Ikon' || item === '_id' || item === 'Leírás' || item === 'Képek'}"
+        appearance="outline" [floatLabel]="floatLabelControl.value">
         <mat-label>{{item}}</mat-label>
         <input matInput type="text" class="form-control" [(ngModel)]="data.doc[item]" [value]="data.doc[item]"
             [placeholder]="item" [ngModelOptions]="{standalone: true}">
@@ -19,8 +19,10 @@
         </mat-select>
     </mat-form-field>
 
-    <!-- TODO szekció törlés
+    <!-- TODO
+        szekció törlés
         Commentek
+        képek kezelése
     -->
     <div class="section" *ngFor="let section of data.doc['Leírás']; first as firstS" [ngClass]="{first: firstS}">
         <mat-form-field appearance="outline" [floatLabel]="floatLabelControl.value">
@@ -29,7 +31,7 @@
                 [value]="section.title" placeholder="Cím, nem kötelező" [ngModelOptions]="{standalone: true}">
             <mat-error>Legalább 5 karaktert írj be!</mat-error>
         </mat-form-field>
-        <mat-form-field *ngFor="let p of section.paragraphs; let i = index; first as firstP; trackBy:trackByFn"
+        <mat-form-field *ngFor="let p of section.paragraphs; index as i; first as firstP; trackBy:trackByFn"
             appearance="outline" [floatLabel]="floatLabelControl.value">
             <mat-label>Bekezdés</mat-label>
             <textarea matInput minlength="10" type="text" class="form-control" [(ngModel)]="section.paragraphs[i]"
@@ -42,11 +44,12 @@
         <button class="dialog-button" (click)="addParagraph(section)" mat-raised-button>
             <fa-icon [icon]="setIcon('plus-square')"></fa-icon> Bekezdés hozzáadása
         </button>
-
     </div>
+
     <button *ngIf="data.doc['Leírás']" class="dialog-button" (click)="addSection()" mat-raised-button>
         <fa-icon [icon]="setIcon('folder-plus')"></fa-icon> Szekció hozzáadása
     </button>
+    
 </form>
 <button class="dialog-button" [mat-dialog-close]="data.doc" type="submit" mat-raised-button color="primary">
     <fa-icon [icon]="setIcon('save')"></fa-icon> Mentés

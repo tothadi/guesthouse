@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { icon, IconName, library } from '@fortawesome/fontawesome-svg-core';
 import {
-    faEnvelope,
-    faGlobeEurope,
-    faHome,
-    faPencilAlt,
-    faPhone,
+    fas,
     IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
 import { Contact } from '../backend.interfaces';
@@ -17,26 +13,21 @@ import { BackendService } from '../backend.service';
     styleUrls: ['./footer.component.css'],
 })
 export class FooterComponent implements OnInit {
-    globe: IconDefinition;
-    pencil: IconDefinition;
-    home: IconDefinition;
 
     contacts?: Contact[];
 
     constructor(private backend: BackendService) {
-        library.add(faEnvelope, faPhone, faGlobeEurope, faPencilAlt, faHome);
-        this.globe = icon({ prefix: 'fas', iconName: 'globe-europe' });
-        this.pencil = icon({prefix: 'fas', iconName: 'pencil-alt'})
-        this.home = icon({prefix: 'fas', iconName: 'home'})
+        library.add(fas);
+    }
+
+    setIcon(name: any): IconDefinition {
+      return icon({ prefix: 'fas', iconName: name as IconName });
     }
 
     ngOnInit(): void {
         this.backend.getContacts().subscribe(
             (contacts) => {
-                this.contacts = contacts.map(c => {
-                  c.iconDef = icon({ prefix: "fas", iconName: c.icon as IconName });
-                  return c;
-                })
+                this.contacts = contacts;
               },
             (err) => {
               console.error(err.message);

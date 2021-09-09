@@ -1,12 +1,12 @@
 module.exports = (objRep) => {
     const { Models } = objRep;
-    return (req, res, next) => {
+    return async (req, res, next) => {
         const Model = Models[req.params.model];
-        return Model.find({}).exec((err, result) => {
-            if (err) {
-               return res.status(500).json({ error: err.message });
-            }
-            return res.json(result);
-        })
+        try {
+            const docs = await Model.find({});
+            return res.json(docs);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
     }
 }

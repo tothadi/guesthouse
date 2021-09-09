@@ -1,0 +1,63 @@
+form {
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+mat-form-field,
+.dialog-button {
+  width: 100%;
+  max-width: 300px;
+  position: relative;
+  overflow: visible;
+}
+
+.upload {
+  position: relative;
+  width: 100%;
+  min-height: 350px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-upload {
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+mat-dialog-content {
+  width: 100%;
+  overflow: overlay;
+}
+
+mat-dialog-content h4 {
+  width: 50%;
+}
+
+mat-progress-bar {
+  width: 50%;
+}
+
+.upload-btn, .cancel {
+  height: 40px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  max-width: 250px;
+}
+
+.upload-btn {
+  background-color: seagreen;
+  color: white;
+}

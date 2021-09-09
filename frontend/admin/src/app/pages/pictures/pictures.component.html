@@ -1,0 +1,65 @@
+<div [ngClass]="{'fullScreen': fullScreen}" *ngIf="doc['Képek']?.length > 0; else buttonBlock" class="picsCont">
+
+    <a [ngClass]="{'fullScreenControl': fullScreen}" *ngIf="multiplePics" class="picControl" (click)="prevPic()">
+        <fa-icon [icon]="setIcon('arrow-circle-left')"></fa-icon>
+    </a>
+    <div id="pics" [ngClass]="{picsFull: fullScreen}">
+        <figure *ngFor="let pic of doc['Képek']; index as i" id="picwrap">
+            <img [src]="pic.imgSrc" alt="{{doc.title}} - {{i+1}}" (load)="setToggle()" />
+            <a #pics [style.top.px]="currentPicPos.top" [style.right.px]="currentPicPos.right" class="toggle"
+                (click)="toggleFullScreen()" [ngClass]="{fullToggle: fullScreen}">
+                <fa-icon [icon]="expandClose"></fa-icon>
+            </a>
+            <figcaption *ngIf="pic.caption">{{pic.caption}}</figcaption>
+        </figure>
+    </div>
+    <a [ngClass]="{'fullScreenControl': fullScreen}" *ngIf="multiplePics" class="picControl" (click)="nextPic()">
+        <fa-icon [icon]="setIcon('arrow-circle-right')"></fa-icon>
+    </a>
+
+    <div *ngIf="fullScreen" class="buttons save-del">
+        <button mat-raised-button *ngIf="fullScreen" class="edit-caption" (click)="editCaption()">
+            <p *ngIf="!captionInput; else thenBlock">
+                <fa-icon [icon]="setIcon('edit')"></fa-icon>
+                Képaláírás szerkesztése
+            </p>
+            <ng-template #thenBlock>
+                <fa-icon [icon]="setIcon('save')"></fa-icon>
+                Képaláírás mentése
+            </ng-template>
+        </button>
+        <mat-form-field *ngIf="captionInput" appearance="outline">
+            <mat-label>Képaláírás</mat-label>
+            <input matInput type="text" class="form-control" [(ngModel)]="doc['Képek'][0].caption" autocomplete="off"
+                [value]="doc['Képek'][0].caption" placeholder="Képaláírás, üresen is hagyhatod"
+                [ngModelOptions]="{standalone: true}">
+
+        </mat-form-field>
+        <button mat-raised-button *ngIf="fullScreen" class="add" (click)="openDialog()">
+            <fa-icon [icon]="setIcon('plus-square')"></fa-icon>
+            Kép(ek) hozzáadása
+        </button>
+        <button mat-raised-button color="warn" *ngIf="fullScreen" class="remove" (click)="confirmDelete()">
+            <fa-icon [icon]="setIcon('trash-alt')"></fa-icon>
+            Kép törlése
+        </button>
+    </div>
+
+    <div id="confirm" *ngIf="confirm">
+        <p>Biztosan törlöd?</p>
+        <div class="buttons confirm">
+            <button id="delete" (click)="deletePicture(true)" mat-raised-button>Igen</button>
+            <button (click)="deletePicture(false)" mat-raised-button color="warn">Mégse</button>
+        </div>
+    </div>
+</div>
+
+<ng-template #buttonBlock>
+    <a *ngIf="doc['Képek']?.length > 0" [style.top.px]="10" [style.right.px]="10" class="toggle fullToggle" (click)="toggleFullScreen()">
+        <fa-icon [icon]="expandClose"></fa-icon>
+    </a>
+    <button mat-raised-button class="add" (click)="openDialog()">
+        <fa-icon [icon]="setIcon('plus-square')"></fa-icon>
+        Kép(ek)
+    </button>
+</ng-template>

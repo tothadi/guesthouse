@@ -22,11 +22,13 @@ article, #tableHead {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
+  justify-content: flex-start;
   height: 3rem;
   width: 100%;
 }
 
 article {
+  height: 6rem;
   background-color: white;
 }
 
@@ -41,20 +43,46 @@ article {
   justify-content: center;
   height: 100%;
   overflow: hidden;
-  margin-left: 10px;
-  margin-right: 10px;
+}
+
+.order h3 {
+  word-wrap: break-word;
 }
 
 .item h3, #tableHead h3 {
-  display: flex;
   width: 95%;
+  display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1rem;
 }
 
+.item-text {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .item p {
+  width: 95%;
+  text-align: center;
+  word-wrap: break-word;
   font-size: .9rem;
+}
+
+.img-wrapper {
+  position: relative;
+  display: flex;
+  flex-flow: row wrap;
+  align-content: space-around;
+  justify-content: space-around;
+  width: 95%;
+  height: 95%;
+}
+
+.item img {
+  object-fit: cover;
 }
 
 .hide {

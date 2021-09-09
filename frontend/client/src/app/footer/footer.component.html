@@ -1,7 +1,7 @@
 <div id="footer-logo">
     <img id="logo" src="assets/image/logo.svg" alt="logo">
     <a target="blank" href="https://www.facebook.com/egondraw/">
-        <fa-icon [icon]="pencil"></fa-icon>
+        <fa-icon [icon]="setIcon('pencil-alt')"></fa-icon>
         <p>EgonDraw</p>
     </a>
 
@@ -9,7 +9,7 @@
 
 <div id="footer-contact">
     <a *ngFor='let contact of contacts' [href]="contact.link" target="blank">
-        <fa-icon [icon]="contact.iconDef || home"></fa-icon>
+        <fa-icon [icon]="setIcon(contact.icon)"></fa-icon>
         <p>{{contact.data}}</p>
     </a>
 </div>
@@ -17,7 +17,7 @@
 <div id="tothadi">
     <p>Fejleszti és<br>üzemelteti:</p>
     <a target="blank" href="https://tothadi.hu">
-        <fa-icon [icon]="globe"></fa-icon>
+        <fa-icon [icon]="setIcon('globe-europe')"></fa-icon>
         <p>tothadi.hu</p>
     </a>
 </div>

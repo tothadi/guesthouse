@@ -10,6 +10,7 @@ export class AppComponent implements OnInit {
   title = 'Könczevölgyi Vendégház - Adminisztráció - ';
   public blur = '';
   public hide = false;
+  public first = true;
 
   @HostBinding('class') get HeadingClass() {
     return this.blur

@@ -1,11 +1,11 @@
 module.exports = (objRep) => {
-    return (req, res, next) => {
-        const Model = res.locals.Model;
-        return Model.deleteOne({ _id: res.locals.document._id }).exec((err, result) => {
-            if (err) {
-               return res.status(500).json({ error: err.message });
-            }
-            return res.json({deleted: res.locals.document, result});
-        })
+  return async (req, res, next) => {
+    const Model = res.locals.Model;
+    try {
+      const doc = await Model.deleteOne({ _id: res.locals.document._id });
+      return res.json(doc);
+    } catch (error) {
+      return res.status(500).json(error.message);
     }
-}
+  };
+};

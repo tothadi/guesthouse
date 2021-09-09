@@ -77,6 +77,10 @@ form button {
   display: none;
 }
 
+mat-divider {
+  height: 10px;
+}
+
 mat-option {
   display: flex;
   flex-flow: row nowrap;

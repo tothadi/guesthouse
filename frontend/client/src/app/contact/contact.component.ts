@@ -13,25 +13,22 @@ import { BackendService } from "../backend.service";
   styleUrls: ["./contact.component.css"],
 })
 export class ContactComponent implements OnInit {
-  home: IconDefinition;
 
   contacts?: Contact[];
 
   constructor(private backend: BackendService) {
     library.add(fas);
-    this.home = icon({ prefix: "fas", iconName: "home" });
+  }
+
+  setIcon(name: any): IconDefinition {
+    return icon({ prefix: 'fas', iconName: name as IconName });
   }
 
 
   ngOnInit(): void {
     this.backend.getContacts().subscribe(
       (contacts) => {
-        this.contacts = contacts
-        .map(c => {
-          c.iconDef = icon({ prefix: "fas", iconName: c.icon as IconName });
-          return c;
-        })
-        .sort((a, b) => a.order - b.order);
+        this.contacts = contacts.sort((a, b) => a.order - b.order);
       },
       (err) => {
         console.error(err.message);

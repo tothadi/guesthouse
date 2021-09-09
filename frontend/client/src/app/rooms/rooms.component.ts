@@ -15,10 +15,7 @@ import {
   faWindowClose,
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
-import {
-  NavigationEnd,
-  Router,
-} from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { Room } from '../backend.interfaces';
 import { BackendService } from '../backend.service';
 
@@ -42,7 +39,7 @@ export class RoomsComponent implements OnInit {
   expandClose: IconDefinition;
 
   rooms?: Room[];
-  room?: Room;
+  room!: Room;
   multiplePics = false;
   fullScreen = false;
 
@@ -63,6 +60,10 @@ export class RoomsComponent implements OnInit {
     this.setToggle();
   }
 
+  convertPic(pic: Buffer) {
+    return pic.toString('base64');
+  }
+
   prevPic() {
     const last = this.room?.pics!.pop();
     this.room?.pics!.unshift(last!);
@@ -77,8 +78,7 @@ export class RoomsComponent implements OnInit {
 
   setToggle() {
     this.cd.detectChanges();
-    this.currentPicPos.top =
-      this.pics?.nativeElement.previousSibling.offsetTop;
+    this.currentPicPos.top = this.pics?.nativeElement.previousSibling.offsetTop;
     this.currentPicPos.right =
       this.pics?.nativeElement.previousSibling.offsetLeft + 10;
   }
@@ -109,7 +109,13 @@ export class RoomsComponent implements OnInit {
   }
 
   filterRoom(roomName: string) {
-    this.room = this.rooms?.filter((r) => r.link === roomName)[0];
+    this.room = this.rooms!.filter((r: Room) => r.link === roomName)[0];
+    this.room.pics = this.room.pics!.map((p) => {
+      p.imgSrc = `data:${p.contentType};base64,${Buffer.from(
+        p.data
+      ).toString('base64')}`;
+      return p;
+    });
     this.multiplePics = this.room!.pics!.length > 1;
   }
 

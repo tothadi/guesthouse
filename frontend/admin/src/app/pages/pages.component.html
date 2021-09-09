@@ -1,0 +1,64 @@
+<app-loader *ngIf="!loaded">
+
+</app-loader>
+
+<main *ngIf="loaded">
+
+    <h2>{{ page.title }}</h2>
+
+    <section>
+
+        <div id="tableHead">
+            <div *ngIf="keys.includes('ssz.')" class="item order" [style.width.px]="orderWidth">
+                <h3>ssz.</h3>
+            </div>
+            <div class="item" *ngFor="let item of keys" [style.width.px]="width"
+                [ngClass]="{hide: item === '_id' || item === 'Link' || item === 'ssz.'}">
+                <h3>{{item}}</h3>
+            </div>
+
+        </div>
+        <article *ngFor="let doc of docs; even as even; index as i" [ngClass]="{even: even}">
+            <div *ngIf="doc['ssz.']" class="item" [style.width.px]="orderWidth">{{doc['ssz.']}}</div>
+            <div class="item" *ngFor="let item of doc | keyvalue:descOrder" [style.width.px]="width"
+                [ngClass]="{hide: item.key === '_id' || item.key === 'Link' || item.key === 'ssz.'}">
+                <div class="item-text" *ngIf="item.key === 'Leírás'; else thenBlock1">
+                    <p *ngFor="let section of doc['Leírás']">{{doc['Leírás'].length}} szekció,
+                        {{section.paragraphs.length}} bekezdéssel</p>
+                </div>
+                <ng-template #thenBlock1>
+                    <app-pictures [doc]="doc" [page]="page" class="img-wrapper" (docUpdate)="onDocUpdate($event)"
+                        *ngIf="item.key === 'Képek' && loaded; else thenBlock2">
+                    </app-pictures>
+                    <ng-template #thenBlock2>
+                        <p *ngIf="item.key === 'Módosítva' && loaded; else thenBlock3">{{doc['Módosítva'] |
+                            date:'yyyy.MM.dd, HH:mm:ss'}}</p>
+                        <ng-template #thenBlock3>
+                            <p *ngIf="item.key === 'Ikon'; else basic"><fa-icon [icon]="setIcon(item.value)"></fa-icon></p>
+                            <ng-template #basic>
+                                <p>{{item.value}}</p>
+                            </ng-template>
+                        </ng-template>
+                    </ng-template>
+                </ng-template>
+
+            </div>
+            <div class="actions">
+                <a (click)="editItem(docs[i])">
+                    <fa-icon [icon]="setIcon('edit')"></fa-icon>
+                </a>
+                <a (click)="removeItem(docs[i])">
+                    <fa-icon [icon]="setIcon('trash-alt')"></fa-icon>
+                </a>
+            </div>
+        </article>
+
+        <div id="add">
+            <button (click)="addItem()" mat-raised-button>
+                <p>
+                    <fa-icon [icon]="setIcon('plus-square')"></fa-icon>{{this.page.title}} hozzáadása
+                </p>
+            </button>
+        </div>
+
+    </section>

@@ -10,6 +10,8 @@ import {
 import { FormControl, NgModel } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, PRIMARY_OUTLET, Router } from '@angular/router';
+import { icon, IconName, library } from '@fortawesome/fontawesome-svg-core';
+import { fas, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { User } from './auth.interfaces';
 import { AuthService } from './auth.service';
 
@@ -27,6 +29,7 @@ export class AuthComponent implements AfterViewInit {
   floatLabelControl = new FormControl('always');
 
   loginDialog!: MatDialogRef<any>;
+  hide = true;
 
   userPlaceHolder: string = 'Add meg a felhasználóneved!';
   pwPlaceHolder: string = 'Add meg a jelszavad!';
@@ -43,7 +46,13 @@ export class AuthComponent implements AfterViewInit {
     private dialog: MatDialog,
     private router: Router,
     private auth: AuthService
-  ) {}
+  ) {
+    library.add(fas);
+  }
+
+  setIcon(name: string): IconDefinition {
+    return icon({ prefix: 'fas', iconName: name as IconName });
+  }
 
   submit() {
     this.auth.login(this.credentials).subscribe(

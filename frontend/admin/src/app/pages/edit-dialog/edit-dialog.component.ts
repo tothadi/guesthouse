@@ -9,7 +9,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl, Validators } from '@angular/forms';
 import { icon, IconName, library } from '@fortawesome/fontawesome-svg-core';
 import { fas, IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { Section } from '../pages.interfaces';
+import { Section } from '../definitions/common.interfaces';
 
 @Component({
   selector: 'app-edit-dialog',
@@ -17,6 +17,7 @@ import { Section } from '../pages.interfaces';
   styleUrls: ['./edit-dialog.component.css'],
 })
 export class EditDialogComponent implements OnInit {
+
   objectKeys = Object.keys;
   floatLabelControl = new FormControl('always');
   iconControl = new FormControl('', Validators.required);
@@ -27,7 +28,7 @@ export class EditDialogComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
   ) {
     library.add(fas);
   }
@@ -41,17 +42,17 @@ export class EditDialogComponent implements OnInit {
   }
 
   deleteParagraph(section: Section, i: number) {
-    section.paragraphs.splice(i);
+    section.paragraphs.splice(i, 1);
     this.cd.detectChanges();
   }
 
   addSection() {
-    this.data.doc['Leírás'].push({title: '', paragraphs: ['']})
+    this.data.doc['Leírás'].push({ title: '', paragraphs: [''] });
   }
 
   trackByFn(index: any, item: any) {
     return index;
- }
+  }
 
   ngOnInit(): void {}
 }

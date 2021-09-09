@@ -1,36 +1,32 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
-import { NotFoundComponent } from "../not-found/not-found.component";
-import { ActualitiesComponent } from "./actualities/actualities.component";
-import { ContactComponent } from "./contact/contact.component";
-import { GreetComponent } from "./greet/greet.component";
-import { ReservationsComponent } from "./reservations/reservations.component";
-import { RoomsComponent } from "./rooms/rooms.component";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { PagesComponent } from './pages.component';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'aktualitasok',
+    pathMatch: 'full'
+  },
+  {
     path: 'aktualitasok',
-    component: ActualitiesComponent
+    component: PagesComponent,
   },
   {
     path: 'foglalasok',
-    component: ReservationsComponent
+    component: PagesComponent,
   },
   {
     path: 'kapcsolat',
-    component: ContactComponent
+    component: PagesComponent,
   },
   {
     path: 'kezdolap',
-    component: GreetComponent
+    component: PagesComponent,
   },
   {
     path: 'szobak',
-    component: RoomsComponent
-  },
-  {
-    path: '**',
-    component: NotFoundComponent,
+    component: PagesComponent,
   },
 ];
 
@@ -38,7 +34,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-
-export class PagesRoutingModule {
-
-}
+export class PagesRoutingModule {}

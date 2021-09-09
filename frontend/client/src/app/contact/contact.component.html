@@ -1,7 +1,7 @@
 <div *ngFor='let contact of contacts'>
 <p>{{contact.label}}:</p>
 <a [href]="contact.link" target="blank">
-    <fa-icon [icon]="contact.iconDef || home"></fa-icon>
+    <fa-icon [icon]="setIcon(contact.icon)"></fa-icon>
     {{contact.data}}
 </a>
 </div>
