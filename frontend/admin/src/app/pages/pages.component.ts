@@ -73,13 +73,13 @@ export class PagesComponent implements OnInit {
   }
 
   setPics(doc: any): ModelType {
-      doc['Képek'] = doc['Képek'].map((p: any) => {
-        p.imgSrc = `data:${p.contentType};base64,${Buffer.from(
-          p.data
-        ).toString('base64')}`;
-        return p;
-      });
-      return doc;
+    doc['Képek'] = doc['Képek'].map((p: any) => {
+      p.imgSrc = `data:${p.contentType};base64,${Buffer.from(p.data).toString(
+        'base64'
+      )}`;
+      return p;
+    });
+    return doc;
   }
 
   setWidth() {
@@ -94,41 +94,41 @@ export class PagesComponent implements OnInit {
   }
 
   getAllDocs(result?: any) {
-    this.pageService.getAll(this.page.api).then(
-      (docs) => {
-        if (!docs?.length) {
+      this.pageService.getAll(this.page.api).then(
+        (docs) => {
+          if (!docs?.length) {
+            this.mock = new this.page.Mock(this.docs.length + 1);
+            this.loaded = true;
+            this.setWidth();
+            return;
+          }
+          this.docs = docs.map((c) => new this.page.Model(c));
+          this.docs.sort((a, b) => a[this.page.sort] - b[this.page.sort]);
           this.mock = new this.page.Mock(this.docs.length + 1);
+          this.keys = Object.keys(this.docs[0]);
+          this.toHide = this.keys.includes('Link')
+            ? this.keys.includes('ssz.')
+              ? 3
+              : 2
+            : this.keys.includes('ssz.')
+            ? 2
+            : 1;
+
+          if (this.keys.includes('Képek')) {
+            this.docs = this.docs.map((doc) => {
+              return this.setPics(doc);
+            });
+          }
           this.loaded = true;
           this.setWidth();
-          return;
+        },
+        (err) => {
+          console.log(err);
         }
-        this.docs = docs.map((c) => new this.page.Model(c));
-        this.docs.sort((a, b) => a[this.page.sort] - b[this.page.sort]);
-        this.mock = new this.page.Mock(this.docs.length + 1);
-        this.keys = Object.keys(this.docs[0]);
-        this.toHide = this.keys.includes('Link')
-          ? this.keys.includes('ssz.')
-            ? 3
-            : 2
-          : this.keys.includes('ssz.')
-          ? 2
-          : 1;
-
-        if (this.keys.includes('Képek')) {
-          this.docs = this.docs.map((doc) => {
-            return this.setPics(doc);
-          });
-        }
-        this.loaded = true;
-        this.setWidth();
-      },
-      (err) => {
-        console.log(err);
+      );
+      if (typeof result != 'undefined') {
+        console.log(result);
       }
-    );
-    if (typeof result != 'undefined') {
-      console.log(result);
-    }
   }
 
   openDialog(doc: ModelType) {
@@ -268,5 +268,4 @@ export class PagesComponent implements OnInit {
       this.app.first = true;
     });
   }
-
 }

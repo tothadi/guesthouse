@@ -39,16 +39,16 @@ const rolesMW = require('./middlewares/roles.js');
 const registerMW = require('./middlewares/register')(objRep);
 const loginMW = require('./middlewares/login');
 
-const getAllMW = require('./middlewares/get-all')(objRep);
-const getOneMW = require('./middlewares/get-one')(objRep);
+const getAllMW = require('./middlewares/get-all')();
+const getOneMW = require('./middlewares/get-one')();
 const createMW = require('./middlewares/create-new');
 const specialEditMW = require('./middlewares/edit-new');
-const saveMW = require('./middlewares/save-new')(objRep);
-const updateOneMW = require('./middlewares/update-one')(objRep);
-const deleteOneMW = require('./middlewares/delete-one')(objRep);
+const saveMW = require('./middlewares/save-new')();
+const updateOneMW = require('./middlewares/update-one')();
+const deleteOneMW = require('./middlewares/delete-one')();
 const addPicMW = require('./middlewares/add-pics')(objRep);
-const updatePicMW = require('./middlewares/update-pics')(objRep);
-const rmPicMW = require('./middlewares/rm-pics')(objRep);
+const updatePicMW = require('./middlewares/update-pics')();
+const rmPicMW = require('./middlewares/rm-pics')();
 
 
 /**
@@ -57,6 +57,7 @@ const rmPicMW = require('./middlewares/rm-pics')(objRep);
 router.get(
   '/all-:model',
   isValidRouteMW(objRep),
+  auth.unless((req,res,next) => !Object.keys(objRep.Restricted).includes(req.params.model)),
   getAllMW
 );
 
@@ -66,6 +67,7 @@ router.get(
 router.get(
   '/one-:model/:id',
   isValidRouteMW(objRep),
+  auth.unless((req,res,next) => !Object.keys(objRep.Restricted).includes(req.params.model)),
   getOneMW,
   (req, res, next) => res.json(res.locals.document)
 );
@@ -73,9 +75,10 @@ router.get(
 /**
  * Creates a new document - /api/new-rooms
  */
-router.put('/new-:model',
-  isValidRouteMW(objRep),
+router.put(
+  '/new-:model',
   auth,
+  isValidRouteMW(objRep),
   createMW(objRep),
   saveMW
 );
@@ -85,8 +88,8 @@ router.put('/new-:model',
  */
 router.put(
   '/:model/add-pics/:id',
-  isValidRouteMW(objRep),
   auth,
+  isValidRouteMW(objRep),
   getOneMW,
   upload.array('pics'),
   addPicMW
@@ -97,8 +100,8 @@ router.put(
  */
 router.patch(
   '/update-:model/:id',
-  isValidRouteMW(objRep),
   auth,
+  isValidRouteMW(objRep),
   getOneMW,
   updateOneMW
 );
@@ -108,8 +111,8 @@ router.patch(
  */
 router.patch(
   '/:model/pics-update/:id/:picid',
-  isValidRouteMW(objRep),
   auth,
+  isValidRouteMW(objRep),
   getOneMW,
   updatePicMW
 );
@@ -119,8 +122,8 @@ router.patch(
  */
 router.delete(
   '/:model/rm-pics/:id/:picid',
-  isValidRouteMW(objRep),
   auth,
+  isValidRouteMW(objRep),
   getOneMW,
   rmPicMW
 );
@@ -130,8 +133,8 @@ router.delete(
  */
 router.delete(
   '/delete-:model/:id',
-  isValidRouteMW(objRep),
   auth,
+  isValidRouteMW(objRep),
   getOneMW,
   deleteOneMW
 );

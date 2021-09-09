@@ -1,4 +1,4 @@
-module.exports = (objRep) => {
+module.exports = () => {
   return async (req, res, next) => {
     if (typeof req.body.caption == 'undefined') {
       return res.status(400).json({

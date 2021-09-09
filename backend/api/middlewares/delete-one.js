@@ -1,4 +1,4 @@
-module.exports = (objRep) => {
+module.exports = () => {
   return async (req, res, next) => {
     const Model = res.locals.Model;
     try {
