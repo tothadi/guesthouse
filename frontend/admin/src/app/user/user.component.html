@@ -1,1 +1,35 @@
-<p>user works!</p>
+<h2>Adminisztrátori profil</h2>
+<form class="form-group" (submit)="saveChanges()" id="profile">
+    <div class="row" *ngFor="let item of properties; index as i">
+        <mat-form-field *ngIf="item.key.split('_')[0] === 'array'; else otherProps" class="key" appearance="outline">
+            <mat-label>{{item.key.split('_')[1]}}</mat-label>
+            <mat-chip-list #roleList>
+                <mat-chip *ngFor="let arrayItem of item.value | ArrayPipe; index as a" selectable
+                    [removable]="removable" (removed)="removeRole(a)" (click)="throwRoleError()">
+                    {{arrayItem}}
+                    <mat-icon *ngIf="removable" matChipRemove>
+                        cancel
+                    </mat-icon>
+                </mat-chip>
+                <input placeholder="Új..." [matChipInputFor]="roleList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+        </mat-form-field>
+        <ng-template #otherProps>
+            <mat-form-field class="key" appearance="outline" >
+                <mat-label>{{item.key.split('_')[1]}}</mat-label>
+                <input class="form-control" matInput required [value]="item.value" [name]="item.key"
+                    [(ngModel)]="item.value">
+            </mat-form-field>
+        </ng-template>
+    </div>
+
+
+    <mat-error *ngIf="roleError.length">{{roleError}}</mat-error>
+    <div id="cancel-save">
+        <button mat-raised-button [disabled]="modified" color="primary" type="submit">Mentés</button>
+        <button mat-raised-button [disabled]="modified" color="warn" type="button" (click)="cancelChanges()">Módosítások
+            elvetése</button>
+    </div>
+</form>

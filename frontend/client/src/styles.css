@@ -51,6 +51,17 @@ a {
   text-decoration: none;
 }
 
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.szep {
+  margin-top: 1rem;
+  max-width: 90%;
+}
+
 app-root {
   position: relative;
   display: flex;

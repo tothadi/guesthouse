@@ -1,14 +1,17 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+
+import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatChipsModule } from '@angular/material/chips';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -22,6 +25,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { UserComponent } from './user/user.component';
 import { SettingsComponent } from './settings/settings.component';
 import { PagesModule } from './pages/pages.module';
+import { ArrayPipe } from './user/array.pipe';
 
 @NgModule({
   declarations: [
@@ -32,6 +36,7 @@ import { PagesModule } from './pages/pages.module';
     SidebarComponent,
     UserComponent,
     SettingsComponent,
+    ArrayPipe,
   ],
   imports: [
     AuthModule,
@@ -44,21 +49,19 @@ import { PagesModule } from './pages/pages.module';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
+    MatIconModule,
     MatButtonModule,
+    MatChipsModule,
     MatToolbarModule,
     FontAwesomeModule,
-    PagesModule
+    PagesModule,
   ],
-  providers: [
-    Title
-  ],
-  exports: [
-    
-  ],
+  providers: [Title],
+  exports: [],
   schemas: [
     //NO_ERRORS_SCHEMA,
-    CUSTOM_ELEMENTS_SCHEMA
+    CUSTOM_ELEMENTS_SCHEMA,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

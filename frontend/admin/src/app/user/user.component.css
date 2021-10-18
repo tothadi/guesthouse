@@ -1,0 +1,24 @@
+h2 {
+    margin-bottom: 2rem;
+}
+
+#profile {
+    width: 80%;
+}
+
+.hide {
+    display: none;
+}
+
+.key {
+    width: 100%;
+}
+
+#cancel-save {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+
