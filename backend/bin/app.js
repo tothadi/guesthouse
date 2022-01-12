@@ -1,6 +1,6 @@
-//if (process.env.NODE_ENV === 'development') {
-require('../config/config');
-//}
+if (process.env.NODE_ENV === 'development') {
+    require('../config/config');
+}
 const express = require('express');
 const { join } = require('path');
 const { GridFSBucket } = require('mongodb');

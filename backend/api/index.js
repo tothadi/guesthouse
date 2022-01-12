@@ -95,7 +95,7 @@ module.exports = function (app, { bucket }) {
    */
   app.put(
     '/api/:model/add-pics/:id',
-    //auth,
+    auth,
     isValidRouteMW(objRep),
     getOneMW,
     upload.array('pics'),
