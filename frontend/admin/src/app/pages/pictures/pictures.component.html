@@ -5,7 +5,7 @@
     </a>
     <div id="pics" [ngClass]="{picsFull: fullScreen}">
         <figure *ngFor="let pic of doc['Képek']; index as i" id="picwrap">
-            <img [src]="pic.imgSrc" alt="{{doc.title}} - {{i+1}}" (load)="setToggle()" />
+            <img src="image/{{pic.fileName}}" alt="{{doc.title}} - {{i+1}}" (load)="setToggle()" />
             <a #pics [style.top.px]="currentPicPos.top" [style.right.px]="currentPicPos.right" class="toggle"
                 (click)="toggleFullScreen()" [ngClass]="{fullToggle: fullScreen}">
                 <fa-icon [icon]="expandClose"></fa-icon>

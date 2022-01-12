@@ -56,8 +56,6 @@ export interface Section {
 
 export interface Picture {
   caption?: string;
-  data: Buffer;
-  contentType: string;
-  imgSrc: string;
+  fileName: string;
   _id: string;
 }

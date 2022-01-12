@@ -1,8 +1,10 @@
 import {
   ChangeDetectorRef,
   Component,
+  ComponentRef,
   HostListener,
   OnInit,
+  ViewChild,
 } from '@angular/core';
 import { Buffer } from 'buffer';
 import { FormControl } from '@angular/forms';
@@ -26,6 +28,7 @@ import {
 } from './definitions/common.interfaces';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { PicturesComponent } from './pictures/pictures.component';
 
 @Component({
   selector: 'app-pages',
@@ -33,6 +36,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./pages.component.css'],
 })
 export class PagesComponent implements OnInit {
+  @ViewChild('pictures') private pictures!: PicturesComponent;
+
   objectKeys = Object.keys;
   loaded = false;
   floatLabelControl = new FormControl('always');
@@ -72,16 +77,6 @@ export class PagesComponent implements OnInit {
     return icon({ prefix: 'fas', iconName: name as IconName });
   }
 
-  setPics(doc: any): ModelType {
-    doc['Képek'] = doc['Képek'].map((p: any) => {
-      p.imgSrc = `data:${p.contentType};base64,${Buffer.from(p.data).toString(
-        'base64'
-      )}`;
-      return p;
-    });
-    return doc;
-  }
-
   setWidth() {
     this.cd.detectChanges();
     if (this.docs.length) {
@@ -94,41 +89,36 @@ export class PagesComponent implements OnInit {
   }
 
   getAllDocs(result?: any) {
-      this.pageService.getAll(this.page.api).then(
-        (docs) => {
-          if (!docs?.length) {
-            this.mock = new this.page.Mock(this.docs.length + 1);
-            this.loaded = true;
-            this.setWidth();
-            return;
-          }
-          this.docs = docs.map((c) => new this.page.Model(c));
-          this.docs.sort((a, b) => a[this.page.sort] - b[this.page.sort]);
+    this.pageService.getAll(this.page.api).then(
+      (docs) => {
+        if (!docs?.length) {
           this.mock = new this.page.Mock(this.docs.length + 1);
-          this.keys = Object.keys(this.docs[0]);
-          this.toHide = this.keys.includes('Link')
-            ? this.keys.includes('ssz.')
-              ? 3
-              : 2
-            : this.keys.includes('ssz.')
+          this.loaded = true;
+          this.setWidth();
+          return;
+        }
+        this.docs = docs.map((c) => new this.page.Model(c));
+        this.docs.sort((a, b) => a[this.page.sort] - b[this.page.sort]);
+        this.mock = new this.page.Mock(this.docs.length + 1);
+        this.keys = Object.keys(this.docs[0]);
+        this.toHide = this.keys.includes('Link')
+          ? this.keys.includes('ssz.')
+            ? 3
+            : 2
+          : this.keys.includes('ssz.')
             ? 2
             : 1;
 
-          if (this.keys.includes('Képek')) {
-            this.docs = this.docs.map((doc) => {
-              return this.setPics(doc);
-            });
-          }
-          this.loaded = true;
-          this.setWidth();
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
-      if (typeof result != 'undefined') {
-        console.log(result);
+        this.loaded = true;
+        this.setWidth();
+      },
+      (err) => {
+        console.log(err);
       }
+    );
+    if (typeof result != 'undefined') {
+      console.log(result);
+    }
   }
 
   openDialog(doc: ModelType) {
@@ -226,6 +216,7 @@ export class PagesComponent implements OnInit {
         return this.pageService.delete(this.page.api, data._id).then(
           (result) => {
             this.getAllDocs(result);
+            this.reloadPics()
           },
           (err) => {
             console.log(err);
@@ -238,26 +229,14 @@ export class PagesComponent implements OnInit {
     );
   }
 
+  public reloadPics() {
+    this.getAllDocs();
+    this.cd.detectChanges();
+  }
+
   descOrder = (a: any, b: any) => {
     if (a.key < b.key) return b.key;
   };
-
-  onDocUpdate(docID: string) {
-    this.app.first = false;
-    this.pageService.getOne(this.page.api, docID).then(
-      (doc) => {
-        this.docs = this.docs.map((d) => {
-          if (d._id === docID) {
-            return this.setPics(new this.page.Model(doc));
-          }
-          return d;
-        });
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-  }
 
   ngOnInit(): void {
     this.route.url.subscribe((url) => {

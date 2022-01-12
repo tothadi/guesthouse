@@ -27,7 +27,7 @@
                         {{section.paragraphs.length}} bekezdéssel</p>
                 </div>
                 <ng-template #thenBlock1>
-                    <app-pictures [doc]="doc" [page]="page" class="img-wrapper" (docUpdate)="onDocUpdate($event)"
+                    <app-pictures [doc]="doc" [page]="page" class="img-wrapper" #pictures
                         *ngIf="item.key === 'Képek' && loaded; else thenBlock2">
                     </app-pictures>
                     <ng-template #thenBlock2>

@@ -1,11 +1,3 @@
-if (process.env.NODE_ENV === 'development') {
-    require('../config/config');
-}
-
-const { client, admin } = require('./app');
-const clientPort = normalizePort(process.env.CLIENT_PORT || '3000');
-const adminPort = normalizePort(process.env.ADMIN_PORT || '5000');
-
 function normalizePort(val) {
     const port = parseInt(val, 10);
 
@@ -22,9 +14,10 @@ function normalizePort(val) {
     return false;
 }
 
-function server(app, port) {
+module.exports = function(app, user) {
     const debug = require('debug')('guesthouse:server');
     const http = require('http');
+    const port = user === 'client' ? normalizePort(process.env.CLIENT_PORT || '3000') : normalizePort(process.env.ADMIN_PORT || '5000');
 
     app.set('port', port);
 
@@ -67,8 +60,5 @@ function server(app, port) {
         debug('Listening on ' + bind);
     }
 }
-
-server(client, clientPort);
-server(admin, adminPort);
 
 

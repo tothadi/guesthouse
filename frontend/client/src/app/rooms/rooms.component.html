@@ -11,7 +11,7 @@
     </a>
     <div *ngIf="loaded" id="roomPics" >
         <figure *ngFor="let pic of room?.pics; index as i" id="picwrap">
-            <img  [src]="pic.imgSrc" alt="{{room?.title}} - {{i+1}}" (load)="setToggle()" />
+            <img  src="image/{{pic.fileName}}" alt="{{room?.title}} - {{i+1}}" (load)="setToggle()" />
             <a #pics *ngIf="loaded" [style.top.px]="currentPicPos.top" [style.right.px]="currentPicPos.right" class="toggle"
                 (click)="toggleFullScreen()">
                 <fa-icon [icon]="expandClose"></fa-icon>

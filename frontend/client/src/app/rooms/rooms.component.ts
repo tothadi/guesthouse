@@ -60,10 +60,6 @@ export class RoomsComponent implements OnInit {
     this.setToggle();
   }
 
-  convertPic(pic: Buffer) {
-    return pic.toString('base64');
-  }
-
   prevPic() {
     const last = this.room?.pics!.pop();
     this.room?.pics!.unshift(last!);
@@ -93,16 +89,16 @@ export class RoomsComponent implements OnInit {
 
   getRooms() {
     this.Backend.getRooms().subscribe(
-      (rooms) => {
+      (rooms: any) => {
         this.rooms = rooms;
         const roomName =
-          this.location.path().split('/')[2] || this.rooms[0].link;
+          this.location.path().split('/')[2] || this.rooms![0].link;
         this.router.navigateByUrl(`szobak/${roomName}`);
         this.filterRoom(roomName);
         this.loaded = true;
         this.setToggle();
       },
-      (err) => {
+      (err: any) => {
         console.error(err.message);
       }
     );
@@ -110,19 +106,13 @@ export class RoomsComponent implements OnInit {
 
   filterRoom(roomName: string) {
     this.room = this.rooms!.filter((r: Room) => r.link === roomName)[0];
-    this.room.pics = this.room.pics!.map((p) => {
-      p.imgSrc = `data:${p.contentType};base64,${Buffer.from(
-        p.data
-      ).toString('base64')}`;
-      return p;
-    });
     this.multiplePics = this.room!.pics!.length > 1;
   }
 
   ngOnInit(): void {
     this.getRooms();
 
-    this.router.events.subscribe((event) => {
+    this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationEnd && event.urlAfterRedirects) {
         const url = event.urlAfterRedirects.split('/');
         if (url[1] == 'szobak' && url[2]) {

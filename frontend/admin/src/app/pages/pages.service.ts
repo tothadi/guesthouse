@@ -115,10 +115,10 @@ export class PageService {
         .get<any[]>(`/api/all-${api}`)
         .toPromise()
         .then(
-          (item) => {
+          (item:any) => {
             resolve(item);
           },
-          (err) => {
+          (err:any) => {
             reject(err);
           }
         );
@@ -131,10 +131,10 @@ export class PageService {
         .get<any>(`/api/one-${api}/${id}`)
         .toPromise()
         .then(
-          (item) => {
+          (item:any) => {
             resolve(item);
           },
-          (err) => {
+          (err:any) => {
             reject(err);
           }
         );
@@ -147,10 +147,10 @@ export class PageService {
         .patch<any[]>(`/api/update-${api}/${model._id}`, model)
         .toPromise()
         .then(
-          (item) => {
+          (item:any) => {
             resolve(item);
           },
-          (err) => {
+          (err:any) => {
             reject(err);
           }
         );
@@ -169,10 +169,10 @@ export class PageService {
         })
         .toPromise()
         .then(
-          (item) => {
+          (item:any) => {
             resolve(item);
           },
-          (err) => {
+          (err:any) => {
             reject(err);
           }
         );
@@ -185,10 +185,10 @@ export class PageService {
         .put<any>(`/api/new-${api}`, item)
         .toPromise()
         .then(
-          (item) => {
+          (item:any) => {
             resolve(item);
           },
-          (err) => {
+          (err:any) => {
             reject(err);
           }
         );
@@ -201,10 +201,10 @@ export class PageService {
         .delete<any>(`/api/delete-${api}/${id}`)
         .toPromise()
         .then(
-          (item) => {
+          (item:any) => {
             resolve(item);
           },
-          (err) => {
+          (err:any) => {
             reject(err);
           }
         );
@@ -218,10 +218,10 @@ export class PageService {
         .delete<any>(`/api/${api}/rm-pics/${docId}/${picId}`)
         .toPromise()
         .then(
-          (doc) => {
+          (doc:any) => {
             resolve({doc, picId});
           },
-          (err) => {
+          (err:any) => {
             reject(err);
           }
         );
@@ -259,7 +259,7 @@ export class PageService {
       // send the http-request and subscribe for progress-updates
 
       const startTime = new Date().getTime();
-      this.http.request(req).subscribe((event) => {
+      this.http.request(req).subscribe((event:any) => {
         if (event.type === HttpEventType.UploadProgress && event.total) {
           // calculate the progress percentage
 

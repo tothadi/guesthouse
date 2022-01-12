@@ -1,3 +1,4 @@
+const { MongoClient, ObjectId, GridFSBucket } = require('mongodb');
 const Mongoose = require('mongoose');
 const dbURI = process.env.DB_HOST;
 const options = {
@@ -8,15 +9,18 @@ const options = {
   keepAlive: true,
 };
 
-async function main() {
+let bucket;
+
+module.exports = async function() {
   try {
     const db = await Mongoose.connect(dbURI, options);
+    const fileDB = await (await MongoClient.connect(dbURI)).db('images');
     console.log('DB server connect');
+    return fileDB;
   } catch (err) {
     console.error(err.message);
   }
 }
-main().catch(console.dir);
 
 /*
 function connectMongoose() {

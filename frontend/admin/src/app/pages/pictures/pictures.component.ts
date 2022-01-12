@@ -17,6 +17,7 @@ import { icon, IconName, library } from '@fortawesome/fontawesome-svg-core';
 import { fas, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { AppComponent } from 'src/app/app.component';
 import { Page } from '../definitions/common.interfaces';
+import { PagesComponent } from '../pages.component';
 import { PageService } from '../pages.service';
 import { UploadComponent } from '../upload/upload.component';
 
@@ -55,7 +56,8 @@ export class PicturesComponent implements OnChanges {
     private cd: ChangeDetectorRef,
     private dialog: MatDialog,
     private app: AppComponent,
-    private pageService: PageService
+    private pageService: PageService,
+    private pagesComponent: PagesComponent,
   ) {
     library.add(fas);
     this.expandClose = this.setIcon('expand');
@@ -117,11 +119,12 @@ export class PicturesComponent implements OnChanges {
     });
 
     uploadDialog.afterClosed().subscribe(
-      (data) => {
+      (data: any) => {
         this.docEmitter.emit(this.doc._id);
         this.app.blur = '';
+        this.pagesComponent.reloadPics();
       },
-      (err) => {
+      (err: any) => {
         console.log(err.message);
       }
     );
@@ -150,11 +153,12 @@ export class PicturesComponent implements OnChanges {
   deletePicture(confirm: boolean) {
     if (confirm) {
       this.pageService
-        .deletePic(this.page.api, this.doc._id, this.doc['Képek'][0]._id)
+        .deletePic(this.page.api, this.doc._id, this.doc['Képek'][0].fileName)
         .then(
           (result) => {
             this.docEmitter.emit(this.doc._id);
             this.confirm = false;
+            this.pagesComponent.reloadPics();
           },
           (err) => {
             console.log(err);
@@ -164,8 +168,8 @@ export class PicturesComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-     if (!this.app.first) {
-       this.toggleFullScreen();
-     }
+    if (!this.app.first) {
+      this.toggleFullScreen();
+    }
   }
 }
