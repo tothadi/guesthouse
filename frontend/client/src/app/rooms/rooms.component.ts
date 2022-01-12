@@ -90,7 +90,7 @@ export class RoomsComponent implements OnInit {
   getRooms() {
     this.Backend.getRooms().subscribe(
       (rooms: any) => {
-        this.rooms = rooms;
+        this.rooms = rooms.sort((a: any, b: any) => a.order - b.order);
         const roomName =
           this.location.path().split('/')[2] || this.rooms![0].link;
         this.router.navigateByUrl(`szobak/${roomName}`);
