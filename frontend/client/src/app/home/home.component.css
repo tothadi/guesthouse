@@ -56,3 +56,25 @@ p {
     margin-bottom: .5rem;
     text-align: justify;
 }
+
+#szepek {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+}
+
+#cards {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+.szep {
+    height: 180px;
+    width: 300px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(50, 50, 50, 0.6);
+}
