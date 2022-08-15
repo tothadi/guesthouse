@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from  '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { Contact, Greet, Room } from './backend.interfaces';
+import { Contact, Greet, Reservation, Room } from './backend.interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +21,10 @@ export class BackendService {
 
   public getRooms(): Observable<Room[]> {
     return this.http.get<Room[]>('/api/all-rooms');
+  }
+
+  public reserve(reservation: Reservation): Observable<Boolean> {
+    return this.http.put<Boolean>('/api/new-reservations', reservation);
   }
 
 }

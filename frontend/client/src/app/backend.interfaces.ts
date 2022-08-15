@@ -32,3 +32,14 @@ export interface Room {
   link: string;
   pics?: Pictures[];
 }
+
+export interface Reservation {
+  confirmed?: Date;
+  name: string;
+  phone: string;
+  email: string;
+  comment: string;
+  arrivalAt: Date;
+  leaveAt: Date;
+  _id?: string;
+}

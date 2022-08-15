@@ -1,6 +1,6 @@
 module.exports = () => {
     return (req, res, next) => {
-        if (typeof req.body == 'undefined') {
+        if (typeof req.body === 'undefined') {
             return res.status(400).json({ error: 'Request data missing.' });
         }
         delete req.body._id;

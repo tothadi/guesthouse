@@ -3,6 +3,9 @@
 # compiled output
 *dist
 
+.env
+nodemon.json
+
 #angular cache
 *.angular
 

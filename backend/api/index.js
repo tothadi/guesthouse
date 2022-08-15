@@ -28,9 +28,9 @@ module.exports = function (app, { bucket }) {
       'greet': Greet,
       'pictures': Pictures,
       'rooms': Rooms,
+      'reservations': Reservations,
     },
     Restricted: {
-      'reservations': Reservations,
       'user': User,
     }
   }
@@ -79,7 +79,7 @@ module.exports = function (app, { bucket }) {
    */
   app.put(
     '/api/new-:model',
-    auth,
+    auth.unless((req, res, next) => req.params.model=== 'reservations'),
     isValidRouteMW(objRep),
     createMW(objRep),
     saveMW
