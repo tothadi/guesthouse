@@ -1,4 +1,4 @@
-FROM node:14.17.3
+FROM node:18-alpine
 WORKDIR '/usr/src/app'
 
 COPY backend ./backend
