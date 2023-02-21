@@ -1,10 +1,10 @@
 cd frontend/client
-npm i
+npm i --legacy-peer-deps
 npm run build:app
 cd ..
 
 cd admin
-npm i
+npm i --legacy-peer-deps
 npm run build:app
 cd ..
 
