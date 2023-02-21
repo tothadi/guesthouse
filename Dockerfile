@@ -7,6 +7,7 @@ COPY ./build.sh ./
 RUN chmod +x ./build.sh
 RUN ./build.sh
 
+
 WORKDIR '/usr/src/app/backend'
 
 CMD [ "npm", "start" ]
