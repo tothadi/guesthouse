@@ -19,4 +19,3 @@ jobs:
           registry: docker.pkg.github.com
           repository: ${{ secrets.REPO_NAME }}/guesthouse
           tag_with_sha: true
-          tags: ${{ secrets.REPO_NAME }}/guesthouse:latest
