@@ -1,4 +1,4 @@
-name: Publish to Docker
+name: Publish to GHCR
 on:
   push:
     branches:
@@ -17,5 +17,5 @@ jobs:
           username: ${{ secrets.REPO_NAME }}
           password: ${{ secrets.GHCR_PAT }}
           registry: docker.pkg.github.com
-          repository: ${{ setcerts.REPO_NAME }}/publish-packages/guesthouse
+          repository: ${{ secrets.REPO_NAME }}/publish-packages/guesthouse
           tag_with_sha: true
