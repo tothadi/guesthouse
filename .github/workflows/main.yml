@@ -18,7 +18,6 @@ jobs:
           username: ${{ secrets.REPO_NAME }}
           password: ${{ secrets.GHCR_PAT }}
           registry: docker.pkg.github.com
-          context: ./
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.REPO_NAME }}/guesthouse:latest
