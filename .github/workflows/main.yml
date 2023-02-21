@@ -17,5 +17,6 @@ jobs:
           username: ${{ secrets.REPO_NAME }}
           password: ${{ secrets.GHCR_PAT }}
           registry: docker.pkg.github.com
-          repository: ${{ secrets.REPO_NAME }}/publish-packages/guesthouse
+          repository: ${{ secrets.REPO_NAME }}/guesthouse
           tag_with_sha: true
+          tags: ${{ secrets.REPO_NAME }}/guesthouse:latest
