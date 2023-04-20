@@ -1,66 +1,184 @@
 <div id="container">
-    <h1>Foglalás</h1>
-    <div *ngIf="submitted; then thenBlock else elseBlock"></div>
+  <h1>Foglalás</h1>
+  <div *ngIf="submitted; then thenBlock; else elseBlock"></div>
 
-    <ng-template #thenBlock>
-        <div id="screen">
-            <dialog [ngClass]="{
-                'message-sent': status === 2,
-                'message-not-sent': status === 3,
-                '': status === 1
-              }" open>{{sent}}</dialog>
+  <ng-template #thenBlock>
+    <div id="screen">
+      <dialog
+        [ngClass]="{
+          'message-sent': status === 2,
+          'message-not-sent': status === 3,
+          '': status === 1
+        }"
+        open
+      >
+        {{ sent }}
+      </dialog>
+    </div>
+  </ng-template>
+
+  <ng-template #elseBlock>
+    <form (ngSubmit)="submit()">
+      <div class="form-group">
+        <label
+          for="name"
+          [ngClass]="{ focused: focused === 'name' }"
+          *ngIf="focused === 'name' || name.length > 0"
+          >Név</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          required
+          [(ngModel)]="name"
+          minlength="5"
+          name="name"
+          #nameInput="ngModel"
+          [placeholder]="focused !== 'name' ? 'Név' : ''"
+          (focus)="changeFocus('name')"
+          (blur)="blur()"
+        />
+        <div
+          class="help error"
+          style="color: red"
+          *ngIf="nameInput.invalid && nameInput.dirty"
+        >
+          Túl rövid név. Kérlek, legalább 5 karaktert adj meg.
         </div>
-    </ng-template>
+      </div>
 
-    <ng-template #elseBlock>
-        <form (ngSubmit)="submit()">
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" required [(ngModel)]="name" minlength="3" name="name"
-                    placeholder="your name" #nameInput="ngModel">
-                <div class="help error" *ngIf="nameInput.invalid && nameInput.dirty">
-                    You have to provide a name at least 3 characters long.
-                </div>
-            </div>
+      <div class="form-group">
+        <label
+          for="email"
+          [ngClass]="{ focused: focused === 'email' }"
+          *ngIf="focused === 'email' || email.length > 0"
+          >Email cím</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="email"
+          required
+          [(ngModel)]="email"
+          email
+          name="email"
+          #emailInput="ngModel"
+          [placeholder]="focused !== 'email' ? 'Email cím' : ''"
+          (focus)="changeFocus('email')"
+          (blur)="blur()"
+        />
+        <div
+          class="help error"
+          style="color: red"
+          *ngIf="(emailInput.invalid || testEmail()) && emailInput.dirty"
+        >
+          Az email-cím formátuma nem megfelelő.
+        </div>
+      </div>
 
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="text" class="form-control" id="email" required [(ngModel)]="email" email name="email"
-                    placeholder="your email address" #emailInput="ngModel">
-                <div class="help error" *ngIf="emailInput.invalid && emailInput.dirty">
-                    You have to provide a valid email address.
-                </div>
-            </div>
+      <div class="form-group">
+        <label
+          for="phone"
+          [ngClass]="{ focused: focused === 'phone' }"
+          *ngIf="focused === 'phone' || phone.length > 0"
+          >Telefonszám</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="phone"
+          required
+          [(ngModel)]="phone"
+          name="phone"
+          #phoneInput="ngModel"
+          [placeholder]="focused !== 'phone' ? 'Telefonszám' : ''"
+          (focus)="changeFocus('phone')"
+          (blur)="blur()"
+        />
+        <div
+          class="help error"
+          style="color: red"
+          *ngIf="testPhone() && phoneInput.dirty"
+        >
+          Az telefonszám formátuma nem megfelelő. Kérjük így adja meg:
+          +36301112222.
+        </div>
+      </div>
 
-            <div class="form-group">
-                <label for="phone">Telefonszám</label>
-                <input type="tel" class="form-control" id="phone" required [(ngModel)]="phone" name="phone"
-                    placeholder="your phone number" #phoneInput="ngModel">
-                <div class="help error" *ngIf="phoneInput.invalid && phoneInput.dirty">
-                    You have to provide a valid phone number.
-                </div>
-            </div>
+      <div class="form-group">
+        <label
+          for="comment"
+          [ngClass]="{ focused: focused === 'comment' }"
+          *ngIf="focused === 'comment' || comment.length > 0"
+          >Megjegyzés</label
+        >
+        <textarea
+          class="textarea form-control"
+          id="comment"
+          [(ngModel)]="comment"
+          name="comment"
+          #commentInput="ngModel"
+          [placeholder]="focused !== 'comment' ? 'Megjegyzés' : ''"
+          (focus)="changeFocus('comment')"
+          (blur)="blur()"
+        ></textarea>
+      </div>
 
-            <div class="form-group">
-                <label for="comment">comment</label>
-                <textarea class="textarea form-control" id="comment" [(ngModel)]="comment"
-                    name="comment" placeholder="Please type in your comment" #commentInput="ngModel"></textarea>
-            </div>
+      <div class="form-group">
+        <label for="arrivalAt" [ngClass]="{ focused: focused === 'arrival' }"
+          >Érkezés</label
+        >
+        <input
+          type="date"
+          class="form-control"
+          id="arrivalAt"
+          label="Érkezés"
+          required
+          [ngModel]="arrivalAt | date : 'yyyy-MM-dd'"
+          (ngModelChange)="arrivalAt = $event"
+          name="arrivalAt"
+          #arrivalAtInput="ngModel"
+          (focus)="changeFocus('arrival')"
+          (blur)="blur()"
+        />
+      </div>
 
-            <div class="form-group">
-                <label for="arrivalAt">Érkezés</label>
-                <input type="date" class="form-control" id="arrivalAt" required [(ngModel)]="arrivalAt" name="arrivalAt" #arrivalAtInput="ngModel">
-            </div>
+      <div class="form-group">
+        <label for="leaveAt" [ngClass]="{ focused: focused === 'leave' }"
+          >Távozás</label
+        >
+        <input
+          type="date"
+          class="form-control"
+          id="leaveAt"
+          value="1999-04-23"
+          required
+          [ngModel]="leaveAt | date : 'yyyy-MM-dd'"
+          (ngModelChange)="leaveAt = $event"
+          name="leaveAt"
+          #leaveAtInput="ngModel"
+          (focus)="changeFocus('leave')"
+          (blur)="blur()"
+        />
+      </div>
 
-            <div class="form-group">
-                <label for="leaveAt">Távozás</label>
-                <input type="date" class="form-control" id="leaveAt" required [(ngModel)]="leaveAt" name="leaveAt" #leaveAtInput="ngModel">
-            </div>
-
-            <div id="sending">
-                <button type="submit" class="btn btn-success"
-                    [disabled]="nameInput.invalid || emailInput.invalid || phoneInput.invalid || arrivalAtInput.invalid || leaveAtInput.invalid || submitted">Send</button>
-            </div>
-        </form>
-    </ng-template>
+      <div id="sending">
+        <button
+          type="submit"
+          class="btn btn-success"
+          [disabled]="
+            nameInput.invalid ||
+            emailInput.invalid ||
+            phoneInput.invalid ||
+            arrivalAtInput.invalid ||
+            leaveAtInput.invalid ||
+            submitted
+          "
+        >
+          Foglalás
+        </button>
+      </div>
+    </form>
+  </ng-template>
 </div>

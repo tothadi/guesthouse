@@ -4,6 +4,10 @@ const { GridFSBucket } = require('mongodb');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const passport = require('passport');
+const { config } = require('dotenv');
+
+config();
+
 const db = require('../api/db/db');
 const startServer = require('./startServer');
 

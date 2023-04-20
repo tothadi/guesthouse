@@ -10,6 +10,13 @@ const auth = jwt({
   userProperty: 'payload',
 });
 
+const parseLinkToken = jwt({
+  secret: process.env.JWT_SECRET,
+  algorithms: ['RS256', 'HS256'],
+  requestProperty: 'newReservation',
+  getToken: (req) => req.query.payload
+});
+
 const Actualities = mongoose.model('Actualities');
 const Contact = mongoose.model('Contact');
 const Greet = mongoose.model('Greet');
@@ -84,6 +91,14 @@ module.exports = function (app, { bucket }) {
     createMW(objRep),
     saveMW
   );
+
+  app.get(
+    '/api/:model/confirmation',
+    parseLinkToken,
+    isValidRouteMW(objRep),
+    createMW(objRep),
+    saveMW
+  )
 
   app.use(
     '/image/:fileName',

@@ -12,6 +12,7 @@ export class ReservationComponent implements OnInit {
   phone: string = "";
   email: string = "";
   comment: string = "";
+  focused: string = "";
   arrivalAt: Date = new Date();
   leaveAt: Date = new Date();
   sent_1 = "Foglalás folyamatban...";
@@ -23,7 +24,25 @@ export class ReservationComponent implements OnInit {
 
   constructor(private backend: BackendService) {
     this.arrivalAt.setDate(this.arrivalAt.getDate() + 7);
-    this.leaveAt.setDate(this.leaveAt.getDate() + 8);
+    this.leaveAt.setDate(this.leaveAt.getDate() + 8)
+  }
+
+  changeFocus(input?: string) {
+    if (input) {
+      this.focused = input;
+    }
+  }
+
+  blur() {
+    this.focused = '';
+  }
+
+  testEmail() {
+    return !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(this.email)
+  }
+
+  testPhone() {
+    return !/^\++[0-9]{10,11}$/i.test(this.phone)
   }
 
   submit() {
