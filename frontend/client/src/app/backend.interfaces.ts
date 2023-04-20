@@ -34,7 +34,7 @@ export interface Room {
 }
 
 export interface Reservation {
-  confirmed?: Date;
+  status: string;
   name: string;
   phone: string;
   email: string;

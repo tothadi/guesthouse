@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 
 const ReservationsSchema = new mongoose.Schema({
-  confirmed: { type: Boolean, default: false },
+  status: { type: String, default: 'pending', enum: ['pending', 'confirmed'] },
   name: { type: String, required: true },
   phone: { type: String, required: true },
   email: { type: String, required: true },

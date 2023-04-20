@@ -6,9 +6,10 @@ module.exports = () => {
       const doc = await res.locals.newModel.save();
 
       if (req.params.model === 'reservations') {
-        const emailResult = await sendEmail(doc.email, doc.name, 'savedReservation');
-        // TODO: handle errors
-        return res.status(200).json({...doc, emailResult: { success: true } });
+        const confirmResult = await sendEmail(doc.email, doc.name, 'savedReservation', doc);
+        const notificationResult = await sendEmail(process.env.MAILER_REPLY_TO, 'doc.name', 'reservationNotification', doc);
+        console.log(notificationResult);
+        return res.status(200).json({...doc, emailResult: { success: confirmResult.accepted.length > 0 } });
       }
 
       return res.json(doc);

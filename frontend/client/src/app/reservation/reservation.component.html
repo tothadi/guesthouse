@@ -135,8 +135,10 @@
           id="arrivalAt"
           label="Érkezés"
           required
+          [min]="minDateArrival.toISOString().split('T')[0]"
           [ngModel]="arrivalAt | date : 'yyyy-MM-dd'"
           (ngModelChange)="arrivalAt = $event"
+          (change)="arrivalChange($event, leaveInput)"
           name="arrivalAt"
           #arrivalAtInput="ngModel"
           (focus)="changeFocus('arrival')"
@@ -152,11 +154,12 @@
           type="date"
           class="form-control"
           id="leaveAt"
-          value="1999-04-23"
+          [min]="minDateLeave.toISOString().split('T')[0]"
           required
           [ngModel]="leaveAt | date : 'yyyy-MM-dd'"
           (ngModelChange)="leaveAt = $event"
           name="leaveAt"
+          #leaveInput
           #leaveAtInput="ngModel"
           (focus)="changeFocus('leave')"
           (blur)="blur()"

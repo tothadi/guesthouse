@@ -1,12 +1,46 @@
+#container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+#success {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+
 h1 {
 	margin-bottom: 3rem;
 	text-align: center;
 }
 
-table {
-	min-width: 60%;
+h3 {
+	margin-bottom: 2rem;
+	text-align: center;
 }
 
-tr:first-child {
-	margin-right: 10px;
+table {
+	width: 50%;
+}
+
+@media only screen and (max-width: 600px) {
+    table {
+        width: 90%;
+    }
+}
+
+tr {
+	margin-bottom: 1rem;
+}
+
+td {
+	width: 50%;
 }

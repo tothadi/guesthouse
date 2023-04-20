@@ -12,6 +12,7 @@ export class ConfirmationComponent implements OnInit {
   status = "none";
   reservation: Reservation = {
     _id: '',
+    status: '',
     name: '',
     email: '',
     phone: '',
