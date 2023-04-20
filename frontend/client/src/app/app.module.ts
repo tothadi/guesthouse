@@ -15,6 +15,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ContactComponent } from './contact/contact.component';
 import { ReservationComponent } from './reservation/reservation.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { HttpClientModule } from '@angular/common/http';
     MenuComponent,
     FooterComponent,
     ContactComponent,
-    ReservationComponent
+    ReservationComponent,
+    ConfirmationComponent
   ],
   imports: [
     AppRoutingModule,

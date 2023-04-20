@@ -27,6 +27,12 @@ function createHtml(name, type, link) {
             <a href="${link}" style="text-decoration: none;">Megerősítem</a>
             <br/>
             <br/>
+        `,
+        savedReservation: `
+            <p>Foglalását mentettük!</p>
+            <p>Hamarosan felvesszük Önnel a kapcsolatot.</p>
+            <br/>
+            <br/>
         `
     }
 

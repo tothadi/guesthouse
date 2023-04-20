@@ -21,7 +21,7 @@ module.exports = () => {
             const tempReservation = new Model(body);
             const jwt = tempReservation.generateJwt(body);
             const baseUrl = process.env.BASE_URL;
-            const url = `${baseUrl}/api/reservations/confirmation?payload=${jwt}`;
+            const url = `${baseUrl}/megerosites?payload=${jwt}`;
 
             const result = await sendEmail(body.email, body.name, 'confirmReservation', url);
             return res.status(200).json(result);

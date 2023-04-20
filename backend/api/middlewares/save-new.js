@@ -4,11 +4,13 @@ module.exports = () => {
   return async (req, res, next) => {
     try {
       const doc = await res.locals.newModel.save();
-      // TODO: send email about confirmation if model is reservations
-      if (model === 'reservations') {
-        // const emailResult = sendEmail(doc.email, 'confirmReservation', 'https://konczevolgyivendeghaz.hu');
+
+      if (req.params.model === 'reservations') {
+        const emailResult = await sendEmail(doc.email, doc.name, 'savedReservation');
+        // TODO: handle errors
+        return res.status(200).json({...doc, emailResult: { success: true } });
       }
-      
+
       return res.json(doc);
     } catch (err) {
       const status = err.message.includes('validation') ? 400 : 500;

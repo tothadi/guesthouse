@@ -1,0 +1,43 @@
+<div id="container" [ngSwitch]="status">
+	<div *ngSwitchCase="'success'">
+		<h1>Foglalás sikeres.</h1>
+		<h3>Adatok:</h3>
+		<table>
+			<tbody>
+				<tr>
+					<td>Azonosító</td>
+					<td>{{ reservation._id }}</td>
+				</tr>
+				<tr>
+					<td>Név</td>
+					<td>{{ reservation.name }}</td>
+				</tr>
+				<tr>
+					<td>Email</td>
+					<td>{{ reservation.email }}</td>
+				</tr>
+				<tr>
+					<td>Telefonszám</td>
+					<td>{{ reservation.phone }}</td>
+				</tr>
+				<tr>
+					<td>Megjegyzés</td>
+					<td>{{ reservation.comment }}</td>
+				</tr>
+				<tr>
+					<td>Érkezés</td>
+					<td>{{ reservation.arrivalAt | date : 'yyyy. MMM dd.' }}</td>
+				</tr>
+				<tr>
+					<td>Távozás</td>
+					<td>{{ reservation.leaveAt | date : 'yyyy. MMM dd.' }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<h1 *ngSwitchCase="'emailFailed'">Sikeres foglalás, de a megerősítő email küldése sikertelen.</h1>
+	<h1 *ngSwitchCase="'duplicate'">A foglalás már megerősítésre került.</h1>
+	<h1 *ngSwitchCase="'expiry'">Sikertelen foglalás. A megerősítésre rendelkezésre álló 5 perces időkeret lejárt.</h1>
+	<h1 *ngSwitchCase="'fail'">Sikertelen foglalás. Ismeretlen hiba.</h1>
+	<div *ngSwitchDefault><h1>Foglalás megerősítése...</h1><app-loader></app-loader></div>
+</div>

@@ -1,0 +1,12 @@
+h1 {
+	margin-bottom: 3rem;
+	text-align: center;
+}
+
+table {
+	min-width: 60%;
+}
+
+tr:first-child {
+	margin-right: 10px;
+}

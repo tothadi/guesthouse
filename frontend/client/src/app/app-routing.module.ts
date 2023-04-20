@@ -1,40 +1,46 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { ContactComponent } from './contact/contact.component';
-import { HomeComponent } from './home/home.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { ReservationComponent } from './reservation/reservation.component';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { ContactComponent } from "./contact/contact.component";
+import { HomeComponent } from "./home/home.component";
+import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
+import { ReservationComponent } from "./reservation/reservation.component";
+import { ConfirmationComponent } from "./confirmation/confirmation.component";
 
 const routes: Routes = [
   {
-    path: 'kezdolap',
-    component: HomeComponent
+    path: "kezdolap",
+    component: HomeComponent,
   },
   {
-    path: 'szobak',
-    loadChildren: () => import('./rooms/rooms.module').then(m => m.RoomsModule)
+    path: "szobak",
+    loadChildren: () =>
+      import("./rooms/rooms.module").then((m) => m.RoomsModule),
   },
   {
-    path: 'kapcsolat',
-    component: ContactComponent
+    path: "kapcsolat",
+    component: ContactComponent,
   },
   {
-    path: 'foglalas',
-    component: ReservationComponent
+    path: "foglalas",
+    component: ReservationComponent,
   },
   {
-    path: '',
-    redirectTo: '/kezdolap',
-    pathMatch: 'full'
+    path: "megerosites",
+    component: ConfirmationComponent,
   },
-  { 
-    path: '**',
-    component: PageNotFoundComponent 
+  {
+    path: "",
+    redirectTo: "/kezdolap",
+    pathMatch: "full",
+  },
+  {
+    path: "**",
+    component: PageNotFoundComponent,
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

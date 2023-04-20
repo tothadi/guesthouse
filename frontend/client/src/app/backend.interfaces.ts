@@ -43,3 +43,12 @@ export interface Reservation {
   leaveAt: Date;
   _id?: string;
 }
+
+export interface EmailResult {
+  success: boolean;
+}
+
+export interface ReservationResult {
+  _doc: Reservation;
+  emailResult: EmailResult;
+}
