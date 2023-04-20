@@ -39,7 +39,6 @@ export class ReservationComponent implements OnInit {
     }
 
   arrivalChange(event: any, leaveInput: HTMLInputElement) {
-      
       this.minDateLeave.setDate(new Date(event.target.value).getDate() + 1);
       leaveInput.value = this.minDateLeave.toISOString().split('T')[0];
     }
@@ -105,7 +104,6 @@ export class ReservationComponent implements OnInit {
                     this.sent = this.sent_1;
                     this.status = 1;
                 }, 5000);
-                console.log(error);
             }
         );
     }
