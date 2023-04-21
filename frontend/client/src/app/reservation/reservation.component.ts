@@ -8,9 +8,9 @@ import { Reservation } from '../backend.interfaces';
     styleUrls: ['./reservation.component.css'],
 })
 export class ReservationComponent implements OnInit {
-    name: string = 'Tóth Ádám';
-    phone: string = '+36305716323';
-    email: string = 'tothadam.onp@gmail.com';
+    name: string = '';
+    phone: string = '';
+    email: string = '';
     comment: string = '';
     focused: string = '';
     minDateArrival: Date = new Date();
