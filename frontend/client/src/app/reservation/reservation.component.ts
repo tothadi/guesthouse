@@ -38,9 +38,12 @@ export class ReservationComponent implements OnInit {
         }
     }
 
-  arrivalChange(event: any, leaveInput: HTMLInputElement) {
-      this.minDateLeave.setDate(new Date(event.target.value).getDate() + 1);
-      leaveInput.value = this.minDateLeave.toISOString().split('T')[0];
+    arrivalChange(event: any, leaveInput: HTMLInputElement) {
+        const newArrival = new Date(event.target.value);
+        if (newArrival.getTime() >= new Date(leaveInput.value).getTime()) {
+            this.minDateLeave.setDate(newArrival.getDate() + 1);
+            leaveInput.value = this.minDateLeave.toISOString().split('T')[0];
+        }
     }
 
     blur() {
