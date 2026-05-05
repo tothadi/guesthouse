@@ -2,22 +2,20 @@ function normalizePort(val) {
     const port = parseInt(val, 10);
 
     if (isNaN(port)) {
-        // named pipe
         return val;
     }
 
     if (port >= 0) {
-        // port number
         return port;
     }
 
     return false;
 }
 
-module.exports = function(app, user) {
+module.exports = function(app) {
     const debug = require('debug')('guesthouse:server');
     const http = require('http');
-    const port = user === 'client' ? normalizePort(process.env.CLIENT_PORT || '3000') : normalizePort(process.env.ADMIN_PORT || '5000');
+    const port = normalizePort(process.env.PORT || '5000');
 
     app.set('port', port);
 
@@ -60,5 +58,3 @@ module.exports = function(app, user) {
         debug('Listening on ' + bind);
     }
 }
-
-

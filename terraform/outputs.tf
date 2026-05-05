@@ -8,7 +8,7 @@ output "admin_pages_url" {
   value       = "https://${cloudflare_pages_project.admin.subdomain}"
 }
 
-output "api_worker_url" {
-  description = "API Worker URL"
+output "api_url" {
+  description = "API URL"
   value       = "https://api.${var.domain}"
 }
