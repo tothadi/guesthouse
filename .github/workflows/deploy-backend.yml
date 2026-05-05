@@ -35,7 +35,7 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: backend
-          command: deploy --env production
+          command: deploy
           secrets: |
             DB_HOST
             JWT_SECRET

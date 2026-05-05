@@ -6,11 +6,6 @@ compatibility_flags = ["nodejs_compat"]
 [vars]
 GALLERY_FOLDER = "dist/assets/gallery"
 
-# Secrets (set via `wrangler secret put`):
+# Secrets (set via wrangler-action):
 # - DB_HOST
 # - JWT_SECRET
-
-[env.production]
-routes = [
-  { pattern = "api.konczevolgyivendeghaz.hu", custom_domain = true }
-]
