@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+  guesthouse:
+    container_name: "${APP_NAME:-guesthouse}"
+    image: tothadi/guesthouse-app:latest
+    networks:
+      - nginx_proxy
+    ports:
+      - "${CLIENT_PORT:-3000}"
+      - "${ADMIN_PORT:-5000}"
+    environment:
+      DB_HOST: "${DB_HOST}"
+      JWT_SECRET: "${JWT_SECRET}"
+      GALLERY_FOLDER: "${GALLERY_FOLDER:-dist/assets/gallery}"
+      CLIENT_PORT: "${CLIENT_PORT:-3000}"
+      ADMIN_PORT: "${ADMIN_PORT:-5000}"
+    restart: always
+
+networks:
+  nginx_proxy:
+    external: true
