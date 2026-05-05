@@ -35,10 +35,11 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: backend
-          command: deploy
+          command: deploy --dry-run --outdir dist
           secrets: |
             DB_HOST
             JWT_SECRET
         env:
           DB_HOST: ${{ secrets.DB_HOST }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          WRANGLER_LOG: debug
