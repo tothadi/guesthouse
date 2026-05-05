@@ -1,3 +1,5 @@
+ARG PORT=5000
+
 FROM node:18-alpine
 WORKDIR /usr/src/app
 
@@ -6,6 +8,6 @@ RUN npm ci --omit=dev
 
 COPY . .
 
-EXPOSE 3000 5000
+EXPOSE ${PORT}
 
 CMD ["npm", "start"]

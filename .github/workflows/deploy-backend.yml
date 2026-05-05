@@ -1,4 +1,4 @@
-name: Deploy Backend Worker
+name: Deploy Backend to VPS
 
 on:
   push:
@@ -11,34 +11,33 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: backend
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@v1
         with:
-          node-version: "18"
-          cache: "npm"
-          cache-dependency-path: backend/package-lock.json
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Deploy to Cloudflare Workers
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          workingDirectory: backend
-          command: deploy
-          secrets: |
-            DB_HOST
-            JWT_SECRET
-        env:
-          DB_HOST: ${{ secrets.DB_HOST }}
-          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            if [ ! -d /opt/guesthouse-api ]; then
+              git clone https://github.com/tothadi/guesthouse.git /opt/guesthouse-api
+            fi
+            cd /opt/guesthouse-api
+            git pull origin main
+            cd backend
+            docker build --build-arg PORT=${{ secrets.PORT }} -t guesthouse-api .
+            docker stop guesthouse-api || true
+            docker rm guesthouse-api || true
+            docker run -d \
+              --name guesthouse-api \
+              --restart always \
+              -p "${{ secrets.PORT }}":"${{ secrets.PORT }}" \
+              -e PORT="${{ secrets.PORT }}" \
+              -e DB_HOST="${{ secrets.DB_HOST }}" \
+              -e JWT_SECRET="${{ secrets.JWT_SECRET }}" \
+              guesthouse-api
+            docker image prune -f

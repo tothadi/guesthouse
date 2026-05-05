@@ -19,3 +19,8 @@ variable "domain" {
   type        = string
   default     = "konczevolgyivendeghaz.hu"
 }
+
+variable "vps_ip" {
+  description = "VPS IP address for the backend API"
+  type        = string
+}
