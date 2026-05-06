@@ -27,3 +27,13 @@ resource "cloudflare_record" "admin" {
   proxied         = true
   allow_overwrite = true
 }
+
+# api subdomain → VPS
+resource "cloudflare_record" "api" {
+  zone_id         = var.cloudflare_zone_id
+  name            = "api"
+  content         = var.vps_ip
+  type            = "A"
+  proxied         = true
+  allow_overwrite = true
+}
