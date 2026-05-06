@@ -23,10 +23,10 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            if [ ! -d /opt/guesthouse-api ]; then
-              git clone https://github.com/tothadi/guesthouse.git /opt/guesthouse-api
+            if [ ! -d ~/guesthouse-api ]; then
+              git clone https://github.com/tothadi/guesthouse.git ~/guesthouse-api
             fi
-            cd /opt/guesthouse-api
+            cd ~/guesthouse-api
             git pull origin main
             cd backend
             mkdir -p certs
