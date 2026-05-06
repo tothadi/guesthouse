@@ -19,7 +19,10 @@ db().then((fileDB) => {
     const app = express();
 
     app.use(cookieParser());
-    app.use(cors());
+    app.use(cors({
+        origin: process.env.CORS_ORIGINS ? process.env.CORS_ORIGINS.split(',') : [],
+        credentials: true,
+    }));
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
     app.use(passport.initialize());

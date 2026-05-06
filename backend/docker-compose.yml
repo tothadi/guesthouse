@@ -10,6 +10,7 @@ services:
       PORT: ${PORT:-5000}
       DB_HOST: ${DB_HOST}
       JWT_SECRET: ${JWT_SECRET}
+      CORS_ORIGINS: ${CORS_ORIGINS}
     networks:
       - guesthouse
 
@@ -20,6 +21,8 @@ services:
     ports:
       - "443:443"
       - "80:80"
+    environment:
+      PORT: ${PORT:-5000}
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - ./certs:/etc/caddy/certs:ro

@@ -35,5 +35,6 @@ jobs:
             export PORT=${{ secrets.PORT }}
             export DB_HOST="${{ secrets.DB_HOST }}"
             export JWT_SECRET="${{ secrets.JWT_SECRET }}"
+            export CORS_ORIGINS="${{ secrets.CORS_ORIGINS }}"
             docker compose up -d --build --force-recreate
             docker image prune -f
