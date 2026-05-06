@@ -1,0 +1,36 @@
+services:
+  api:
+    build:
+      context: .
+      args:
+        PORT: ${PORT:-5000}
+    container_name: guesthouse-api
+    restart: always
+    environment:
+      PORT: ${PORT:-5000}
+      DB_HOST: ${DB_HOST}
+      JWT_SECRET: ${JWT_SECRET}
+    networks:
+      - guesthouse
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: guesthouse-caddy
+    restart: always
+    ports:
+      - "443:443"
+      - "80:80"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./certs:/etc/caddy/certs:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - guesthouse
+
+networks:
+  guesthouse:
+
+volumes:
+  caddy_data:
+  caddy_config:

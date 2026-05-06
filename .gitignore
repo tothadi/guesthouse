@@ -65,6 +65,9 @@ Thumbs.db
 .env
 nodemon.json
 
+# Certs
+backend/certs/
+
 # Terraform
 terraform/.terraform/
 terraform/*.tfstate

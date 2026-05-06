@@ -29,15 +29,11 @@ jobs:
             cd /opt/guesthouse-api
             git pull origin main
             cd backend
-            docker build --build-arg PORT=${{ secrets.PORT }} -t guesthouse-api .
-            docker stop guesthouse-api || true
-            docker rm guesthouse-api || true
-            docker run -d \
-              --name guesthouse-api \
-              --restart always \
-              -p "${{ secrets.PORT }}":"${{ secrets.PORT }}" \
-              -e PORT="${{ secrets.PORT }}" \
-              -e DB_HOST="${{ secrets.DB_HOST }}" \
-              -e JWT_SECRET="${{ secrets.JWT_SECRET }}" \
-              guesthouse-api
+            mkdir -p certs
+            echo "${{ secrets.ORIGIN_CERT }}" > certs/origin.pem
+            echo "${{ secrets.ORIGIN_KEY }}" > certs/origin-key.pem
+            export PORT=${{ secrets.PORT }}
+            export DB_HOST="${{ secrets.DB_HOST }}"
+            export JWT_SECRET="${{ secrets.JWT_SECRET }}"
+            docker compose up -d --build --force-recreate
             docker image prune -f
