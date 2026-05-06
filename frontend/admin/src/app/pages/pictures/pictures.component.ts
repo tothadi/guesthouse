@@ -20,6 +20,7 @@ import { Page } from '../definitions/common.interfaces';
 import { PagesComponent } from '../pages.component';
 import { PageService } from '../pages.service';
 import { UploadComponent } from '../upload/upload.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-pictures',
@@ -49,6 +50,7 @@ export class PicturesComponent implements OnChanges {
   multiplePics = false;
   confirm = false;
   captionInput = false;
+  apiUrl = environment.apiUrl;
 
   expandClose: IconDefinition;
 

@@ -18,6 +18,7 @@ import {
 import { NavigationEnd, Router } from '@angular/router';
 import { Room } from '../backend.interfaces';
 import { BackendService } from '../backend.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-rooms',
@@ -42,6 +43,7 @@ export class RoomsComponent implements OnInit {
   room!: Room;
   multiplePics = false;
   fullScreen = false;
+  apiUrl = environment.apiUrl;
 
   constructor(
     private location: Location,
