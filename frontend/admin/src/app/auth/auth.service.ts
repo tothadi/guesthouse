@@ -3,12 +3,14 @@ import { Injectable } from '@angular/core';
 import { TokenPayload, TokenResponse, User } from './auth.interfaces';
 import { tap, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { userInfo } from 'os';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  private apiUrl = environment.apiUrl;
+
   constructor(private http: HttpClient, private router: Router) {}
 
   private getExp(token: string): TokenPayload {
@@ -53,7 +55,7 @@ export class AuthService {
   }
 
   login(credentials: User) {
-    return this.http.post<TokenResponse>('/api/signin', credentials).pipe(
+    return this.http.post<TokenResponse>(`${this.apiUrl}/api/signin`, credentials).pipe(
       tap((res) => this.setToken(res)),
       shareReplay()
     );

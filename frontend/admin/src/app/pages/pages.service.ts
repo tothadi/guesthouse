@@ -25,11 +25,14 @@ import {
 import { MockRoom, ModRoom, Room } from './definitions/rooms.class';
 import { Observable, Subject } from 'rxjs';
 import { PagesComponent } from './pages.component';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PageService {
+  private apiUrl = environment.apiUrl;
+
   icons: string[] = [
     'phone',
     'phone-alt',
@@ -112,7 +115,7 @@ export class PageService {
   public getAll(api: string): Promise<any[]> {
     return new Promise((resolve, reject) => {
       this.http
-        .get<any[]>(`/api/all-${api}`)
+        .get<any[]>(`${this.apiUrl}/api/all-${api}`)
         .toPromise()
         .then(
           (item:any) => {
@@ -128,7 +131,7 @@ export class PageService {
   public getOne(api: string, id: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http
-        .get<any>(`/api/one-${api}/${id}`)
+        .get<any>(`${this.apiUrl}/api/one-${api}/${id}`)
         .toPromise()
         .then(
           (item:any) => {
@@ -144,7 +147,7 @@ export class PageService {
   public update(api: string, model: any): Promise<any[]> {
     return new Promise((resolve, reject) => {
       this.http
-        .patch<any[]>(`/api/update-${api}/${model._id}`, model)
+        .patch<any[]>(`${this.apiUrl}/api/update-${api}/${model._id}`, model)
         .toPromise()
         .then(
           (item:any) => {
@@ -164,7 +167,7 @@ export class PageService {
   ): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http
-        .patch<any>(`/api/${api}/pics-update/${docId}/${picture._id}`, {
+        .patch<any>(`${this.apiUrl}/api/${api}/pics-update/${docId}/${picture._id}`, {
           caption: picture.caption,
         })
         .toPromise()
@@ -182,7 +185,7 @@ export class PageService {
   public create(api: string, item: any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http
-        .put<any>(`/api/new-${api}`, item)
+        .put<any>(`${this.apiUrl}/api/new-${api}`, item)
         .toPromise()
         .then(
           (item:any) => {
@@ -198,7 +201,7 @@ export class PageService {
   public delete(api: string, id: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http
-        .delete<any>(`/api/delete-${api}/${id}`)
+        .delete<any>(`${this.apiUrl}/api/delete-${api}/${id}`)
         .toPromise()
         .then(
           (item:any) => {
@@ -211,11 +214,11 @@ export class PageService {
     });
   }
 
-  
+
   public deletePic(api: string, docId: string, picId: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http
-        .delete<any>(`/api/${api}/rm-pics/${docId}/${picId}`)
+        .delete<any>(`${this.apiUrl}/api/${api}/rm-pics/${docId}/${picId}`)
         .toPromise()
         .then(
           (doc:any) => {
@@ -246,7 +249,7 @@ export class PageService {
       // tell it to report the upload progress
       const req = new HttpRequest(
         'PUT',
-        `/api/${model}/add-pics/${docID}`,
+        `${this.apiUrl}/api/${model}/add-pics/${docID}`,
         formData,
         {
           reportProgress: true,
